@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --color-warm-white: #fafaf8;
+  --color-italian-red: #8e2c25;
+  --color-basil: #5c7a5a;
+  --color-olive: #6b6b3a;
+  --color-gold: #c9a65b;
+  --color-cream: #f3ebdd;
+  --color-warm-brown: #5a4636;
+
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+
+  --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    background-color: var(--color-warm-white);
+    color: var(--color-warm-brown);
+    font-family: var(--font-body);
+  }
+
+  ::selection {
+    background: var(--color-cream);
+    color: var(--color-italian-red);
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    background: linear-gradient(120deg, var(--color-gold), var(--color-warm-brown));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

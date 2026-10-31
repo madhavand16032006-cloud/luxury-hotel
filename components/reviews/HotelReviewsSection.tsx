@@ -474,10 +474,10 @@ export function HotelReviewsSection() {
                     </button>
                     <button
                       type="submit"
-                      className="bg-[#241814] hover:bg-[#382820] text-white px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] transition-colors flex items-center gap-2 cursor-pointer rounded-none active:scale-95 shadow-md"
+                      className="bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] hover:brightness-105 text-[#1a120b] px-6 py-2.5 text-xs font-bold uppercase tracking-[0.18em] transition-all flex items-center gap-2 cursor-pointer rounded-none active:scale-95 shadow-[0_4px_15px_rgba(223,186,115,0.4)]"
                     >
                       <span>Publish Live Review</span>
-                      <Send className="h-3.5 w-3.5 text-[#c2593f]" />
+                      <Send className="h-3.5 w-3.5 text-[#1a120b]" />
                     </button>
                   </div>
                 </form>

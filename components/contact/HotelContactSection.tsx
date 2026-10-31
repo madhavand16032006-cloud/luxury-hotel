@@ -259,10 +259,10 @@ export function HotelContactSection() {
 
               <button
                 type="submit"
-                className="w-full bg-[#c2593f] hover:bg-[#a64730] text-warm-white py-3.5 px-6 font-semibold uppercase tracking-[0.2em] text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer rounded-none active:scale-95 shadow-md"
+                className="w-full bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] hover:brightness-105 text-[#1a120b] py-3.5 px-6 font-bold uppercase tracking-[0.2em] text-xs transition-all flex items-center justify-center gap-2 cursor-pointer rounded-none active:scale-95 shadow-[0_4px_20px_rgba(223,186,115,0.4)]"
               >
                 <span>Send to WhatsApp Concierge</span>
-                <Send className="h-3.5 w-3.5" />
+                <Send className="h-3.5 w-3.5 text-[#1a120b]" />
               </button>
             </form>
           </div>

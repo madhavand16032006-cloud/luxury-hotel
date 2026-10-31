@@ -257,7 +257,7 @@ export function RoomShowcase() {
 
                 {/* Content Details */}
                 <div className="p-7 sm:p-8">
-                  <h3 className="font-display text-2xl sm:text-3xl text-warm-brown group-hover:text-italian-red transition-colors">
+                  <h3 className="font-display text-2xl sm:text-3xl text-warm-brown group-hover:text-[#c9a65b] transition-colors">
                     {room.title}
                   </h3>
                   <p className="mt-3 text-xs sm:text-sm leading-relaxed text-warm-brown/75">
@@ -293,11 +293,11 @@ export function RoomShowcase() {
                 <button
                   type="button"
                   onClick={() => handleSelectRoom(room.id, room.title, room.rate)}
-                  className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-none bg-italian-red hover:bg-[#b5372e] py-3 px-6 text-xs font-semibold uppercase tracking-[0.18em] text-warm-white shadow-md transition-all active:scale-95 cursor-pointer"
+                  className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-none bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] hover:brightness-105 py-3 px-6 text-xs font-bold uppercase tracking-[0.18em] text-[#1a120b] shadow-[0_4px_20px_rgba(223,186,115,0.4)] transition-all active:scale-95 cursor-pointer"
                   data-cursor-text="BOOK"
                 >
                   <span>Select &amp; Book {room.title.split(" ")[0]} ({room.rate})</span>
-                  <ArrowRight className="h-3.5 w-3.5" />
+                  <ArrowRight className="h-3.5 w-3.5 text-[#1a120b]" />
                 </button>
               </div>
             </motion.div>

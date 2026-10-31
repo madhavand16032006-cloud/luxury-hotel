@@ -4,7 +4,6 @@ import { Hero } from "@/components/hero/Hero";
 import { HotelFacilities } from "@/components/facilities/HotelFacilities";
 import { HotelAboutSection } from "@/components/about/HotelAboutSection";
 import { RoomShowcase } from "@/components/rooms/RoomShowcase";
-import { ProductShowcase } from "@/components/products/ProductShowcase";
 import { HotelReviewsSection } from "@/components/reviews/HotelReviewsSection";
 import { HotelContactSection } from "@/components/contact/HotelContactSection";
 import { Footer } from "@/components/footer/Footer";
@@ -15,28 +14,25 @@ export default function Home() {
       <CustomCursor />
       <Navbar />
       <main>
-        {/* 1. Hero: 8K Resort Video & Clean Amenity Highlights */}
+        {/* 1. Hero: Resort Video Background & Floating Destination Booking Bar */}
         <Hero />
 
-        {/* 2. Hotel Facilities: Pristine 6-Cell Grid Matching User's Reference */}
+        {/* 2. Hotel Facilities: 6-Cell Boutique Grid (Luxury Stay, Prime Location, Parking, 24x7) */}
         <HotelFacilities />
 
-        {/* 3. About Section: Chettinad Heritage Story & Commitments */}
+        {/* 3. About Section: Chettinad Royal Heritage & Virunthombal Standards */}
         <HotelAboutSection />
 
-        {/* 4. Luxury Accommodation: 4 Room Categories (Normal AC, Deluxe, Chettinad, Penthouse) */}
+        {/* 4. Luxury Accommodation: 4 Room Tiers (Normal AC, Deluxe, Chettinad Suite, Penthouse) */}
         <RoomShowcase />
 
-        {/* 5. Dakshin Dining: Kumbakonam Degree Filter Coffee & Royal Feasts */}
-        <ProductShowcase />
-
-        {/* 6. Live Reviews & Feedback: 4.9★ Plus Rating & Live Guest Feedback Form */}
+        {/* 5. Live Reviews: 4.8★ Rating & Verified Guest Testimonials Showcase */}
         <HotelReviewsSection />
 
-        {/* 7. Contact & 24/7 Concierge Desk: WhatsApp, Phone & Direct Inquiries */}
+        {/* 6. Contact & 24/7 Concierge Desk: WhatsApp, Phone Desk & Direct Assistance */}
         <HotelContactSection />
 
-        {/* 8. Luxury Hotel Footer: Zero Radius, Straight Corners, Instant Room Booking Pass */}
+        {/* 7. Hotel Footer: Destination Branch Reservation Engine with Guest Memory */}
         <Footer />
       </main>
     </>

@@ -92,7 +92,7 @@ export function HotelFacilities() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="mt-8 font-display text-2xl text-[#221610] tracking-tight group-hover:text-italian-red transition-colors">
+                  <h3 className="mt-8 font-display text-2xl text-[#221610] tracking-tight group-hover:text-[#c9a65b] transition-colors">
                     {item.title}
                   </h3>
 

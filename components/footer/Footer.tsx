@@ -757,13 +757,13 @@ export function Footer() {
                   <div className="sm:col-span-4">
                     <button
                       type="submit"
-                      className="w-full rounded-none bg-italian-red hover:bg-[#b5372e] py-3 px-4 text-xs font-semibold uppercase tracking-[0.16em] text-warm-white shadow-xl transition-all cursor-pointer flex flex-col items-center justify-center gap-0.5 active:scale-95"
+                      className="w-full rounded-none bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] hover:brightness-105 py-3 px-4 text-xs font-bold uppercase tracking-[0.16em] text-[#1a120b] shadow-[0_4px_25px_rgba(223,186,115,0.45)] transition-all cursor-pointer flex flex-col items-center justify-center gap-0.5 active:scale-95"
                     >
                       <span className="flex items-center gap-2 text-[12px]">
                         <span>Confirm at {currentBranch.name.split(" ")[0]} · Pay at Check-in</span>
-                        <Sparkles className="h-3.5 w-3.5 text-gold" />
+                        <Sparkles className="h-3.5 w-3.5 text-[#1a120b]" />
                       </span>
-                      <span className="text-[10px] font-normal opacity-85 lowercase tracking-normal text-rose-100">
+                      <span className="text-[10px] font-medium opacity-85 lowercase tracking-normal text-[#382618]">
                         Zero advance required · Instant digital pass
                       </span>
                     </button>
@@ -859,10 +859,9 @@ export function Footer() {
           </div>
 
           <div className="flex flex-wrap items-center gap-6 text-xs">
-            <a href="#about" className="hover:text-gold transition-colors">About</a>
             <a href="#facilities" className="hover:text-gold transition-colors">Facilities</a>
+            <a href="#about" className="hover:text-gold transition-colors">About</a>
             <a href="#rooms" className="hover:text-gold transition-colors">Rooms &amp; Suites</a>
-            <a href="#dining" className="hover:text-gold transition-colors">Dining</a>
             <a href="#reviews" className="hover:text-gold transition-colors">Reviews</a>
             <a href="#contact" className="hover:text-gold transition-colors">Contact</a>
           </div>

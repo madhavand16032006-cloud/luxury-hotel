@@ -142,7 +142,7 @@ export function Hero() {
             {/* Secondary Button: [Reserve Room] replacing video pause as requested */}
             <a
               href="#visit"
-              className="group rounded-full border border-gold/70 bg-black/45 backdrop-blur-md text-warm-white hover:text-gold hover:border-gold hover:bg-black/70 px-7 py-3.5 text-xs uppercase tracking-[0.18em] font-semibold flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
+              className="group rounded-full border border-gold/75 bg-black/50 backdrop-blur-md text-warm-white hover:bg-gradient-to-r hover:from-[#dfba73] hover:via-[#fae4b2] hover:to-[#c79a4d] hover:text-[#1a120b] hover:border-transparent px-7 py-3.5 text-xs uppercase tracking-[0.18em] font-semibold flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
               data-cursor-text="BOOK"
             >
               <Calendar className="h-4 w-4 text-gold shrink-0 transition-transform group-hover:scale-110" />

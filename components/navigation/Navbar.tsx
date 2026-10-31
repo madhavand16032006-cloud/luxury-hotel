@@ -14,8 +14,8 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { label: "Facilities", href: "#facilities" },
+  { label: "About", href: "#about" },
   { label: "Rooms & Suites", href: "#rooms" },
-  { label: "Dining", href: "#dining" },
   { label: "Reviews", href: "#reviews" },
   { label: "Contact", href: "#contact" },
 ];
@@ -29,7 +29,7 @@ export function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      const sectionIds = ["contact", "reviews", "dining", "rooms", "facilities"];
+      const sectionIds = ["contact", "reviews", "rooms", "about", "facilities"];
       for (const id of sectionIds) {
         const el = document.getElementById(id);
         if (el) {

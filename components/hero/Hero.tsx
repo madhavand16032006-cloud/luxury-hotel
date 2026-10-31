@@ -251,11 +251,10 @@ export function Hero() {
                           setSelectedBranchId(b.id);
                           setShowBranchMenu(false);
                         }}
-                        className={`w-full text-left px-3 py-2 rounded-xl text-xs transition-colors flex items-center justify-between ${
-                          selectedBranchId === b.id
+                        className={`w-full text-left px-3 py-2 rounded-xl text-xs transition-colors flex items-center justify-between ${selectedBranchId === b.id
                             ? "bg-gold/20 text-gold font-semibold"
                             : "text-white/80 hover:bg-white/10"
-                        }`}
+                          }`}
                       >
                         <div>
                           <p className="font-medium text-warm-white">{b.name}</p>
@@ -459,11 +458,10 @@ export function Hero() {
                 title="Toggle 8K Clarity Filter"
               >
                 <span
-                  className={`h-2 w-2 rounded-full ${
-                    enhancedClarity
+                  className={`h-2 w-2 rounded-full ${enhancedClarity
                       ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]"
                       : "bg-white/40"
-                  }`}
+                    }`}
                 />
                 <span>{enhancedClarity ? "8K CLARITY ACTIVE" : "STANDARD 1080P"}</span>
               </button>

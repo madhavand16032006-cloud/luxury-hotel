@@ -72,3 +72,4 @@ export const HOTEL_BRANCHES: HotelBranch[] = [
     ],
   },
 ];
+

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { inter, playfair } from "@/lib/fonts";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { DirectBookingModal } from "@/components/booking/DirectBookingModal";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,7 +20,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body className="bg-warm-white text-warm-brown antialiased selection:bg-cream selection:text-italian-red">
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          {children}
+          <DirectBookingModal />
+        </SmoothScroll>
       </body>
     </html>
   );

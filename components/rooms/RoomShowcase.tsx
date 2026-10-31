@@ -125,18 +125,25 @@ export function RoomShowcase() {
   const [activeTab, setActiveTab] = useState("all");
   const [viewingRoom, setViewingRoom] = useState<(typeof ROOM_TIERS)[0] | null>(null);
 
-  const handleSelectRoom = (roomId: string, roomTitle: string, roomRate: string) => {
+  const handleSelectRoom = (
+    roomId: string,
+    roomTitle: string,
+    roomRate: string,
+    roomObj?: (typeof ROOM_TIERS)[0]
+  ) => {
     setViewingRoom(null);
     if (typeof window !== "undefined") {
       window.dispatchEvent(
-        new CustomEvent("select-hotel-room", {
-          detail: { id: roomId, title: roomTitle, rate: roomRate },
+        new CustomEvent("open-direct-booking", {
+          detail: {
+            id: roomId,
+            title: roomTitle,
+            rate: roomRate,
+            image: roomObj?.image,
+            acType: roomObj?.acType,
+          },
         })
       );
-      const visitSection = document.getElementById("visit");
-      if (visitSection) {
-        visitSection.scrollIntoView({ behavior: "smooth" });
-      }
     }
   };
 
@@ -281,41 +288,48 @@ export function RoomShowcase() {
                 </div>
               </div>
 
-              {/* Bottom Reservation Action Bar with [View Room] and [Reserve Room] */}
-              <div className="border-t border-cream bg-[#faf7f2] p-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
-                <div className="flex items-center gap-3 text-xs text-warm-brown/70">
-                  <span className="flex items-center gap-1">
-                    <Car className="h-3.5 w-3.5 text-gold" />
-                    <span>Free Parking</span>
-                  </span>
-                  <span>·</span>
-                  <span className="flex items-center gap-1">
-                    <Wifi className="h-3.5 w-3.5 text-emerald-600" />
-                    <span>Free Wi-Fi</span>
+              {/* Bottom Reservation Action Bar: Perfectly Aligned 2-Button Grid */}
+              <div className="border-t border-[#e8dfd6] bg-[#faf7f2] p-5 sm:p-6 flex flex-col gap-3.5">
+                {/* Row 1: Key Inclusions & Booking Guarantee */}
+                <div className="flex items-center justify-between text-xs text-warm-brown/75">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex items-center gap-1 font-medium">
+                      <Car className="h-3.5 w-3.5 text-[#c2593f]" />
+                      <span>Free Parking</span>
+                    </span>
+                    <span className="text-stone-300">·</span>
+                    <span className="flex items-center gap-1 font-medium">
+                      <Wifi className="h-3.5 w-3.5 text-emerald-600" />
+                      <span>Free Wi-Fi</span>
+                    </span>
+                  </div>
+                  <span className="text-[10px] uppercase tracking-wider text-stone-500 font-medium">
+                    Pay at Check-In
                   </span>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2.5">
+                {/* Row 2: Perfectly Aligned Dual Action Buttons */}
+                <div className="grid grid-cols-2 gap-3 w-full">
                   {/* View Room Button */}
                   <button
                     type="button"
                     onClick={() => setViewingRoom(room)}
-                    className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-3 border border-gold/50 bg-white hover:bg-gold/15 text-xs uppercase tracking-[0.16em] font-semibold text-warm-brown hover:text-[#8c6b2d] transition-all cursor-pointer shadow-xs active:scale-95"
+                    className="h-11 inline-flex items-center justify-center gap-1.5 px-3 border border-gold/60 bg-white hover:bg-gold/15 text-[11px] sm:text-xs uppercase tracking-[0.14em] font-semibold text-warm-brown hover:text-[#8c6b2d] transition-all cursor-pointer shadow-xs active:scale-95 rounded-none"
                   >
-                    <Eye className="h-3.5 w-3.5 text-gold" />
+                    <Eye className="h-3.5 w-3.5 text-gold shrink-0" />
                     <span>View Room</span>
                   </button>
 
                   {/* Reserve Room Button */}
                   <button
                     type="button"
-                    onClick={() => handleSelectRoom(room.id, room.title, room.rate)}
-                    className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 rounded-none bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] hover:brightness-105 py-3 px-6 text-xs font-bold uppercase tracking-[0.16em] text-[#1a120b] shadow-[0_4px_20px_rgba(223,186,115,0.4)] transition-all active:scale-95 cursor-pointer"
+                    onClick={() => handleSelectRoom(room.id, room.title, room.rate, room)}
+                    className="h-11 inline-flex items-center justify-center gap-1.5 rounded-none bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] hover:brightness-105 px-3 text-[11px] sm:text-xs font-bold uppercase tracking-[0.14em] text-[#1a120b] shadow-[0_4px_18px_rgba(223,186,115,0.4)] transition-all active:scale-95 cursor-pointer truncate"
                     data-cursor-text="BOOK"
                   >
-                    <Calendar className="h-3.5 w-3.5 text-[#1a120b]" />
-                    <span>Reserve Room ({room.rate})</span>
-                    <ArrowRight className="h-3.5 w-3.5 text-[#1a120b]" />
+                    <Calendar className="h-3.5 w-3.5 text-[#1a120b] shrink-0" />
+                    <span className="truncate">Reserve ({room.rate})</span>
+                    <ArrowRight className="h-3.5 w-3.5 text-[#1a120b] shrink-0" />
                   </button>
                 </div>
               </div>
@@ -423,7 +437,14 @@ export function RoomShowcase() {
 
                   <button
                     type="button"
-                    onClick={() => handleSelectRoom(viewingRoom.id, viewingRoom.title, viewingRoom.rate)}
+                    onClick={() =>
+                      handleSelectRoom(
+                        viewingRoom.id,
+                        viewingRoom.title,
+                        viewingRoom.rate,
+                        viewingRoom
+                      )
+                    }
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-none bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] hover:brightness-105 py-3.5 px-8 text-xs font-bold uppercase tracking-[0.18em] text-[#1a120b] shadow-xl transition-all active:scale-95 cursor-pointer"
                   >
                     <Calendar className="h-4 w-4 text-[#1a120b]" />

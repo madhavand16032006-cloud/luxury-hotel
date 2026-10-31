@@ -151,16 +151,21 @@ export function Navbar() {
             </ul>
           </nav>
 
-          {/* 3. CTA: [Reserve Room] with Light Gold Button */}
+          {/* 3. CTA: [Reserve Room] with Light Gold Button - Opens Direct Booking */}
           <div className="flex items-center gap-3">
-            <Link
-              href="/#visit"
+            <button
+              type="button"
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  window.dispatchEvent(new CustomEvent("open-direct-booking"));
+                }
+              }}
               className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] text-[#1a120b] px-5 sm:px-6 py-2.5 text-xs uppercase tracking-[0.16em] font-bold shadow-[0_4px_20px_rgba(223,186,115,0.4)] hover:shadow-[0_6px_25px_rgba(223,186,115,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
             >
               <Calendar className="h-3.5 w-3.5 stroke-[2.5]" />
               <span>Reserve Room</span>
               <ArrowRight className="h-3.5 w-3.5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
+            </button>
 
             {/* Mobile Hamburger Toggle */}
             <button
@@ -227,15 +232,20 @@ export function Navbar() {
             </nav>
 
             <div className="mt-6 pt-4 border-t border-white/10">
-              <Link
-                href="/#visit"
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] py-3 text-xs uppercase tracking-[0.18em] font-bold text-[#1a120b] shadow-lg"
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (typeof window !== "undefined") {
+                    window.dispatchEvent(new CustomEvent("open-direct-booking"));
+                  }
+                }}
+                className="w-full flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] py-3 text-xs uppercase tracking-[0.18em] font-bold text-[#1a120b] shadow-lg cursor-pointer"
               >
                 <Calendar className="h-4 w-4" />
                 <span>Reserve Room</span>
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </button>
             </div>
           </motion.div>
         )}

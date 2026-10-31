@@ -32,22 +32,17 @@ export function Hero() {
   const [showGuestsMenu, setShowGuestsMenu] = useState(false);
 
   const handleCheckAvailability = () => {
-    // Dispatch custom event to sync with the reservation module
     if (typeof window !== "undefined") {
       window.dispatchEvent(
-        new CustomEvent("hero-booking-sync", {
+        new CustomEvent("open-direct-booking", {
           detail: {
             branchId: selectedBranchId,
             checkIn: checkInDate === "Select Date" ? "Tomorrow" : checkInDate,
             duration: checkOutDate === "Select Date" ? "2 Nights" : checkOutDate,
-            guests: parseInt(guestsCount) || 2,
+            guests: guestsCount,
           },
         })
       );
-      const visitSection = document.getElementById("visit") || document.getElementById("rooms");
-      if (visitSection) {
-        visitSection.scrollIntoView({ behavior: "smooth" });
-      }
     }
   };
 
@@ -132,15 +127,24 @@ export function Hero() {
             className="mt-8 flex flex-wrap items-center gap-4 sm:gap-5"
           >
             {/* Primary Button: Reserve Room */}
-            <a
-              href="#visit"
+            <button
+              type="button"
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  window.dispatchEvent(
+                    new CustomEvent("open-direct-booking", {
+                      detail: { branchId: selectedBranchId },
+                    })
+                  );
+                }
+              }}
               className="group rounded-full bg-gradient-to-r from-[#dfba73] via-[#e5c483] to-[#be8e46] text-[#1b120c] font-bold px-8 py-3.5 text-xs uppercase tracking-[0.18em] shadow-[0_15px_30px_-5px_rgba(223,186,115,0.4)] flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
               data-cursor-text="BOOK"
             >
               <Calendar className="h-4 w-4 text-[#1b120c]" />
               <span>Reserve Room</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
+            </button>
 
             {/* View Rooms Button */}
             <Link

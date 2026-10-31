@@ -15,7 +15,17 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-export function HotelContactSection() {
+interface HotelContactSectionProps {
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+}
+
+export function HotelContactSection({
+  eyebrow = "GET IN TOUCH",
+  title = "24/7 Concierge & Reception",
+  subtitle = "Have questions about room availability, 100% AC comfort, covered valet parking, or Chettinad dining? Our front desk team is on standby 24 hours a day.",
+}: HotelContactSectionProps = {}) {
   const [guestName, setGuestName] = useState("");
   const [guestPhone, setGuestPhone] = useState("");
   const [suiteInterest, setSuiteInterest] = useState("Deluxe AC Room (450 sq. ft.)");
@@ -48,15 +58,15 @@ export function HotelContactSection() {
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center mb-16">
-          <div className="inline-flex items-center gap-2 rounded-none bg-gold/15 border border-gold/30 px-3.5 py-1 text-[11px] uppercase tracking-[0.25em] text-warm-brown font-semibold mb-3">
-            <Sparkles className="h-3 w-3 text-gold" />
-            <span>24/7 Concierge &amp; Reception</span>
+          <div className="inline-flex items-center gap-2 rounded-none bg-gold/15 border border-gold/30 px-3.5 py-1 text-[11px] uppercase tracking-[0.25em] text-[#c2593f] font-semibold mb-3">
+            <Sparkles className="h-3 w-3 text-[#c2593f]" />
+            <span>{eyebrow}</span>
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#221610] tracking-tight">
-            We Are Always Here to Welcome You
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a120b] tracking-tight">
+            {title}
           </h2>
-          <p className="mt-3 text-xs sm:text-sm text-stone-600 max-w-xl mx-auto leading-relaxed">
-            Have questions about room availability, 100% AC comfort, covered valet parking, or Chettinad dining? Our front desk team is on standby 24 hours a day.
+          <p className="mt-3 text-xs sm:text-sm text-stone-600 max-w-xl mx-auto leading-relaxed font-light">
+            {subtitle}
           </p>
         </div>
 

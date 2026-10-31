@@ -3,13 +3,14 @@ import { CustomCursor } from "@/components/ui/CustomCursor";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContactLocationsMap } from "@/components/contact/ContactLocationsMap";
 import { HotelContactSection } from "@/components/contact/HotelContactSection";
+import { HotelReviewsSection } from "@/components/reviews/HotelReviewsSection";
 import { HotelFaqSection } from "@/components/faq/HotelFaqSection";
 import { Footer } from "@/components/footer/Footer";
 
 export const metadata = {
   title: "Contact & Locations — Le Prestige Residency | BR Vasantham",
   description:
-    "Visit Le Prestige Residency across our Puducherry, Tindivanam, and Chennai locations. Plan your arrival with Google Maps, direct telephone, instant WhatsApp concierge (+91 96777 51329), and comprehensive FAQs.",
+    "Visit Le Prestige Residency across our Puducherry, Tindivanam, and Chennai locations. Plan your arrival with Google Maps, direct telephone, instant WhatsApp concierge (+91 96777 51329), guest reviews, and comprehensive FAQs.",
 };
 
 export default function ContactPage() {
@@ -37,10 +38,13 @@ export default function ContactPage() {
         {/* 2. Direct Inquiry & Concierge Desk */}
         <HotelContactSection />
 
-        {/* 3. Frequently Asked Questions (FAQ Section) */}
+        {/* 3. Guest Reviews & Verified Testimonials (4.8★) */}
+        <HotelReviewsSection />
+
+        {/* 4. Frequently Asked Questions (FAQ Section) */}
         <HotelFaqSection />
 
-        {/* 4. Hotel Footer */}
+        {/* 5. Hotel Footer */}
         <Footer />
       </main>
     </>

@@ -19,7 +19,6 @@ const NAV_ITEMS: NavItem[] = [
   { label: "About", href: "/about" },
   { label: "Rooms & Suites", href: "/rooms" },
   { label: "Facilities", href: "/facilities" },
-  { label: "Reviews", href: "/reviews" },
   { label: "Contact", href: "/contact" },
 ];
 

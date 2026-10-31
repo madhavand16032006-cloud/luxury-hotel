@@ -223,3 +223,4 @@ export function HotelFaqSection() {
     </section>
   );
 }
+

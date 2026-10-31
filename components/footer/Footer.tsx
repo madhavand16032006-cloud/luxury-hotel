@@ -80,11 +80,15 @@ export function Footer() {
   return (
     <footer
       id="visit"
-      className="relative w-full border-t border-gold/30 bg-gradient-to-b from-[#222426] via-[#161210] to-[#0a0503] text-warm-white pt-20 pb-12 px-6 sm:px-10 lg:px-16"
+      className={`relative w-full border-t border-gold/30 ${
+        isHome
+          ? "bg-gradient-to-b from-[#222426] via-[#161210] to-[#0a0503]"
+          : "bg-gradient-to-b from-[#18100a] via-[#120a06] to-[#0a0503]"
+      } text-warm-white pt-20 pb-12 px-6 sm:px-10 lg:px-16`}
     >
       <div className="relative mx-auto max-w-7xl">
-        {/* Top Feature: "Book Your Luxury Stay" matching Reference Image (Shown ONLY on Home Page) */}
-        {isHome && (
+        {/* Top Feature: Home Page shows "Book Your Luxury Stay" CTA Banner matching Reference Image */}
+        {isHome ? (
           <div className="border-b border-white/10 pb-20 pt-4 text-center">
             <div className="mx-auto max-w-2xl">
               {/* Eyebrow Label matching Reference Image */}
@@ -124,6 +128,89 @@ export function Footer() {
                   EXPLORE ROOMS
                 </Link>
               </div>
+            </div>
+          </div>
+        ) : (
+          /* Top Feature on Inner Pages (About, Rooms, Contact, etc.): Our 3 Sanctuaries (Chennai, Madurai, Puducherry) */
+          <div className="border-b border-white/10 pb-16">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+              <div>
+                <span className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-gold font-medium mb-2">
+                  <Sparkles className="h-3.5 w-3.5 text-gold" />
+                  <span>Our Hotel Sanctuaries</span>
+                </span>
+                <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white">
+                  Experience Luxury Across Tamil Nadu
+                </h2>
+              </div>
+
+              {/* Live IST Clock */}
+              <div className="inline-flex items-center gap-3 bg-black/60 border border-gold/30 px-5 py-2.5 rounded-none shrink-0 backdrop-blur-md">
+                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                <div className="text-xs">
+                  <span className="text-white/50 text-[10px] uppercase tracking-wider block">
+                    Tamil Nadu Time
+                  </span>
+                  <span className="font-mono text-sm font-bold text-white">
+                    {chennaiTime ? `${chennaiTime} IST` : "12:00:00 PM IST"}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* 3 User-Friendly Branch Cards: Chennai, Madurai, Puducherry */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {HOTEL_BRANCHES.map((branch) => (
+                <div
+                  key={branch.id}
+                  className="group relative bg-[#1c120c]/80 border border-white/15 p-5 rounded-none flex flex-col justify-between hover:border-gold/60 transition-all duration-300 hover:shadow-[0_15px_35px_rgba(0,0,0,0.6)]"
+                >
+                  <div>
+                    {/* Photo Thumbnail */}
+                    <div className="relative h-44 w-full overflow-hidden rounded-none mb-4 border border-white/10">
+                      <Image
+                        src={branch.image}
+                        alt={branch.name}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+
+                      <span className="absolute top-3 left-3 bg-black/75 backdrop-blur-md border border-white/20 text-gold text-[10px] font-semibold px-2.5 py-1 uppercase tracking-wider">
+                        {branch.city}
+                      </span>
+
+                      <span className="absolute bottom-3 left-3 text-xs font-mono font-bold text-gold bg-black/60 px-2.5 py-0.5 border border-gold/40">
+                        {branch.startingRate}
+                      </span>
+                    </div>
+
+                    <h3 className="font-display text-xl text-white">{branch.name}</h3>
+                    <p className="text-xs text-white/70 mt-1">{branch.tagline}</p>
+
+                    <p className="text-[11px] text-white/50 flex items-center gap-1.5 mt-2">
+                      <MapPin className="h-3 w-3 text-gold shrink-0" />
+                      <span>{branch.address}</span>
+                    </p>
+                  </div>
+
+                  <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
+                    <span className="text-[11px] text-emerald-400 flex items-center gap-1 font-medium">
+                      <Sparkles className="h-3 w-3" />
+                      <span>Free Parking Included</span>
+                    </span>
+
+                    <button
+                      type="button"
+                      onClick={() => handleOpenBooking(branch.id)}
+                      className="bg-gold text-[#1a120b] hover:bg-gold/90 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider rounded-none transition-all active:scale-95 cursor-pointer"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         )}

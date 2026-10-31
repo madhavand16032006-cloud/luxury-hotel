@@ -18,6 +18,8 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/", sectionId: "hero" },
   { label: "Facilities", href: "/facilities", sectionId: "facilities" },
+  { label: "Amenities", href: "/amenities", sectionId: "amenities" },
+  { label: "The Gallery", href: "/gallery", sectionId: "gallery" },
   { label: "About", href: "/about", sectionId: "about" },
   { label: "Rooms & Suites", href: "/rooms", sectionId: "rooms" },
   { label: "Reviews", href: "/reviews", sectionId: "reviews" },
@@ -35,7 +37,16 @@ export function Navbar() {
       setScrolled(window.scrollY > 30);
 
       if (pathname === "/") {
-        const sections = ["contact", "reviews", "rooms", "about", "facilities", "hero"];
+        const sections = [
+          "contact",
+          "reviews",
+          "rooms",
+          "about",
+          "gallery",
+          "amenities",
+          "facilities",
+          "hero",
+        ];
         const scrollPosition = window.scrollY + 220;
 
         for (const section of sections) {
@@ -116,7 +127,7 @@ export function Navbar() {
                       <Link
                         href={pathname === "/" ? `/#${item.sectionId}` : item.href}
                         onClick={(e) => handleNavClick(e, item)}
-                        className={`relative px-4 py-2 text-xs uppercase tracking-[0.18em] font-medium transition-all duration-200 cursor-pointer ${
+                        className={`relative px-2.5 xl:px-3.5 py-2 text-[11px] xl:text-xs uppercase tracking-[0.15em] font-medium transition-all duration-200 cursor-pointer ${
                           isActive
                             ? "text-gold font-semibold"
                             : "text-white/80 hover:text-white hover:text-gold"

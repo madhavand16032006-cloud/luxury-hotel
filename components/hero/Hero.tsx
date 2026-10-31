@@ -407,19 +407,16 @@ export function Hero() {
               <span className="h-1.5 w-1.5 bg-white/45 rounded-full" />
             </div>
 
-            {/* Redesigned Luxury Scroll Down Control */}
+            {/* Ultra-Luxury Wordless Glass Discovery Button matching Reference Image */}
             <a
               href="#facilities"
-              className="group inline-flex items-center gap-2.5 rounded-full border border-white/25 bg-black/60 hover:bg-black/85 hover:border-gold px-4 py-2 text-white/80 hover:text-gold backdrop-blur-md transition-all duration-300 shadow-lg cursor-pointer"
-              aria-label="Scroll to Facilities"
-              data-cursor-text="DOWN"
+              className="group relative h-10 w-10 sm:h-11 sm:w-11 rounded-full border border-white/30 bg-black/50 hover:bg-black/75 hover:border-gold/80 flex items-center justify-center text-white/80 hover:text-gold backdrop-blur-md transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:scale-110 active:scale-95 cursor-pointer"
+              aria-label="Discover Facilities"
+              data-cursor-text="DISCOVER"
             >
-              <span className="text-[10px] uppercase tracking-[0.22em] font-medium text-white/70 group-hover:text-gold transition-colors">
-                Scroll Down
-              </span>
-              <span className="h-6 w-6 rounded-full bg-white/10 group-hover:bg-gradient-to-r group-hover:from-[#dfba73] group-hover:to-[#c79a4d] group-hover:text-[#1a120b] flex items-center justify-center transition-all duration-300">
-                <ArrowDown className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-y-0.5" />
-              </span>
+              {/* Subtle Expanding Gold Ring on Hover */}
+              <span className="absolute inset-0 rounded-full border border-gold/40 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500 pointer-events-none" />
+              <ArrowDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
             </a>
           </div>
         </motion.div>

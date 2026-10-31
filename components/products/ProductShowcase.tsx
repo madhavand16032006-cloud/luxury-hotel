@@ -122,11 +122,10 @@ export function ProductShowcase() {
                     <button
                       type="button"
                       onClick={() => setServiceType("in-room")}
-                      className={`p-3 rounded-none border text-left transition-all cursor-pointer ${
-                        serviceType === "in-room"
+                      className={`p-3 rounded-none border text-left transition-all cursor-pointer ${serviceType === "in-room"
                           ? "bg-gold/20 border-gold text-white font-semibold"
                           : "bg-white/5 border-white/15 text-white/70 hover:bg-white/10"
-                      }`}
+                        }`}
                     >
                       <p className="font-semibold text-warm-white">In-Room Delivery</p>
                       <p className="text-[10px] text-white/60 mt-0.5">Delivered to Suite in 25 mins</p>
@@ -134,11 +133,10 @@ export function ProductShowcase() {
                     <button
                       type="button"
                       onClick={() => setServiceType("restaurant")}
-                      className={`p-3 rounded-none border text-left transition-all cursor-pointer ${
-                        serviceType === "restaurant"
+                      className={`p-3 rounded-none border text-left transition-all cursor-pointer ${serviceType === "restaurant"
                           ? "bg-gold/20 border-gold text-white font-semibold"
                           : "bg-white/5 border-white/15 text-white/70 hover:bg-white/10"
-                      }`}
+                        }`}
                     >
                       <p className="font-semibold text-warm-white">Reserve Dining Table</p>
                       <p className="text-[10px] text-white/60 mt-0.5">At Dakshin Courtyard Pavilion</p>
@@ -157,11 +155,10 @@ export function ProductShowcase() {
                         key={n}
                         type="button"
                         onClick={() => setPortions(n)}
-                        className={`flex-1 py-2 rounded-none text-xs font-semibold transition-all cursor-pointer ${
-                          portions === n
+                        className={`flex-1 py-2 rounded-none text-xs font-semibold transition-all cursor-pointer ${portions === n
                             ? "bg-gold text-warm-brown shadow-sm"
                             : "border border-white/15 bg-white/5 text-white/70 hover:bg-white/10"
-                        }`}
+                          }`}
                       >
                         {n} {n === 5 ? "+" : ""}
                       </button>
@@ -185,11 +182,10 @@ export function ProductShowcase() {
                         key={pref}
                         type="button"
                         onClick={() => setSpecialNote(pref)}
-                        className={`p-2 text-left text-[11px] rounded-none border transition-all cursor-pointer ${
-                          specialNote === pref
+                        className={`p-2 text-left text-[11px] rounded-none border transition-all cursor-pointer ${specialNote === pref
                             ? "bg-gold/15 border-gold text-gold font-medium"
                             : "bg-white/5 border-white/15 text-white/65 hover:bg-white/10"
-                        }`}
+                          }`}
                       >
                         {pref}
                       </button>
@@ -254,9 +250,8 @@ function ProductChapter({
     <article
       ref={ref}
       id={`item-${product.id}`}
-      className={`mx-auto grid min-h-[85svh] max-w-7xl items-center gap-12 px-6 py-20 md:grid-cols-2 md:gap-20 md:px-12 ${
-        reverse ? "md:[&>*:first-child]:order-2" : ""
-      }`}
+      className={`mx-auto grid min-h-[85svh] max-w-7xl items-center gap-12 px-6 py-20 md:grid-cols-2 md:gap-20 md:px-12 ${reverse ? "md:[&>*:first-child]:order-2" : ""
+        }`}
     >
       <motion.div
         style={{ y: imageY, scale: imageScale }}

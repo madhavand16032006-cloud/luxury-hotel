@@ -794,11 +794,12 @@ export function Footer() {
           </div>
 
           <div className="flex flex-wrap items-center gap-6 text-xs">
-            <a href="#story" className="hover:text-gold transition-colors">Heritage</a>
+            <a href="#about" className="hover:text-gold transition-colors">About</a>
             <a href="#facilities" className="hover:text-gold transition-colors">Facilities</a>
             <a href="#rooms" className="hover:text-gold transition-colors">Rooms &amp; Suites</a>
             <a href="#dining" className="hover:text-gold transition-colors">Dining</a>
-            <a href="#atmosphere" className="hover:text-gold transition-colors">Atmosphere</a>
+            <a href="#reviews" className="hover:text-gold transition-colors">Reviews</a>
+            <a href="#contact" className="hover:text-gold transition-colors">Contact</a>
           </div>
 
           <button

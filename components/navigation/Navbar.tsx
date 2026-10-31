@@ -5,12 +5,12 @@ import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Clock, Calendar, Sparkles } from "lucide-react";
 
 const NAV_ITEMS = [
-  { label: "Heritage", href: "#story" },
+  { label: "About", href: "#about" },
   { label: "Facilities", href: "#facilities" },
   { label: "Rooms & Suites", href: "#rooms" },
   { label: "Dining", href: "#dining" },
-  { label: "Atmosphere", href: "#atmosphere" },
-  { label: "Reserve", href: "#visit" },
+  { label: "Reviews", href: "#reviews" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export function Navbar() {

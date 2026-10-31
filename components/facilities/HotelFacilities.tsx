@@ -1,223 +1,130 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
-import Image from "next/image";
+import React from "react";
+import { motion } from "motion/react";
 import {
+  Star,
+  MapPin,
+  Building2,
   Car,
-  Wifi,
-  Wind,
-  Maximize2,
-  UtensilsCrossed,
-  Waves,
+  Clock,
+  Heart,
   Sparkles,
-  ShieldCheck,
-  Zap,
-  CheckCircle2,
+  ArrowRight,
 } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-const FACILITIES = [
+const LUXURY_PILLARS = [
   {
-    id: "parking",
+    icon: Star,
+    title: "Luxury Stay",
+    description:
+      "Meticulously designed rooms that blend Chettinad royal aesthetics with uncompromising five-star comfort.",
+  },
+  {
+    icon: MapPin,
+    title: "Prime Location",
+    description:
+      "Centrally located in Tamil Nadu's historic corridor, minutes from cultural landmarks, beach promenades, and central transit.",
+  },
+  {
+    icon: Building2,
+    title: "Boutique Rooms",
+    description:
+      "Intimate and curated — generous 320 to 1,200 sq. ft. suites with 100% inverter AC, ensuring every guest receives personal attention.",
+  },
+  {
     icon: Car,
-    tag: "Complimentary · 24/7 Secured",
-    title: "Free Covered Car Parking & Valet",
+    title: "Free Parking",
     description:
-      "Wide-bay covered parking with round-the-clock CCTV surveillance and security staff. Complimentary valet service on arrival with fast EV charging docks.",
-    perks: ["Zero parking fees", "Valet driver on standby", "EV charging stations"],
-    image: "/images/facility-parking.jpg",
+      "Complimentary secure covered car parking and valet service available for all guests throughout their stay.",
   },
   {
-    id: "wifi",
-    icon: Wifi,
-    tag: "Gigabit Fiber · Unlimited",
-    title: "Free High-Speed Wi-Fi 6",
+    icon: Clock,
+    title: "24×7 Reception",
     description:
-      "Enterprise-grade fiber optic network providing unbroken connectivity across all suites, balconies, lobby, and dining pavilions with zero lag.",
-    perks: ["Up to 300 Mbps speed", "Work-from-hotel desk", "Unlimited device pairing"],
-    image: "/images/facility-wifi.jpg",
+      "Round-the-clock front desk concierge assistance to ensure your every need is met, day or night.",
   },
   {
-    id: "ac",
-    icon: Wind,
-    tag: "Whisper Inverter · 100% AC",
-    title: "Deluxe & Normal AC Climate Control",
+    icon: Heart,
+    title: "Premium Hospitality",
     description:
-      "Every single room—from our Normal AC rooms to Deluxe Suites—is equipped with whisper-quiet, eco-inverter air conditioning and air purification filters.",
-    perks: ["Individual digital thermostat", "Silent sleep mode", "Filtered cool air 24/7"],
-    image: "/images/room-deluxe-ac.jpg",
-  },
-  {
-    id: "sqft",
-    icon: Maximize2,
-    tag: "Expansive Space · High Ceilings",
-    title: "Spacious Rooms: 320 to 1,200 Sq. Ft.",
-    description:
-      "Unmatched room proportions designed for true rest. Standard AC starts at an expansive 320 sq. ft., Deluxe at 450 sq. ft., and Suites up to 1,200 sq. ft.",
-    perks: ["Private sit-out balconies", "Living area & work desks", "Spacious Italian marble baths"],
-    image: "/images/room-presidential.jpg",
-  },
-  {
-    id: "dining",
-    icon: UtensilsCrossed,
-    tag: "Chettinad & Continental · 24/7 Service",
-    title: "Dakshin Royal Dining & Filter Coffee",
-    description:
-      "Authentic Kumbakonam degree filter coffee served in brass davarah-tumbler, accompanied by Chettinad royal specialties and 24-hour room service dining.",
-    perks: ["Complimentary breakfast", "24/7 in-room dining", "Separate pure veg preparation"],
-    image: "/images/facility-dining.jpg",
-  },
-  {
-    id: "pool",
-    icon: Waves,
-    tag: "Emerald Lap Pool · Relaxation",
-    title: "Royal Courtyard Swimming Pool",
-    description:
-      "A tranquil emerald swimming pool set amidst heritage Chettinad stone pillars, tropical greenery, and secluded poolside lounge cabanas.",
-    perks: ["Fresh towels & loungers", "Kids splash zone", "Open 06:00 to 20:00"],
-    image: "/images/facility-pool.jpg",
+      "Warm, professional service inspired by the finest South Indian boutique hotel and Virunthombal traditions.",
   },
 ];
 
 export function HotelFacilities() {
-  const containerRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
   return (
-    <section
-      ref={containerRef}
-      id="facilities"
-      className="relative overflow-hidden bg-warm-white py-32 md:py-40 border-t border-cream"
-    >
+    <section id="facilities" className="relative bg-[#f8f5ef] py-28 sm:py-36 border-t border-[#e8dfd6]">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
-        {/* Section Header */}
-        <div className="mx-auto max-w-3xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: EASE }}
-            className="flex items-center justify-center gap-2 text-xs uppercase tracking-[0.35em] text-italian-red font-medium"
-          >
-            <Sparkles className="h-3.5 w-3.5 text-italian-red" />
-            <span>World-Class Hospitality</span>
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.8, ease: EASE }}
-            className="mt-4 font-display text-4xl sm:text-5xl md:text-6xl text-warm-brown"
-          >
-            Hotel Facilities &amp; Amenities
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.8, ease: EASE }}
-            className="mt-5 text-sm sm:text-base leading-relaxed text-warm-brown/75"
-          >
-            Designed to offer complete peace of mind. Every guest enjoys complimentary covered car parking,
-            free high-speed Wi-Fi 6, 100% climate-controlled AC living, and generous room square footage.
-          </motion.p>
+        {/* Subtle Header */}
+        <div className="mx-auto max-w-2xl text-center mb-16">
+          <div className="inline-flex items-center gap-2 rounded-none bg-gold/15 border border-gold/30 px-3.5 py-1 text-[11px] uppercase tracking-[0.25em] text-warm-brown font-semibold mb-3">
+            <Sparkles className="h-3 w-3 text-gold" />
+            <span>The BR Vasantham Standard</span>
+          </div>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-warm-brown tracking-tight">
+            Crafted for Unmatched Serenity &amp; Comfort
+          </h2>
+          <p className="mt-3 text-xs sm:text-sm text-stone-600 max-w-xl mx-auto leading-relaxed">
+            Every element of your stay has been carefully considered to provide genuine peace, effortless convenience, and royal Tamil hospitality.
+          </p>
         </div>
 
-        {/* 6 Facilities Cards in 3x2 Grid with Interactive Hover Animation */}
-        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {FACILITIES.map((item, i) => {
+        {/* 6-Cell Grid with Razor-Sharp Corners & Terracotta Line Icons Matching Reference */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-[#e5ded6] bg-[#e5ded6] gap-[1px] shadow-sm">
+          {LUXURY_PILLARS.map((item, idx) => {
             const Icon = item.icon;
             return (
               <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 30 }}
+                key={item.title}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: i * 0.1, duration: 0.8, ease: EASE }}
-                whileHover={{ y: -8, scale: 1.015 }}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-[2.25rem] border border-warm-brown/15 bg-white p-6 shadow-[0_25px_50px_-20px_rgba(90,70,54,0.12)] transition-all duration-500 hover:border-gold/60 hover:shadow-[0_35px_70px_-20px_rgba(90,70,54,0.22)]"
-                data-cursor-text="AMENITY"
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08, duration: 0.6, ease: EASE }}
+                className="group relative flex flex-col justify-between bg-white p-8 sm:p-10 transition-colors duration-300 hover:bg-[#fffdfa]"
               >
                 <div>
-                  {/* Photo Preview with Subtle Linear Gradient */}
-                  <div className="relative h-48 w-full overflow-hidden rounded-2xl mb-5">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover transition-transform duration-700 ease-[var(--ease-cinematic)] group-hover:scale-108"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
-                    
-                    {/* Floating Pill Tag */}
-                    <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full bg-black/60 backdrop-blur-md px-3 py-1 text-[10px] uppercase tracking-wider text-gold font-medium border border-gold/30">
-                      <Icon className="h-3 w-3 text-gold" />
-                      <span>{item.tag}</span>
-                    </div>
+                  {/* Terracotta/Rust Outline Icon */}
+                  <div className="text-[#c2593f] transition-transform duration-300 group-hover:scale-110">
+                    <Icon className="h-6 w-6" strokeWidth={1.4} />
                   </div>
 
-                  <h3 className="font-display text-2xl text-warm-brown group-hover:text-italian-red transition-colors">
+                  {/* Title */}
+                  <h3 className="mt-8 font-display text-2xl text-[#221610] tracking-tight group-hover:text-italian-red transition-colors">
                     {item.title}
                   </h3>
-                  <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-warm-brown/75">
+
+                  {/* Description */}
+                  <p className="mt-3 text-xs sm:text-sm leading-relaxed text-[#594d45]">
                     {item.description}
                   </p>
                 </div>
 
-                {/* Bulleted Perks */}
-                <div className="mt-6 border-t border-cream pt-4 space-y-2">
-                  {item.perks.map((perk) => (
-                    <div key={perk} className="flex items-center gap-2 text-xs text-warm-brown/80 font-medium">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
-                      <span>{perk}</span>
-                    </div>
-                  ))}
+                {/* Subtle Bottom Accent Indicator */}
+                <div className="mt-6 pt-4 border-t border-[#f4ede6] flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-[#998b82]">
+                  <span>Pillar 0{idx + 1}</span>
+                  <span className="text-[#c2593f] opacity-0 group-hover:opacity-100 transition-opacity">
+                    Guaranteed ✓
+                  </span>
                 </div>
               </motion.div>
             );
           })}
         </div>
 
-        {/* Bottom Reassurance Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mt-16 rounded-3xl border border-gold/30 bg-linear-to-r from-cream/90 via-warm-white to-cream/90 p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6"
-        >
-          <div className="flex items-center gap-4">
-            <div className="h-12 w-12 rounded-2xl bg-gold/20 text-gold flex items-center justify-center border border-gold/40 shrink-0">
-              <ShieldCheck className="h-6 w-6 text-warm-brown" />
-            </div>
-            <div>
-              <h4 className="font-display text-xl text-warm-brown">
-                Guaranteed Satisfaction &amp; 24/7 Power Backup
-              </h4>
-              <p className="text-xs text-warm-brown/70 mt-0.5">
-                Heavy-duty generator redundancy ensures zero interruption in AC cooling, Wi-Fi, and elevators.
-              </p>
-            </div>
-          </div>
-
+        {/* Reassurance Action Footer */}
+        <div className="mt-12 text-center">
           <a
-            href="#visit"
-            className="rounded-full bg-warm-brown hover:bg-warm-brown/90 px-6 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-warm-white shadow-md transition-all shrink-0 active:scale-95"
-            data-cursor-text="BOOK"
+            href="#rooms"
+            className="inline-flex items-center gap-2 rounded-none border border-warm-brown/30 bg-white hover:bg-warm-brown hover:text-warm-white px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-warm-brown transition-all shadow-xs active:scale-95 cursor-pointer"
           >
-            Reserve 100% AC Room (From ₹2,999)
+            <span>Explore Our Boutique Rooms &amp; Suites</span>
+            <ArrowRight className="h-3.5 w-3.5" />
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
 }
-

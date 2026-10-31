@@ -13,9 +13,7 @@ import {
   Wind,
   Maximize2,
   Calendar,
-  Users,
-  ShieldCheck,
-  Coffee,
+  ArrowRight,
 } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -24,11 +22,6 @@ export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [enhancedClarity, setEnhancedClarity] = useState(true);
-
-  // Quick Booking State in Hero
-  const [quickRoom, setQuickRoom] = useState("deluxe");
-  const [quickDate, setQuickDate] = useState("Tomorrow");
-  const [quickGuests, setQuickGuests] = useState("2 Guests");
 
   const togglePlay = () => {
     if (!videoRef.current) return;
@@ -41,16 +34,8 @@ export function Hero() {
     }
   };
 
-  const handleQuickBook = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const visitEl = document.getElementById("visit");
-    if (visitEl) {
-      visitEl.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <section className="relative min-h-[105svh] overflow-hidden bg-[#140e0a] pt-24 pb-16">
+    <section className="relative h-svh min-h-[640px] overflow-hidden bg-[#140e0a]">
       {/* 8K Film Sharpening Filter Definition */}
       <svg className="absolute h-0 w-0" aria-hidden="true">
         <filter id="clarity-8k-filter">
@@ -62,10 +47,10 @@ export function Hero() {
         </filter>
       </svg>
 
-      {/* Image / video reveal: opens from an inset rounded frame to full bleed */}
+      {/* Cinematic Full-Bleed 8K Resort Video Background */}
       <motion.div
-        initial={{ clipPath: "inset(8% 5% 8% 5% round 28px)", scale: 1.05 }}
-        animate={{ clipPath: "inset(0% 0% 0% 0% round 0px)", scale: 1 }}
+        initial={{ scale: 1.05 }}
+        animate={{ scale: 1 }}
         transition={{ duration: 1.8, ease: EASE }}
         className="absolute inset-0"
       >
@@ -82,13 +67,13 @@ export function Hero() {
             transform: "translate3d(0, 0, 0)",
             WebkitBackfaceVisibility: "hidden",
             filter: enhancedClarity
-              ? "contrast(1.1) brightness(1.02) saturate(1.1)"
+              ? "contrast(1.08) brightness(1.02) saturate(1.1)"
               : "none",
           }}
           aria-hidden="true"
         >
+          <source src="/videos/resort-8k.mp4" type="video/mp4" />
           <source src="/videos/cafe.mp4" type="video/mp4" />
-          <source src="/videos/cafe.webm" type="video/webm" />
         </video>
 
         {/* Ultra-Fine Organic Micro-Texture Film Grain: boosts perceived acuity to 8K */}
@@ -102,33 +87,31 @@ export function Hero() {
         />
 
         {/* Cinematic Vignette & Deep Luxury Gradient Overlays */}
-        <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/35 to-[#160f0b]/95" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/55 via-black/25 to-[#120b08]/90" />
         <div
-          className="pointer-events-none absolute inset-0 opacity-50"
+          className="pointer-events-none absolute inset-0 opacity-45"
           style={{
             background: "radial-gradient(circle at center, transparent 35%, rgba(15, 10, 7, 0.75) 100%)",
           }}
         />
       </motion.div>
 
-      {/* Hero Content */}
-      <div className="relative z-10 mx-auto flex min-h-[90svh] max-w-7xl flex-col justify-end px-6 pb-12 sm:pb-16 md:px-12">
+      {/* User-Friendly Clean Hero Content */}
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-end px-6 pb-16 sm:pb-20 md:px-12">
         {/* Eyebrow Pill Badges */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.9, ease: EASE }}
-          className="mb-5 flex flex-wrap items-center gap-2.5 sm:gap-3 text-xs uppercase tracking-[0.3em] text-warm-white/90"
+          transition={{ delay: 0.5, duration: 0.8, ease: EASE }}
+          className="mb-4 flex flex-wrap items-center gap-2 sm:gap-3 text-xs uppercase tracking-[0.25em] text-warm-white/90"
         >
-          <span className="font-medium text-gold">BR Vasantham Grand</span>
+          <span className="font-semibold text-gold">BR Vasantham Grand</span>
           <span className="h-1 w-1 rounded-full bg-warm-white/50" />
           <span>Tamil Nadu Heritage</span>
           <span className="h-1 w-1 rounded-full bg-warm-white/50" />
-          <span>Est. 1984</span>
-          <span className="h-1 w-1 rounded-full bg-warm-white/50" />
-          <span className="flex items-center gap-1.5 rounded-full bg-gold/20 border border-gold/40 px-3 py-1 text-[11px] font-semibold tracking-[0.2em] text-gold shadow-md backdrop-blur-md">
+          <span className="flex items-center gap-1.5 rounded-full bg-gold/20 border border-gold/40 px-3 py-1 text-[11px] font-semibold tracking-wider text-gold shadow-md backdrop-blur-md">
             <Sparkles className="h-3 w-3 text-gold animate-spin" style={{ animationDuration: "6s" }} />
-            5-Star Luxury Sanctuary
+            5-Star Luxury Resort &amp; Suites
           </span>
         </motion.div>
 
@@ -143,7 +126,7 @@ export function Hero() {
                     key={`${char}-${charIdx}`}
                     initial={{ opacity: 0, y: "0.5em", filter: "blur(6px)" }}
                     animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    transition={{ delay: 0.9 + totalIdx * 0.03, duration: 0.9, ease: EASE }}
+                    transition={{ delay: 0.8 + totalIdx * 0.025, duration: 0.8, ease: EASE }}
                     className={`inline-block ${
                       word === "Heritage." || word === "Luxury."
                         ? "text-gold"
@@ -158,120 +141,65 @@ export function Hero() {
           ))}
         </h1>
 
-        {/* Subtitle Description */}
+        {/* User-Friendly Subtitle Description */}
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6, duration: 0.9, ease: EASE }}
-          className="mt-5 max-w-2xl text-sm sm:text-base leading-relaxed text-warm-white/80"
+          transition={{ delay: 1.4, duration: 0.8, ease: EASE }}
+          className="mt-4 max-w-2xl text-sm sm:text-base leading-relaxed text-warm-white/85"
         >
-          Welcome to Tamil Nadu&apos;s most distinguished palace sanctuary. Featuring 100% climate-controlled
-          Deluxe &amp; Normal AC suites (320 to 1,200 sq. ft.), free covered car parking &amp; valet, high-speed Wi-Fi,
-          and authentic Chettinad royal hospitality in Chennai &amp; Madurai.
+          Experience Tamil Nadu&apos;s most distinguished palace resort. Immerse in authentic Chettinad architecture,
+          100% climate-controlled AC suites (320 to 1,200 sq. ft.), and timeless royal hospitality.
         </motion.p>
 
-        {/* Core Facility Feature Badges (Car Parking, Wi-Fi, AC, Sq Ft) with Motion Hover */}
+        {/* User-Friendly Simple Amenities Bar: Free Parking, Free Wi-Fi, AC, Sq. Ft. */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.8, duration: 0.9, ease: EASE }}
-          className="mt-6 flex flex-wrap items-center gap-2.5 sm:gap-3"
+          transition={{ delay: 1.6, duration: 0.8, ease: EASE }}
+          className="mt-5 flex flex-wrap items-center gap-2 sm:gap-2.5"
         >
-          <div className="flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs text-warm-white backdrop-blur-md shadow-xs hover:border-gold/60 transition-colors">
+          <div className="flex items-center gap-1.5 rounded-full border border-white/20 bg-black/45 px-3.5 py-1.5 text-xs text-warm-white backdrop-blur-md">
             <Car className="h-3.5 w-3.5 text-gold" />
-            <span>Free Valet &amp; Covered Car Parking</span>
+            <span className="font-medium">Free Car Parking &amp; Valet</span>
           </div>
-          <div className="flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs text-warm-white backdrop-blur-md shadow-xs hover:border-gold/60 transition-colors">
+          <div className="flex items-center gap-1.5 rounded-full border border-white/20 bg-black/45 px-3.5 py-1.5 text-xs text-warm-white backdrop-blur-md">
             <Wifi className="h-3.5 w-3.5 text-emerald-400" />
-            <span>High-Speed Free Wi-Fi 6</span>
+            <span className="font-medium">Free High-Speed Wi-Fi</span>
           </div>
-          <div className="flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs text-warm-white backdrop-blur-md shadow-xs hover:border-gold/60 transition-colors">
+          <div className="flex items-center gap-1.5 rounded-full border border-white/20 bg-black/45 px-3.5 py-1.5 text-xs text-warm-white backdrop-blur-md">
             <Wind className="h-3.5 w-3.5 text-sky-400" />
-            <span>100% Deluxe &amp; Normal AC Available</span>
+            <span className="font-medium">100% Inverter AC (Deluxe &amp; Normal)</span>
           </div>
-          <div className="flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs text-warm-white backdrop-blur-md shadow-xs hover:border-gold/60 transition-colors">
+          <div className="flex items-center gap-1.5 rounded-full border border-white/20 bg-black/45 px-3.5 py-1.5 text-xs text-warm-white backdrop-blur-md">
             <Maximize2 className="h-3.5 w-3.5 text-gold" />
-            <span>Spacious 320 to 1,200 Sq. Ft.</span>
+            <span className="font-medium">320 – 1,200 Sq. Ft.</span>
           </div>
         </motion.div>
 
-        {/* Floating Quick Reservation Search Bar */}
+        {/* User-Friendly Primary Action Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.1, duration: 1, ease: EASE }}
-          className="mt-8 rounded-2xl sm:rounded-3xl border border-white/20 bg-black/60 p-4 sm:p-5 backdrop-blur-xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] hover:border-gold/50 transition-all duration-300"
+          transition={{ delay: 1.9, duration: 0.8, ease: EASE }}
+          className="mt-8 flex flex-wrap items-center gap-4"
         >
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 items-center">
-            {/* Field 1: Check-in Date */}
-            <div className="rounded-xl border border-white/10 bg-white/5 p-3 hover:bg-white/10 transition-colors">
-              <label className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-gold font-medium">
-                <Calendar className="h-3 w-3" />
-                <span>Check-in Date</span>
-              </label>
-              <select
-                value={quickDate}
-                onChange={(e) => setQuickDate(e.target.value)}
-                className="mt-1 w-full bg-transparent text-xs font-semibold text-warm-white outline-none cursor-pointer"
-              >
-                <option value="Today" className="bg-[#1f1610] text-white">Today (Instant Check-in)</option>
-                <option value="Tomorrow" className="bg-[#1f1610] text-white">Tomorrow</option>
-                <option value="This Weekend" className="bg-[#1f1610] text-white">This Weekend (Fri - Sun)</option>
-                <option value="Next Week" className="bg-[#1f1610] text-white">Next Week</option>
-              </select>
-            </div>
-
-            {/* Field 2: Room Type with AC & Sq Ft Specs */}
-            <div className="rounded-xl border border-white/10 bg-white/5 p-3 hover:bg-white/10 transition-colors">
-              <label className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-gold font-medium">
-                <Maximize2 className="h-3 w-3" />
-                <span>Room Type &amp; AC</span>
-              </label>
-              <select
-                value={quickRoom}
-                onChange={(e) => setQuickRoom(e.target.value)}
-                className="mt-1 w-full bg-transparent text-xs font-semibold text-warm-white outline-none cursor-pointer"
-              >
-                <option value="deluxe" className="bg-[#1f1610] text-white">Deluxe AC Room (450 sq. ft.) · ₹4,499</option>
-                <option value="normal" className="bg-[#1f1610] text-white">Normal AC Room (320 sq. ft.) · ₹2,999</option>
-                <option value="chettinad" className="bg-[#1f1610] text-white">Royal Chettinad Suite (750 sq. ft.) · ₹7,999</option>
-                <option value="presidential" className="bg-[#1f1610] text-white">Presidential Penthouse (1,200 sq. ft.) · ₹14,999</option>
-              </select>
-            </div>
-
-            {/* Field 3: Number of Guests */}
-            <div className="rounded-xl border border-white/10 bg-white/5 p-3 hover:bg-white/10 transition-colors">
-              <label className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-gold font-medium">
-                <Users className="h-3 w-3" />
-                <span>Guests &amp; Parking</span>
-              </label>
-              <select
-                value={quickGuests}
-                onChange={(e) => setQuickGuests(e.target.value)}
-                className="mt-1 w-full bg-transparent text-xs font-semibold text-warm-white outline-none cursor-pointer"
-              >
-                <option value="1 Guest" className="bg-[#1f1610] text-white">1 Guest · Free Parking</option>
-                <option value="2 Guests" className="bg-[#1f1610] text-white">2 Guests · Free Parking</option>
-                <option value="3 Guests" className="bg-[#1f1610] text-white">3 Guests · Free Parking</option>
-                <option value="4+ Family" className="bg-[#1f1610] text-white">4+ Family Guests · 2 Bays</option>
-              </select>
-            </div>
-
-            {/* Field 4: Search & Book CTA Button */}
-            <div>
-              <motion.a
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                href="#visit"
-                onClick={handleQuickBook}
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-italian-red hover:bg-[#b5372e] py-4 px-6 text-xs font-semibold uppercase tracking-[0.2em] text-warm-white shadow-xl shadow-italian-red/35 transition-all cursor-pointer"
-                data-cursor-text="BOOK"
-              >
-                <span>Reserve Room Now</span>
-                <Sparkles className="h-4 w-4" />
-              </motion.a>
-            </div>
-          </div>
+          <a
+            href="#rooms"
+            className="flex items-center gap-2 rounded-full bg-italian-red hover:bg-[#b5372e] px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-warm-white shadow-xl shadow-italian-red/35 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            data-cursor-text="ROOMS"
+          >
+            <span>Explore Rooms &amp; Suites</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </a>
+          <a
+            href="#visit"
+            className="flex items-center gap-2 rounded-full border border-white/30 bg-white/10 hover:bg-white/20 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-warm-white backdrop-blur-md transition-all hover:border-gold hover:text-gold active:scale-95 cursor-pointer"
+            data-cursor-text="BOOK"
+          >
+            <Calendar className="h-3.5 w-3.5 text-gold" />
+            <span>Book Your Stay</span>
+          </a>
         </motion.div>
       </div>
 
@@ -279,7 +207,7 @@ export function Hero() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2.5, duration: 1 }}
+        transition={{ delay: 2.3, duration: 0.8 }}
         className="absolute bottom-6 right-6 z-20 hidden sm:flex items-center gap-3 md:right-12"
       >
         <button
@@ -313,7 +241,7 @@ export function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2.8, duration: 1.2 }}
+        transition={{ delay: 2.6, duration: 1 }}
         className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2 text-warm-white/70"
         aria-label="Scroll to continue"
       >

@@ -4,16 +4,13 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowDown,
-  Play,
-  Pause,
   BedDouble,
   Users,
   ChevronDown,
   ArrowRight,
-  Sparkles,
-  Sliders,
   Calendar,
   MapPin,
+  Sparkles,
 } from "lucide-react";
 import { HOTEL_BRANCHES } from "@/lib/branches";
 
@@ -21,8 +18,6 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [enhancedClarity, setEnhancedClarity] = useState(true);
 
   // Floating Booking Bar State
   const [selectedBranchId, setSelectedBranchId] = useState("chennai");
@@ -33,17 +28,6 @@ export function Hero() {
   const [showCheckInMenu, setShowCheckInMenu] = useState(false);
   const [showCheckOutMenu, setShowCheckOutMenu] = useState(false);
   const [showGuestsMenu, setShowGuestsMenu] = useState(false);
-
-  const togglePlay = () => {
-    if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      videoRef.current.play();
-      setIsPlaying(true);
-    }
-  };
 
   const handleCheckAvailability = () => {
     // Dispatch custom event to sync with the reservation module
@@ -66,19 +50,8 @@ export function Hero() {
   };
 
   return (
-    <section id="hero" className="relative h-svh min-h-[700px] overflow-hidden bg-[#0d0806]">
-      {/* 8K Sharpening Convolution Filter Definition */}
-      <svg className="absolute h-0 w-0" aria-hidden="true">
-        <filter id="clarity-8k-filter">
-          <feConvolveMatrix
-            order="3"
-            preserveAlpha="true"
-            kernelMatrix="0 -0.25 0 -0.25 2.0 -0.25 0 -0.25 0"
-          />
-        </filter>
-      </svg>
-
-      {/* Cinematic Full-Bleed 8K Resort Video Background */}
+    <section id="hero" className="relative h-svh min-h-[720px] overflow-hidden bg-[#0d0806]">
+      {/* Cinematic Full-Bleed Resort Video Background */}
       <motion.div
         initial={{ scale: 1.05 }}
         animate={{ scale: 1 }}
@@ -93,13 +66,11 @@ export function Hero() {
           playsInline
           preload="auto"
           poster="/images/hotel-hero.jpg"
-          className="h-full w-full object-cover transition-all duration-700"
+          className="h-full w-full object-cover"
           style={{
             transform: "translate3d(0, 0, 0)",
             WebkitBackfaceVisibility: "hidden",
-            filter: enhancedClarity
-              ? "contrast(1.08) brightness(1.02) saturate(1.12)"
-              : "none",
+            filter: "contrast(1.06) brightness(1.02) saturate(1.1)",
           }}
           aria-hidden="true"
         >
@@ -107,23 +78,13 @@ export function Hero() {
           <source src="/videos/cafe.mp4" type="video/mp4" />
         </video>
 
-        {/* Micro-texture film grain for 8K acuity */}
-        <div
-          className="pointer-events-none absolute inset-0 mix-blend-overlay"
-          style={{
-            opacity: enhancedClarity ? 0.08 : 0,
-            backgroundImage: `radial-gradient(rgba(255,255,255,0.9) 1px, transparent 0)`,
-            backgroundSize: "3px 3px",
-          }}
-        />
-
         {/* Atmospheric Dusk / Sunset Overlays matching reference image */}
         <div className="absolute inset-0 bg-linear-to-r from-black/75 via-black/35 to-black/20" />
         <div className="absolute inset-0 bg-linear-to-b from-black/60 via-transparent to-black/85" />
       </motion.div>
 
       {/* Main Hero Container */}
-      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-between px-6 pt-32 pb-10 sm:pb-12 md:px-12">
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-between px-6 pt-32 pb-14 sm:pb-16 md:px-12">
         {/* Left-Aligned Luxury Editorial Header matching Reference Image */}
         <div className="max-w-3xl my-auto">
           {/* Eyebrow Label with Golden Accent Rule Line */}
@@ -161,12 +122,12 @@ export function Hero() {
             Relax · Unwind · Rejuvenate
           </motion.p>
 
-          {/* Action Buttons: Solid Golden Pill + Glass Circle Watch Tour */}
+          {/* Action Buttons: [Explore Our Resort] & [Reserve Room] in replace of video pause */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1, duration: 0.8, ease: EASE }}
-            className="mt-8 flex flex-wrap items-center gap-5 sm:gap-6"
+            className="mt-8 flex flex-wrap items-center gap-4 sm:gap-5"
           >
             {/* Primary Button: Explore Our Resort */}
             <a
@@ -178,24 +139,16 @@ export function Hero() {
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
 
-            {/* Secondary Button: Glass Circle Watch Tour */}
-            <button
-              onClick={togglePlay}
-              className="group flex items-center gap-3 text-warm-white hover:text-gold transition-colors cursor-pointer"
-              data-cursor-text="WATCH"
-              aria-label={isPlaying ? "Pause resort video tour" : "Play resort video tour"}
+            {/* Secondary Button: [Reserve Room] replacing video pause as requested */}
+            <a
+              href="#visit"
+              className="group rounded-full border border-gold/70 bg-black/45 backdrop-blur-md text-warm-white hover:text-gold hover:border-gold hover:bg-black/70 px-7 py-3.5 text-xs uppercase tracking-[0.18em] font-semibold flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
+              data-cursor-text="BOOK"
             >
-              <div className="h-11 w-11 rounded-full border border-white/40 bg-white/10 backdrop-blur-md flex items-center justify-center transition-all duration-300 group-hover:border-gold group-hover:bg-white/20 group-hover:scale-105 shadow-lg">
-                {isPlaying ? (
-                  <Pause className="h-4 w-4 fill-white text-white ml-0.5" />
-                ) : (
-                  <Play className="h-4 w-4 fill-white text-white ml-0.5" />
-                )}
-              </div>
-              <span className="text-xs uppercase tracking-[0.2em] font-medium text-warm-white group-hover:text-gold transition-colors">
-                {isPlaying ? "Pause Video" : "Watch Tour"}
-              </span>
-            </button>
+              <Calendar className="h-4 w-4 text-gold shrink-0 transition-transform group-hover:scale-110" />
+              <span>Reserve Room</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </a>
           </motion.div>
         </div>
 
@@ -251,10 +204,11 @@ export function Hero() {
                           setSelectedBranchId(b.id);
                           setShowBranchMenu(false);
                         }}
-                        className={`w-full text-left px-3 py-2 rounded-xl text-xs transition-colors flex items-center justify-between ${selectedBranchId === b.id
+                        className={`w-full text-left px-3 py-2 rounded-xl text-xs transition-colors flex items-center justify-between ${
+                          selectedBranchId === b.id
                             ? "bg-gold/20 text-gold font-semibold"
                             : "text-white/80 hover:bg-white/10"
-                          }`}
+                        }`}
                       >
                         <div>
                           <p className="font-medium text-warm-white">{b.name}</p>
@@ -324,7 +278,7 @@ export function Hero() {
             {/* Divider */}
             <div className="hidden md:block h-8 w-px bg-white/15" />
 
-            {/* Column 2: Check Out */}
+            {/* Column 3: Check Out */}
             <div className="relative flex-1 px-4 py-2 hover:bg-white/5 rounded-full transition-colors">
               <button
                 type="button"
@@ -379,7 +333,7 @@ export function Hero() {
             {/* Divider */}
             <div className="hidden md:block h-8 w-px bg-white/15" />
 
-            {/* Column 3: Guests */}
+            {/* Column 4: Guests */}
             <div className="relative flex-1 px-4 py-2 hover:bg-white/5 rounded-full transition-colors">
               <button
                 type="button"
@@ -429,7 +383,7 @@ export function Hero() {
               </AnimatePresence>
             </div>
 
-            {/* Column 4: Check Availability CTA Button matching Reference Image */}
+            {/* Column 5: Check Availability CTA Button matching Reference Image */}
             <button
               type="button"
               onClick={handleCheckAvailability}
@@ -440,45 +394,32 @@ export function Hero() {
               <ArrowRight className="h-4 w-4" />
             </button>
           </div>
-
-          {/* Bottom Row Controls: Slider Pagination (Left) & Scroll Arrow (Right) matching Reference */}
-          <div className="mt-4 flex items-center justify-between px-2 sm:px-6">
-            {/* Slider Dots Indicator */}
-            <div className="hidden sm:flex items-center gap-2">
-              <span className="h-1 w-8 bg-gradient-to-r from-gold to-[#be8e46] rounded-full" />
-              <span className="h-1.5 w-1.5 bg-white/40 rounded-full" />
-              <span className="h-1.5 w-1.5 bg-white/40 rounded-full" />
-            </div>
-
-            {/* 8K Quality Badge Toggle */}
-            <div className="mx-auto sm:mx-0">
-              <button
-                onClick={() => setEnhancedClarity(!enhancedClarity)}
-                className="flex items-center gap-2 rounded-full border border-white/20 bg-black/50 px-3.5 py-1 text-[10px] font-mono tracking-wider text-warm-white backdrop-blur-md transition-all hover:border-gold hover:text-gold cursor-pointer"
-                title="Toggle 8K Clarity Filter"
-              >
-                <span
-                  className={`h-2 w-2 rounded-full ${enhancedClarity
-                      ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]"
-                      : "bg-white/40"
-                    }`}
-                />
-                <span>{enhancedClarity ? "8K CLARITY ACTIVE" : "STANDARD 1080P"}</span>
-              </button>
-            </div>
-
-            {/* Scroll Down Arrow */}
-            <a
-              href="#facilities"
-              className="h-9 w-9 rounded-full border border-white/30 bg-black/45 backdrop-blur-md flex items-center justify-center text-white/80 hover:text-gold hover:border-gold hover:scale-105 transition-all"
-              aria-label="Scroll to Facilities"
-              data-cursor-text="DOWN"
-            >
-              <ArrowDown className="h-4 w-4" />
-            </a>
-          </div>
         </motion.div>
       </div>
+
+      {/* Bottom-Left Slider Pagination Indicator matching Reference Image */}
+      <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-12 z-20 hidden sm:flex items-center gap-2 pointer-events-none">
+        <span className="h-1 w-8 bg-gradient-to-r from-gold to-[#be8e46] rounded-full" />
+        <span className="h-1.5 w-1.5 bg-white/45 rounded-full" />
+        <span className="h-1.5 w-1.5 bg-white/45 rounded-full" />
+      </div>
+
+      {/* Bottom-Right Luxury Scroll Down Arrow Indicator matching Reference Image */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1.6, duration: 0.8, ease: EASE }}
+        className="absolute bottom-5 right-6 sm:bottom-7 sm:right-12 z-20"
+      >
+        <a
+          href="#facilities"
+          className="group h-11 w-11 sm:h-12 sm:w-12 rounded-full border border-white/35 bg-black/55 backdrop-blur-md flex items-center justify-center text-white/85 hover:text-gold hover:border-gold hover:bg-black/80 hover:scale-110 active:scale-95 transition-all duration-300 shadow-[0_8px_25px_rgba(0,0,0,0.6)] cursor-pointer"
+          aria-label="Scroll to Facilities"
+          data-cursor-text="DOWN"
+        >
+          <ArrowDown className="h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 group-hover:translate-y-0.5" />
+        </a>
+      </motion.div>
     </section>
   );
 }

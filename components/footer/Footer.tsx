@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import {
   MapPin,
@@ -24,6 +25,8 @@ import { HOTEL_BRANCHES } from "@/lib/branches";
 import { GoldenLotus } from "@/components/ui/GoldenLotus";
 
 export function Footer() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [chennaiTime, setChennaiTime] = useState("");
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterDone, setNewsletterDone] = useState(false);
@@ -77,109 +80,53 @@ export function Footer() {
   return (
     <footer
       id="visit"
-      className="relative w-full border-t border-gold/30 bg-gradient-to-b from-[#18100a] via-[#120a06] to-[#0a0503] text-warm-white pt-20 pb-12 px-6 sm:px-10 lg:px-16"
+      className="relative w-full border-t border-gold/30 bg-gradient-to-b from-[#222426] via-[#161210] to-[#0a0503] text-warm-white pt-20 pb-12 px-6 sm:px-10 lg:px-16"
     >
       <div className="relative mx-auto max-w-7xl">
-        {/* Top Feature: Our 3 Sanctuaries (User-Friendly Branch Cards with Direct Booking) */}
-        <div className="border-b border-white/10 pb-16">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-            <div>
-              <span className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-gold font-medium mb-2">
-                <Sparkles className="h-3.5 w-3.5 text-gold" />
-                <span>Our Hotel Sanctuaries</span>
+        {/* Top Feature: "Book Your Luxury Stay" matching Reference Image (Shown ONLY on Home Page) */}
+        {isHome && (
+          <div className="border-b border-white/10 pb-20 pt-4 text-center">
+            <div className="mx-auto max-w-2xl">
+              {/* Eyebrow Label matching Reference Image */}
+              <span className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-white/55 font-medium block">
+                BR VASANTHAM BOUTIQUE HOTEL
               </span>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white">
-                Experience Luxury Across Tamil Nadu
+
+              {/* Serif Headline with Italic Warm Terracotta Accent matching Reference */}
+              <h2 className="mt-5 text-4xl sm:text-5xl md:text-6xl text-white tracking-tight leading-[1.12]">
+                <span className="block font-serif font-normal text-white">Book Your</span>
+                <span className="block font-serif italic text-[#c2593f] mt-1 sm:mt-1.5 font-normal">
+                  Luxury Stay
+                </span>
               </h2>
-            </div>
 
-            {/* Live IST Clock */}
-            <div className="inline-flex items-center gap-3 bg-black/60 border border-gold/30 px-5 py-2.5 rounded-none shrink-0 backdrop-blur-md">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              <div className="text-xs">
-                <span className="text-white/50 text-[10px] uppercase tracking-wider block">
-                  Tamil Nadu Time
-                </span>
-                <span className="font-mono text-sm font-bold text-white">
-                  {chennaiTime ? `${chennaiTime} IST` : "12:00:00 PM IST"}
-                </span>
+              {/* Subtitle matching Reference Image */}
+              <p className="mt-5 text-xs sm:text-sm text-white/70 max-w-xl mx-auto leading-relaxed font-light">
+                Reserve today and experience the BR Vasantham difference — where luxury is quiet and service is personal.
+              </p>
+
+              {/* Centered Dual Action Buttons matching Reference Image */}
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+                <button
+                  type="button"
+                  onClick={() => handleOpenBooking()}
+                  className="rounded-none bg-[#c2593f] hover:bg-[#a84c35] text-white font-bold px-8 py-3.5 text-xs uppercase tracking-[0.2em] shadow-lg transition-all active:scale-95 cursor-pointer"
+                  data-cursor-text="BOOK"
+                >
+                  RESERVE NOW
+                </button>
+
+                <Link
+                  href="/rooms"
+                  className="rounded-none border border-white/30 bg-[#2b2c2e]/40 hover:bg-white/10 hover:border-white text-white font-semibold px-8 py-3.5 text-xs uppercase tracking-[0.2em] transition-all active:scale-95 cursor-pointer"
+                  data-cursor-text="ROOMS"
+                >
+                  EXPLORE ROOMS
+                </Link>
               </div>
             </div>
           </div>
-
-          {/* 3 User-Friendly Branch Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {HOTEL_BRANCHES.map((branch) => (
-              <div
-                key={branch.id}
-                className="group relative bg-[#1c120c]/80 border border-white/15 p-5 rounded-none flex flex-col justify-between hover:border-gold/60 transition-all duration-300 hover:shadow-[0_15px_35px_rgba(0,0,0,0.6)]"
-              >
-                <div>
-                  {/* Photo Thumbnail */}
-                  <div className="relative h-44 w-full overflow-hidden rounded-none mb-4 border border-white/10">
-                    <Image
-                      src={branch.image}
-                      alt={branch.name}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
-                    
-                    <span className="absolute top-3 left-3 bg-black/75 backdrop-blur-md border border-white/20 text-gold text-[10px] font-semibold px-2.5 py-1 uppercase tracking-wider">
-                      {branch.city}
-                    </span>
-
-                    <span className="absolute bottom-3 right-3 bg-gold text-[#1a120b] font-bold text-xs px-2.5 py-1">
-                      From {branch.startingRate}
-                    </span>
-                  </div>
-
-                  <h3 className="font-display text-xl text-white group-hover:text-gold transition-colors">
-                    {branch.name}
-                  </h3>
-                  <p className="mt-1.5 text-xs text-white/65 line-clamp-2 font-light leading-relaxed">
-                    {branch.address}
-                  </p>
-
-                  <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-white/70">
-                    <span className="flex items-center gap-1.5">
-                      <Phone className="h-3.5 w-3.5 text-gold" />
-                      <span>{branch.phone}</span>
-                    </span>
-                    <span className="text-emerald-400 font-medium">
-                      ★ {branch.rating}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Direct Action Buttons */}
-                <div className="mt-5 pt-4 border-t border-white/10 grid grid-cols-2 gap-2">
-                  <a
-                    href={`https://wa.me/${branch.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
-                      `Vanakkam ${branch.name}! I would like to inquire about room availability.`
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="h-10 inline-flex items-center justify-center gap-1.5 bg-white/5 hover:bg-white/15 border border-white/20 text-[11px] uppercase tracking-wider font-semibold text-white transition-all cursor-pointer"
-                  >
-                    <MessageSquare className="h-3.5 w-3.5 text-emerald-400" />
-                    <span>WhatsApp</span>
-                  </a>
-
-                  <button
-                    type="button"
-                    onClick={() => handleOpenBooking(branch.id)}
-                    className="h-10 inline-flex items-center justify-center gap-1.5 bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] hover:brightness-105 text-[#1a120b] font-bold text-[11px] uppercase tracking-wider shadow-md transition-all cursor-pointer"
-                  >
-                    <Calendar className="h-3.5 w-3.5 text-[#1a120b]" />
-                    <span>Book Room</span>
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        )}
 
         {/* Middle Section: 4-Column Directory */}
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 border-b border-white/10">

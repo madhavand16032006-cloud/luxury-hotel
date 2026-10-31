@@ -158,11 +158,32 @@ export function Footer() {
       }
     };
 
+    const onHeroSync = (e: Event) => {
+      const custom = e as CustomEvent<{ checkIn: string; duration: string; guests: number }>;
+      if (custom.detail) {
+        if (custom.detail.checkIn && custom.detail.checkIn !== "Select Date") {
+          setSelectedDate(custom.detail.checkIn);
+        }
+        if (custom.detail.duration && custom.detail.duration !== "Select Date") {
+          setSelectedDuration(custom.detail.duration);
+        }
+        if (custom.detail.guests) {
+          setSelectedGuests(custom.detail.guests);
+        }
+        setSelectionNotice(
+          `✓ Check-in: ${custom.detail.checkIn} · Stay: ${custom.detail.duration} · Guests: ${custom.detail.guests} — select your luxury room below`
+        );
+        setTimeout(() => setSelectionNotice(null), 8000);
+      }
+    };
+
     window.addEventListener("select-hotel-room", onSelectRoom);
+    window.addEventListener("hero-booking-sync", onHeroSync);
 
     return () => {
       clearInterval(interval);
       window.removeEventListener("select-hotel-room", onSelectRoom);
+      window.removeEventListener("hero-booking-sync", onHeroSync);
     };
   }, []);
 

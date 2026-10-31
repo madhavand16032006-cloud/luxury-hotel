@@ -52,11 +52,10 @@ export function Navbar() {
     <>
       <header className="fixed top-0 left-0 right-0 z-40 py-3 sm:py-4 px-4 sm:px-8 transition-all duration-300">
         <div
-          className={`mx-auto max-w-6xl flex items-center justify-between rounded-full border transition-all duration-300 px-5 py-2.5 shadow-md ${
-            scrolled
+          className={`mx-auto max-w-6xl flex items-center justify-between rounded-full border transition-all duration-300 px-5 py-2.5 shadow-md ${scrolled
               ? "bg-[#160f0b]/90 border-white/15 backdrop-blur-xl shadow-[0_15px_35px_-10px_rgba(0,0,0,0.5)]"
               : "bg-black/40 border-white/10 backdrop-blur-md"
-          }`}
+            }`}
         >
           {/* Brand Logo */}
           <a
@@ -84,9 +83,8 @@ export function Navbar() {
                     <a
                       href={item.href}
                       onClick={(e) => handleNavClick(e, item.href)}
-                      className={`text-xs uppercase tracking-[0.2em] font-medium transition-colors duration-200 hover:text-gold ${
-                        isActive ? "text-gold font-semibold" : "text-warm-white/80"
-                      }`}
+                      className={`text-xs uppercase tracking-[0.2em] font-medium transition-colors duration-200 hover:text-gold ${isActive ? "text-gold font-semibold" : "text-warm-white/80"
+                        }`}
                       data-cursor-text="VIEW"
                     >
                       {item.label}

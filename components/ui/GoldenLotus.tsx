@@ -60,3 +60,4 @@ export function GoldenLotus({ className = "h-8 w-8" }: { className?: string }) {
     </svg>
   );
 }
+

@@ -13,7 +13,9 @@ import {
   Sparkles,
   Sliders,
   Calendar,
+  MapPin,
 } from "lucide-react";
+import { HOTEL_BRANCHES } from "@/lib/branches";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -23,9 +25,11 @@ export function Hero() {
   const [enhancedClarity, setEnhancedClarity] = useState(true);
 
   // Floating Booking Bar State
+  const [selectedBranchId, setSelectedBranchId] = useState("chennai");
   const [checkInDate, setCheckInDate] = useState("Select Date");
   const [checkOutDate, setCheckOutDate] = useState("Select Date");
   const [guestsCount, setGuestsCount] = useState("2 Guests");
+  const [showBranchMenu, setShowBranchMenu] = useState(false);
   const [showCheckInMenu, setShowCheckInMenu] = useState(false);
   const [showCheckOutMenu, setShowCheckOutMenu] = useState(false);
   const [showGuestsMenu, setShowGuestsMenu] = useState(false);
@@ -47,6 +51,7 @@ export function Hero() {
       window.dispatchEvent(
         new CustomEvent("hero-booking-sync", {
           detail: {
+            branchId: selectedBranchId,
             checkIn: checkInDate === "Select Date" ? "Tomorrow" : checkInDate,
             duration: checkOutDate === "Select Date" ? "2 Nights" : checkOutDate,
             guests: parseInt(guestsCount) || 2,
@@ -201,9 +206,74 @@ export function Hero() {
           transition={{ delay: 1.4, duration: 0.9, ease: EASE }}
           className="w-full pt-4"
         >
-          <div className="mx-auto w-full max-w-5xl rounded-full bg-black/65 backdrop-blur-2xl border border-white/20 p-2.5 sm:px-8 sm:py-3.5 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.85)] flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 md:gap-4">
-            {/* Column 1: Check In */}
-            <div className="relative flex-1 px-4 py-2 hover:bg-white/5 rounded-full transition-colors">
+          <div className="mx-auto w-full max-w-6xl rounded-full bg-black/65 backdrop-blur-2xl border border-white/20 p-2.5 sm:px-6 sm:py-3.5 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.85)] flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5 md:gap-3">
+            {/* Column 1: Destination Branch */}
+            <div className="relative flex-1 px-3 py-1.5 hover:bg-white/5 rounded-full transition-colors">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowBranchMenu(!showBranchMenu);
+                  setShowCheckInMenu(false);
+                  setShowCheckOutMenu(false);
+                  setShowGuestsMenu(false);
+                }}
+                className="w-full flex items-center gap-2.5 text-left cursor-pointer"
+              >
+                <MapPin className="h-5 w-5 text-gold shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] text-white/50 font-semibold truncate">
+                    Destination Branch
+                  </span>
+                  <span className="text-xs font-semibold text-warm-white flex items-center gap-1 mt-0.5 truncate">
+                    {HOTEL_BRANCHES.find((b) => b.id === selectedBranchId)?.name.split(" ")[0]} Resort
+                    <ChevronDown className="h-3 w-3 text-gold/70 ml-1 shrink-0" />
+                  </span>
+                </div>
+              </button>
+
+              {/* Branch Dropdown */}
+              <AnimatePresence>
+                {showBranchMenu && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="absolute bottom-full left-0 mb-3 w-72 rounded-2xl bg-[#170f0b]/98 border border-gold/40 p-2 shadow-2xl backdrop-blur-xl z-30"
+                  >
+                    <span className="block px-3 py-1.5 text-[10px] uppercase tracking-wider text-gold font-semibold border-b border-white/10 mb-1">
+                      Choose Hotel Branch
+                    </span>
+                    {HOTEL_BRANCHES.map((b) => (
+                      <button
+                        key={b.id}
+                        type="button"
+                        onClick={() => {
+                          setSelectedBranchId(b.id);
+                          setShowBranchMenu(false);
+                        }}
+                        className={`w-full text-left px-3 py-2 rounded-xl text-xs transition-colors flex items-center justify-between ${
+                          selectedBranchId === b.id
+                            ? "bg-gold/20 text-gold font-semibold"
+                            : "text-white/80 hover:bg-white/10"
+                        }`}
+                      >
+                        <div>
+                          <p className="font-medium text-warm-white">{b.name}</p>
+                          <p className="text-[10px] text-white/50">{b.city} · From {b.startingRate}</p>
+                        </div>
+                        {selectedBranchId === b.id && <span className="text-xs text-gold">✓</span>}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Divider */}
+            <div className="hidden md:block h-8 w-px bg-white/15" />
+
+            {/* Column 2: Check In */}
+            <div className="relative flex-1 px-3 py-1.5 hover:bg-white/5 rounded-full transition-colors">
               <button
                 type="button"
                 onClick={() => {

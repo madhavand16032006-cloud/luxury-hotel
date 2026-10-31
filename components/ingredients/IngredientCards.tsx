@@ -6,34 +6,34 @@ import Image from "next/image";
 
 const INGREDIENTS = [
   {
-    name: "Arabica beans",
-    origin: "Sidama & San Marcos",
-    note: "Single-origin beans slow-roasted in small batches to preserve natural stone fruit and cocoa undertones.",
-    profile: "Fragrant · Floral · Cocoa",
+    name: "Plantation Peaberry",
+    origin: "Nilgiris & Shevaroy Hills",
+    note: "High-altitude shade-grown coffee beans slow-roasted to yield rich dark chocolate and toasted hazelnut depth.",
+    profile: "Chicory Velvet · Cocoa · Caramel",
     tone: "#c9a65b",
     image: "/images/beans.jpg",
   },
   {
-    name: "Mascarpone",
-    origin: "Lombardy Dairy Farms",
-    note: "Fresh cow's milk cream whipped by hand every morning until velvety, smooth, and cloud-light.",
-    profile: "Silk · Sweet Cream · Delicate",
+    name: "Pure A2 Farm Milk",
+    origin: "Kongu Dairy Country",
+    note: "Fresh Kangeyam cow's milk boiled gently over brass vessels for luxurious micro-texture in our degree coffee.",
+    profile: "Silky · Sweet Cream · Delicate",
     tone: "#e8dcc8",
     image: "/images/mascarpone.jpg",
   },
   {
-    name: "Olive oil",
-    origin: "Tuscan Cold-Pressed",
-    note: "First cold-extraction from hand-harvested Frantoio olives, delivering grassy and peppery finish.",
-    profile: "Golden · Grassy · Peppery",
+    name: "Pure Cold-Pressed Ghee",
+    origin: "Thanjavur Heritage Dairy",
+    note: "Slow-churned bilona ghee imparting golden luster and irresistible aroma to our morning dosas and pongal.",
+    profile: "Golden · Nutty · Fragrant",
     tone: "#b5b56a",
     image: "/images/olive-oil.jpg",
   },
   {
-    name: "Sweet Basil",
-    origin: "Ligurian Coast",
-    note: "DOP Genovese basil picked with the morning dew, crushed moments before service for optimal aromatics.",
-    profile: "Anise · Herbaceous · Vibrant",
+    name: "Madurai Malli & Thulasi",
+    origin: "Vaigai River Valleys",
+    note: "GI-tagged sacred jasmine and crisp holy basil picked with the morning dew, welcoming every arriving guest.",
+    profile: "Floral · Sacred · Uplifting",
     tone: "#5c7a5a",
     image: "/images/basil.jpg",
   },
@@ -46,10 +46,10 @@ export function IngredientCards() {
   return (
     <section ref={ref} id="ingredients" className="relative overflow-hidden px-6 py-40 md:px-12 bg-warm-white">
       <div className="mx-auto max-w-3xl text-center mb-16">
-        <p className="text-xs uppercase tracking-[0.35em] text-olive font-medium">L'Artigianalità</p>
-        <h2 className="mt-3 font-display text-4xl sm:text-5xl text-warm-brown">The Sacred Ingredients</h2>
+        <p className="text-xs uppercase tracking-[0.35em] text-olive font-medium">Virunthombal Pillars</p>
+        <h2 className="mt-3 font-display text-4xl sm:text-5xl text-warm-brown">The Sacred Terroir of Tamil Nadu</h2>
         <p className="mt-4 text-sm leading-relaxed text-warm-brown/70">
-          Every espresso pulled and every pastry folded begins with four uncompromising pillars of Italian terroir.
+          Every morning filter coffee poured and every royal feast prepared begins with four uncompromising pillars of Tamil land and culinary heritage.
         </p>
       </div>
 

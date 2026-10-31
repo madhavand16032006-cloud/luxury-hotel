@@ -5,10 +5,10 @@ import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 const LINES = [
-  "Coffee here is a ritual, not a rush.",
-  "We roast slowly, pour patiently,",
-  "and serve every cup as if it were",
-  "the first of the morning.",
+  "Hospitality here is sacred tradition, not business.",
+  "We welcome with genuine grace,",
+  "crafting every stay into a cherished sanctuary",
+  "of Tamil Nadu's royal warmth.",
 ];
 
 export function Manifesto() {
@@ -42,7 +42,7 @@ export function Manifesto() {
 
   return (
     <section ref={ref} id="story" className="relative mx-auto max-w-6xl px-6 py-40 md:px-12">
-      <p className="mb-10 text-xs uppercase tracking-[0.35em] text-basil">Our philosophy</p>
+      <p className="mb-10 text-xs uppercase tracking-[0.35em] text-basil">Virunthombal · The Art of Tamil Hospitality</p>
       <p className="font-display text-[clamp(2rem,5vw,4.5rem)] leading-[1.15] text-warm-brown">
         {LINES.map((line) =>
           line.split(" ").map((word, i) => (

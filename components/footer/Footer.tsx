@@ -22,6 +22,11 @@ import {
   BedDouble,
   Key,
   Hotel,
+  Car,
+  Wifi,
+  Wind,
+  Maximize2,
+  ShieldCheck,
 } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -36,98 +41,112 @@ const STAY_DURATIONS = [
 
 const ROOM_SUITES = [
   {
-    id: "courtyard",
-    title: "Deluxe Courtyard Suite",
-    rate: "€380 / night",
-    specs: "45 m² · Private Terrace",
-    desc: "King linen bed, Carrara marble bath, courtyard garden views, and morning in-suite espresso ritual.",
-    image: "/images/suite-courtyard.jpg",
+    id: "deluxe",
+    title: "Deluxe AC Room",
+    category: "Deluxe Luxury",
+    rate: "₹4,499 / night",
+    rawRate: 4499,
+    sqft: "450 sq. ft.",
+    ac: "100% Silent Inverter AC",
+    parking: "Free Valet & Covered Parking",
+    wifi: "Free High-Speed Wi-Fi 6",
+    specs: "450 sq. ft. · King Plush Bed · Private Balcony",
+    desc: "King plush mattress, Carrara marble bath, courtyard balcony view, 100% whisper-quiet AC, and complimentary South Indian breakfast.",
+    image: "/images/room-deluxe-ac.jpg",
   },
   {
-    id: "penthouse",
-    title: "Executive Lombard Penthouse",
-    rate: "€620 / night",
-    specs: "72 m² · Duomo Skyline",
-    desc: "Private rooftop terrace, antique oak beams, open fireplace, and personal butler coffee service.",
-    image: "/images/suite-penthouse.jpg",
+    id: "normal",
+    title: "Standard Normal AC Room",
+    category: "Normal AC",
+    rate: "₹2,999 / night",
+    rawRate: 2999,
+    sqft: "320 sq. ft.",
+    ac: "100% Split Inverter AC",
+    parking: "Free Covered Car Parking",
+    wifi: "Free High-Speed Wi-Fi",
+    specs: "320 sq. ft. · Queen Bed · Work Desk",
+    desc: "Cozy Queen bed, 100% split AC, ergonomic work desk, 43\" 4K Smart TV, rain shower, and morning Kumbakonam brass filter coffee.",
+    image: "/images/room-normal-ac.jpg",
   },
   {
-    id: "roastery",
-    title: "Master Roastery Suite",
-    rate: "€490 / night",
-    specs: "58 m² · Roastery Heritage",
-    desc: "Bespoke walnut furnishings, custom brass La Marzocco bar, and private cellar access.",
-    image: "/images/suite-roastery.jpg",
+    id: "chettinad",
+    title: "Royal Chettinad Heritage Suite",
+    category: "Heritage Royal",
+    rate: "₹7,999 / night",
+    rawRate: 7999,
+    sqft: "750 sq. ft.",
+    ac: "Centralized Climate Control AC",
+    parking: "Reserved VIP Parking Bay",
+    wifi: "Gigabit Executive Wi-Fi",
+    specs: "750 sq. ft. · Teakwood King · Athangudi Foyer",
+    desc: "Handcrafted Burmese teakwood bed, authentic Athangudi patterned tiles, Tanjore gold foil art, deep soaking bathtub, and personal butler.",
+    image: "/images/room-chettinad-suite.jpg",
   },
   {
-    id: "villa",
-    title: "San Frediano Tuscan Villa",
-    rate: "€750 / night",
-    specs: "95 m² · Oltrarno Firenze",
-    desc: "Renaissance vaulted ceilings, private culinary courtyard, wood-fired oven, and sommelier cellar.",
-    image: "/images/suite-villa.jpg",
+    id: "presidential",
+    title: "Presidential Grand Penthouse",
+    category: "Presidential Luxury",
+    rate: "₹14,999 / night",
+    rawRate: 14999,
+    sqft: "1,200 sq. ft.",
+    ac: "Dual-Zone Central AC",
+    parking: "2 VIP Covered Bays + Airport Chauffeur",
+    wifi: "Dedicated Gigabit Fiber",
+    specs: "1,200 sq. ft. · Master King · Private Plunge Pool",
+    desc: "Expansive duplex penthouse with private rooftop plunge pool, living salon, dining room for 6, whirlpool jacuzzi, and airport transfers.",
+    image: "/images/room-presidential.jpg",
   },
 ];
 
 export function Footer() {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
-  const [milanTime, setMilanTime] = useState("");
-  const [isMilanOpen, setIsMilanOpen] = useState(true);
-  const [isFirenzeOpen, setIsFirenzeOpen] = useState(true);
+  const [chennaiTime, setChennaiTime] = useState("");
+  const [isFrontDeskOpen, setIsFrontDeskOpen] = useState(true);
 
   // Room Booking Form State
-  const [selectedSuite, setSelectedSuite] = useState("courtyard");
+  const [selectedSuite, setSelectedSuite] = useState("deluxe");
   const [selectedGuests, setSelectedGuests] = useState(2);
   const [selectedDate, setSelectedDate] = useState("Tomorrow");
   const [selectedDuration, setSelectedDuration] = useState("2 Nights (Recommended)");
+  const [needsValetParking, setNeedsValetParking] = useState(true);
   const [guestName, setGuestName] = useState("");
   const [guestPhone, setGuestPhone] = useState("");
-  const [specialNote, setSpecialNote] = useState("");
+  const [guestEmail, setGuestEmail] = useState("");
   const [isBooked, setIsBooked] = useState(false);
   const [bookingConfirmation, setBookingConfirmation] = useState<{
     id: string;
     name: string;
     suite: string;
+    category: string;
+    sqft: string;
+    ac: string;
+    parking: string;
+    wifi: string;
     rate: string;
     date: string;
     duration: string;
     guests: number;
+    totalAmount: string;
   } | null>(null);
 
   // Newsletter State
   const [email, setEmail] = useState("");
   const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
 
-  // Dynamic Milan & Florence Real-Time Clock & Dynamic Open/Closed Status
+  // Dynamic Chennai (IST - Asia/Kolkata) Real-Time Clock & 24/7 Front Desk Status
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
       const options: Intl.DateTimeFormatOptions = {
-        timeZone: "Europe/Rome",
+        timeZone: "Asia/Kolkata",
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
-        hour12: false,
+        hour12: true,
       };
-      const timeStr = new Intl.DateTimeFormat("en-GB", options).format(now);
-      setMilanTime(timeStr);
-
-      // Check current hour in Europe/Rome
-      const hourOptions: Intl.DateTimeFormatOptions = {
-        timeZone: "Europe/Rome",
-        hour: "numeric",
-        hour12: false,
-      };
-      const currentHour = parseInt(
-        new Intl.DateTimeFormat("en-GB", hourOptions).format(now),
-        10
-      );
-
-      // Milan: Open 07:00 to 20:00
-      setIsMilanOpen(currentHour >= 7 && currentHour < 20);
-
-      // Firenze: Open 07:30 to 19:30
-      setIsFirenzeOpen(currentHour >= 7 && currentHour < 19);
+      const timeStr = new Intl.DateTimeFormat("en-IN", options).format(now);
+      setChennaiTime(timeStr);
+      setIsFrontDeskOpen(true); // 24/7 Front desk & Concierge
     };
 
     updateTime();
@@ -148,14 +167,29 @@ export function Footer() {
     const chosenSuite =
       ROOM_SUITES.find((room) => room.id === selectedSuite) || ROOM_SUITES[0];
 
+    // Calculate nights count
+    let nights = 1;
+    if (selectedDuration.includes("2 Nights")) nights = 2;
+    else if (selectedDuration.includes("3 Nights")) nights = 3;
+    else if (selectedDuration.includes("5 Nights")) nights = 5;
+    else if (selectedDuration.includes("7 Nights")) nights = 7;
+
+    const totalEst = (chosenSuite.rawRate * nights).toLocaleString("en-IN");
+
     const confirmation = {
-      id: `VR-SUITE-${Math.floor(1000 + Math.random() * 9000)}`,
+      id: `BRV-TN-${Math.floor(10000 + Math.random() * 90000)}`,
       name: guestName.trim(),
       suite: chosenSuite.title,
+      category: chosenSuite.category,
+      sqft: chosenSuite.sqft,
+      ac: chosenSuite.ac,
+      parking: needsValetParking ? "Free Valet & Covered Bay #A-14 Reserved" : "Free Covered Parking",
+      wifi: chosenSuite.wifi,
       rate: chosenSuite.rate,
       date: selectedDate,
       duration: selectedDuration,
       guests: selectedGuests,
+      totalAmount: `₹${totalEst} (Taxes incl.)`,
     };
 
     setBookingConfirmation(confirmation);
@@ -167,7 +201,7 @@ export function Footer() {
     setBookingConfirmation(null);
     setGuestName("");
     setGuestPhone("");
-    setSpecialNote("");
+    setGuestEmail("");
   };
 
   const handleNewsletter = (e: React.FormEvent) => {
@@ -206,44 +240,38 @@ export function Footer() {
           className="pointer-events-none absolute -top-32 right-1/4 h-96 w-96 rounded-full bg-gold/20 blur-[130px]"
         />
 
-        {/* 1. Header: Tagline & Live Milan Clock (with accurate CET calculation) */}
+        {/* 1. Header: Tagline & Live Chennai Clock (IST) */}
         <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-b border-white/10 pb-12">
           <div>
             <span className="flex items-center gap-2 text-xs uppercase tracking-[0.35em] text-gold font-medium">
               <Sparkles className="h-3.5 w-3.5 text-gold animate-spin" style={{ animationDuration: "8s" }} />
-              Plan Your Visit & Boutique Suites
+              Plan Your Visit &amp; Luxury Stay
             </span>
             <h2 className="mt-2 font-display text-4xl sm:text-5xl md:text-6xl text-warm-white">
-              The sanctuaries of Velluto.
+              The sanctuaries of BR Vasantham.
             </h2>
             <p className="mt-2 text-xs sm:text-sm text-white/60 max-w-lg leading-relaxed">
-              Two historic sanctuaries of Italian craftsmanship. Walk in for counter service, or reserve your boutique suite stay below.
+              Two prestigious sanctuaries of Tamil Nadu luxury hospitality. Walk in for royal dining, or reserve your 100% AC room stay below.
             </p>
           </div>
 
-          {/* Live Milan Clock Badge */}
+          {/* Live Chennai Clock Badge */}
           <div className="flex items-center gap-4 rounded-2xl border border-white/15 bg-white/5 px-6 py-3.5 backdrop-blur-md shadow-inner">
-            <span
-              className={`h-2.5 w-2.5 rounded-full transition-all ${
-                isMilanOpen
-                  ? "bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.9)] animate-pulse"
-                  : "bg-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.8)]"
-              }`}
-            />
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.9)] animate-pulse" />
             <div className="text-left text-xs">
               <p className="uppercase tracking-[0.2em] text-white/50 text-[10px] font-semibold">
-                Milan Local Time (CET)
+                Chennai Local Time (IST)
               </p>
               <p className="font-mono text-sm tracking-wider font-bold text-white mt-0.5">
-                {milanTime ? `${milanTime} CET` : "12:00:00 CET"}
+                {chennaiTime ? `${chennaiTime} IST` : "12:00:00 IST"}
               </p>
             </div>
           </div>
         </div>
 
-        {/* 2. Interactive Location Cards with Dynamic Open Status & 1-Click Copy */}
+        {/* 2. Interactive Tamil Nadu Location Cards with Dynamic Open Status & 1-Click Copy */}
         <div className="relative z-10 mt-12 grid grid-cols-1 gap-8 lg:grid-cols-2">
-          {/* Location 1: Milano */}
+          {/* Location 1: Chennai Flagship */}
           <motion.div
             whileHover={{ y: -8, scale: 1.01 }}
             transition={{ duration: 0.35, ease: EASE }}
@@ -252,39 +280,31 @@ export function Footer() {
             <div>
               <div className="flex items-center justify-between">
                 <span className="rounded-full bg-italian-red/30 border border-italian-red/50 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-rose-200 font-semibold">
-                  Flagship Roastery
+                  Flagship Luxury Hotel
                 </span>
-                <span
-                  className={`flex items-center gap-1.5 text-xs font-medium ${
-                    isMilanOpen ? "text-emerald-400" : "text-amber-300"
-                  }`}
-                >
-                  <span
-                    className={`h-2 w-2 rounded-full ${
-                      isMilanOpen ? "bg-emerald-400 animate-ping" : "bg-amber-400"
-                    }`}
-                  />
-                  <span>{isMilanOpen ? "Open Now · Closes 20:00" : "Closed Now · Opens 07:00"}</span>
+                <span className="flex items-center gap-1.5 text-xs font-medium text-emerald-400">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+                  <span>Open 24/7 · Valet Parking Active</span>
                 </span>
               </div>
 
               <h3 className="mt-6 font-display text-3xl text-warm-white group-hover:text-gold transition-colors">
-                Milano Quadrilatero
+                Chennai Anna Salai &amp; ECR
               </h3>
               <p className="mt-3 flex items-start gap-2.5 text-sm text-white/80">
                 <MapPin className="h-4 w-4 shrink-0 text-gold mt-0.5" />
-                <span>Via Montenapoleone 18, 20121 Milano (Metro M3 Montenapoleone)</span>
+                <span>Anna Salai (Mount Road) &amp; ECR Beachfront, Chennai 600002 (Near Central Metro)</span>
               </p>
 
               <div className="mt-4 space-y-2 text-xs text-white/60">
                 <div className="flex items-center gap-2">
                   <Clock className="h-3.5 w-3.5 text-white/40" />
-                  <span>Mon – Sun: 07:00 – 20:00 · Standing counter & Garden salon</span>
+                  <span>24/7 Front Desk · Free Covered Car Parking &amp; Valet · Free Wi-Fi 6</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="h-3.5 w-3.5 text-white/40" />
-                  <a href="tel:+390289451984" className="hover:text-gold transition-colors">
-                    +39 02 8945 1984 (Direct Concierge)
+                  <a href="tel:+914428451984" className="hover:text-gold transition-colors">
+                    +91 44 2845 1984 (Direct Concierge)
                   </a>
                 </div>
               </div>
@@ -293,7 +313,7 @@ export function Footer() {
             <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-white/10 pt-6">
               <button
                 type="button"
-                onClick={() => copyAddress("Via Montenapoleone 18, 20121 Milano", 0)}
+                onClick={() => copyAddress("Anna Salai & ECR, Chennai 600002, Tamil Nadu", 0)}
                 className="flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.15em] text-white/90 hover:bg-white/15 hover:border-gold/50 transition-all cursor-pointer active:scale-95"
                 data-cursor-text="COPY"
               >
@@ -310,7 +330,7 @@ export function Footer() {
                 )}
               </button>
               <a
-                href="https://maps.google.com/?q=Via+Montenapoleone+18+Milano"
+                href="https://maps.google.com/?q=Anna+Salai+Chennai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 text-xs uppercase tracking-[0.15em] text-gold hover:underline transition-all"
@@ -321,7 +341,7 @@ export function Footer() {
             </div>
           </motion.div>
 
-          {/* Location 2: Firenze */}
+          {/* Location 2: Madurai & Chettinad */}
           <motion.div
             whileHover={{ y: -8, scale: 1.01 }}
             transition={{ duration: 0.35, ease: EASE }}
@@ -330,39 +350,31 @@ export function Footer() {
             <div>
               <div className="flex items-center justify-between">
                 <span className="rounded-full bg-olive/40 border border-olive/60 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-emerald-200 font-semibold">
-                  Bottega & Pasticceria
+                  Royal Chettinad Palace
                 </span>
-                <span
-                  className={`flex items-center gap-1.5 text-xs font-medium ${
-                    isFirenzeOpen ? "text-emerald-400" : "text-amber-300"
-                  }`}
-                >
-                  <span
-                    className={`h-2 w-2 rounded-full ${
-                      isFirenzeOpen ? "bg-emerald-400 animate-ping" : "bg-amber-400"
-                    }`}
-                  />
-                  <span>{isFirenzeOpen ? "Open Now · Closes 19:30" : "Closed Now · Opens 07:30"}</span>
+                <span className="flex items-center gap-1.5 text-xs font-medium text-emerald-400">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+                  <span>Open 24/7 · Heritage Courtyard</span>
                 </span>
               </div>
 
               <h3 className="mt-6 font-display text-3xl text-warm-white group-hover:text-gold transition-colors">
-                Firenze San Frediano
+                Madurai &amp; Chettinad Palace
               </h3>
               <p className="mt-3 flex items-start gap-2.5 text-sm text-white/80">
                 <MapPin className="h-4 w-4 shrink-0 text-gold mt-0.5" />
-                <span>Piazza del Carmine 4, 50124 Firenze (Oltrarno Quarter)</span>
+                <span>West Perumal Maistry Street, Madurai &amp; Kanadukathan, Chettinad 625001</span>
               </p>
 
               <div className="mt-4 space-y-2 text-xs text-white/60">
                 <div className="flex items-center gap-2">
                   <Clock className="h-3.5 w-3.5 text-white/40" />
-                  <span>Mon – Sat: 07:30 – 19:30 · Wood-fired oven pasticceria</span>
+                  <span>24/7 Front Desk · Free Car Parking · Dakshin Royal Dining &amp; Pool</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="h-3.5 w-3.5 text-white/40" />
-                  <a href="tel:+390552411984" className="hover:text-gold transition-colors">
-                    +39 055 241 1984 (Direct Concierge)
+                  <a href="tel:+914522341984" className="hover:text-gold transition-colors">
+                    +91 452 234 1984 (Direct Concierge)
                   </a>
                 </div>
               </div>
@@ -371,7 +383,7 @@ export function Footer() {
             <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-white/10 pt-6">
               <button
                 type="button"
-                onClick={() => copyAddress("Piazza del Carmine 4, 50124 Firenze", 1)}
+                onClick={() => copyAddress("West Perumal Maistry Street, Madurai 625001, Tamil Nadu", 1)}
                 className="flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.15em] text-white/90 hover:bg-white/15 hover:border-gold/50 transition-all cursor-pointer active:scale-95"
                 data-cursor-text="COPY"
               >
@@ -388,7 +400,7 @@ export function Footer() {
                 )}
               </button>
               <a
-                href="https://maps.google.com/?q=Piazza+del+Carmine+4+Firenze"
+                href="https://maps.google.com/?q=West+Perumal+Maistry+Street+Madurai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 text-xs uppercase tracking-[0.15em] text-gold hover:underline transition-all"
@@ -405,14 +417,14 @@ export function Footer() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/10">
             <div>
               <span className="text-xs uppercase tracking-[0.3em] text-gold font-medium">
-                Boutique Suites & Room Booking
+                Tamil Nadu Luxury Room &amp; Suite Booking
               </span>
               <h3 className="mt-2 font-display text-3xl sm:text-4xl text-warm-white">
-                Reserve your stay at Velluto.
+                Reserve your stay at BR Vasantham Grand.
               </h3>
             </div>
             <p className="max-w-md text-xs leading-relaxed text-white/65">
-              Historic Milanese residences and Tuscan vineyard suites. Experience restful Italian luxury overlooking private courtyards with morning in-suite rituals.
+              Experience genuine Tamil hospitality in our 100% AC Deluxe &amp; Normal rooms. Every reservation includes complimentary covered car parking, free high-speed Wi-Fi, and morning Kumbakonam filter coffee.
             </p>
           </div>
 
@@ -429,40 +441,51 @@ export function Footer() {
               </div>
               <div>
                 <span className="px-3 py-1 rounded-full bg-white/10 text-gold text-[10px] font-mono tracking-widest uppercase border border-gold/30">
-                  Confirmation #{bookingConfirmation.id}
+                  Booking Confirmation #{bookingConfirmation.id}
                 </span>
                 <h4 className="mt-3 font-display text-2xl sm:text-3xl text-warm-white">
-                  Suite Reserved for {bookingConfirmation.name}
+                  Room Reserved for {bookingConfirmation.name}
                 </h4>
                 <p className="mt-1 text-xs text-white/70">
-                  {bookingConfirmation.suite} · {bookingConfirmation.guests} {bookingConfirmation.guests === 1 ? "Guest" : "Guests"}
+                  {bookingConfirmation.suite} ({bookingConfirmation.category}) · {bookingConfirmation.guests} {bookingConfirmation.guests === 1 ? "Guest" : "Guests"}
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-xs text-white/80 space-y-1 text-left max-w-sm mx-auto">
+              <div className="p-5 rounded-2xl bg-white/5 border border-white/10 text-xs text-white/80 space-y-2 text-left max-w-md mx-auto shadow-inner">
                 <div className="flex justify-between py-1 border-b border-white/10">
-                  <span className="text-white/50">Suite Type:</span>
+                  <span className="text-white/50">Room Category:</span>
                   <span className="font-semibold text-gold">{bookingConfirmation.suite}</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-white/10">
-                  <span className="text-white/50">Check-in:</span>
-                  <span className="font-semibold text-white">{bookingConfirmation.date}</span>
+                  <span className="text-white/50">Room Size (Sq. Ft.):</span>
+                  <span className="font-semibold text-white">{bookingConfirmation.sqft}</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-white/10">
-                  <span className="text-white/50">Stay Duration:</span>
-                  <span className="font-semibold text-white">{bookingConfirmation.duration}</span>
+                  <span className="text-white/50">Air Conditioning:</span>
+                  <span className="font-semibold text-sky-400">{bookingConfirmation.ac}</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-white/10">
-                  <span className="text-white/50">Nightly Rate:</span>
-                  <span className="font-semibold text-gold">{bookingConfirmation.rate}</span>
+                  <span className="text-white/50">Car Parking:</span>
+                  <span className="font-semibold text-emerald-400">{bookingConfirmation.parking}</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-white/10">
-                  <span className="text-white/50">Guest Mobile:</span>
-                  <span className="font-semibold">{guestPhone}</span>
+                  <span className="text-white/50">Internet:</span>
+                  <span className="font-semibold text-white">{bookingConfirmation.wifi}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-white/10">
+                  <span className="text-white/50">Check-in &amp; Duration:</span>
+                  <span className="font-semibold text-white">{bookingConfirmation.date} · {bookingConfirmation.duration}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-white/10">
+                  <span className="text-white/50">Estimated Total:</span>
+                  <span className="font-semibold text-gold text-sm font-mono">{bookingConfirmation.totalAmount}</span>
                 </div>
                 <div className="flex justify-between py-1">
                   <span className="text-white/50">Concierge Status:</span>
-                  <span className="font-semibold text-emerald-400">Confirmed · Digital Key via WhatsApp</span>
+                  <span className="font-semibold text-emerald-400 flex items-center gap-1">
+                    <CheckCircle2 className="h-3.5 w-3.5" />
+                    <span>Instant Confirmed · Digital Pass via WhatsApp</span>
+                  </span>
                 </div>
               </div>
 
@@ -471,15 +494,15 @@ export function Footer() {
                 onClick={handleResetBooking}
                 className="mt-4 px-6 py-2.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/15 text-xs uppercase tracking-wider text-white transition-colors cursor-pointer"
               >
-                Book Another Suite
+                Book Another Room
               </button>
             </motion.div>
           ) : (
             <form onSubmit={handleBooking} className="mt-8 space-y-6">
-              {/* Row 1: Boutique Suite Selection Cards with Realistic Photography & Details */}
+              {/* Row 1: Hotel Room Cards with Real Photography, Sq. Ft. & AC Badges */}
               <div>
                 <label className="block text-[11px] uppercase tracking-[0.2em] text-white/60 mb-3 font-medium">
-                  1. Select Boutique Suite
+                  1. Select Room Type &amp; AC Category
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {ROOM_SUITES.map((suite) => (
@@ -489,21 +512,29 @@ export function Footer() {
                       onClick={() => setSelectedSuite(suite.id)}
                       className={`group relative p-4 rounded-2xl border text-left transition-all duration-300 flex flex-col justify-between cursor-pointer overflow-hidden ${
                         selectedSuite === suite.id
-                          ? "bg-gold/15 border-gold shadow-[0_0_20px_rgba(201,166,91,0.3)] text-warm-white ring-1 ring-gold"
+                          ? "bg-gold/15 border-gold shadow-[0_0_25px_rgba(201,166,91,0.35)] text-warm-white ring-1 ring-gold"
                           : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20 text-white/70"
                       }`}
                     >
-                      {/* Realistic Suite Photography Banner */}
-                      <div className="relative h-28 w-full overflow-hidden rounded-xl mb-3">
+                      {/* Realistic Hotel Room Photography Banner */}
+                      <div className="relative h-32 w-full overflow-hidden rounded-xl mb-3">
                         <Image
                           src={suite.image}
                           alt={suite.title}
                           fill
                           className="object-cover transition-transform duration-700 group-hover:scale-110"
                         />
-                        <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/25 to-transparent" />
-                        <div className="absolute top-2 right-2 rounded-full bg-black/60 backdrop-blur-xs px-2.5 py-0.5 text-[10px] font-mono text-gold border border-gold/30">
+                        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/25 to-transparent" />
+                        
+                        {/* Nightly Tariff Badge */}
+                        <div className="absolute top-2 right-2 rounded-full bg-black/75 backdrop-blur-xs px-2.5 py-0.5 text-[11px] font-mono font-semibold text-gold border border-gold/40">
                           {suite.rate}
+                        </div>
+
+                        {/* Sq. Ft. Badge */}
+                        <div className="absolute bottom-2 left-2 flex items-center gap-1 rounded-md bg-white/20 backdrop-blur-md px-2 py-0.5 text-[10px] font-medium text-white border border-white/20">
+                          <Maximize2 className="h-3 w-3 text-gold" />
+                          <span>{suite.sqft}</span>
                         </div>
                       </div>
 
@@ -519,10 +550,18 @@ export function Footer() {
                         </p>
                       </div>
 
-                      <div className="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between text-[10px] text-white/50">
-                        <span>{suite.specs}</span>
-                        <span className={`font-semibold ${selectedSuite === suite.id ? "text-gold" : "text-white/60"}`}>
-                          {selectedSuite === suite.id ? "Selected" : "Select Room"}
+                      {/* Room Amenities Pills */}
+                      <div className="mt-3 pt-2.5 border-t border-white/10 flex flex-wrap items-center justify-between text-[10px] text-white/60 gap-1">
+                        <span className="flex items-center gap-1 text-sky-300">
+                          <Wind className="h-2.5 w-2.5" />
+                          <span>{suite.ac.split(" ")[1] || "AC"}</span>
+                        </span>
+                        <span className="flex items-center gap-1 text-emerald-300">
+                          <Car className="h-2.5 w-2.5" />
+                          <span>Free Parking</span>
+                        </span>
+                        <span className={`font-semibold ml-auto ${selectedSuite === suite.id ? "text-gold" : "text-white/40"}`}>
+                          {selectedSuite === suite.id ? "Selected" : "Select"}
                         </span>
                       </div>
                     </button>
@@ -538,7 +577,7 @@ export function Footer() {
                     2. Check-in Date
                   </label>
                   <div className="flex items-center gap-2">
-                    {["Tomorrow", "This Weekend", "Next Week"].map((d) => (
+                    {["Today", "Tomorrow", "This Weekend"].map((d) => (
                       <button
                         key={d}
                         type="button"
@@ -597,6 +636,26 @@ export function Footer() {
                 </div>
               </div>
 
+              {/* Facility Inclusions Checklist */}
+              <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4 flex flex-wrap items-center justify-between gap-3 text-xs text-white/80">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                  <span>100% Climate-Controlled AC (Deluxe &amp; Normal)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                  <span>Free Valet &amp; Covered Car Parking Included</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                  <span>High-Speed Wi-Fi 6 Included</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                  <span>Complimentary South Indian Morning Breakfast</span>
+                </div>
+              </div>
+
               {/* Row 3: Guest Contact & Submit Button */}
               <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end pt-2">
                 <div className="sm:col-span-4">
@@ -608,7 +667,7 @@ export function Footer() {
                     required
                     value={guestName}
                     onChange={(e) => setGuestName(e.target.value)}
-                    placeholder="e.g. Alessandro Rossi"
+                    placeholder="e.g. S. Ramanathan"
                     className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-xs text-warm-white placeholder-white/35 outline-none focus:border-gold transition-colors"
                   />
                 </div>
@@ -622,7 +681,7 @@ export function Footer() {
                     required
                     value={guestPhone}
                     onChange={(e) => setGuestPhone(e.target.value)}
-                    placeholder="e.g. +39 340 123 4567"
+                    placeholder="e.g. +91 94440 12345"
                     className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-xs text-warm-white placeholder-white/35 outline-none focus:border-gold transition-colors"
                   />
                 </div>
@@ -632,10 +691,10 @@ export function Footer() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"
-                    className="w-full rounded-xl bg-italian-red hover:bg-[#a3322a] py-3.5 px-6 text-xs font-semibold uppercase tracking-[0.2em] text-warm-white shadow-xl shadow-italian-red/30 transition-all cursor-pointer flex items-center justify-center gap-2"
+                    className="w-full rounded-xl bg-italian-red hover:bg-[#b5372e] py-3.5 px-6 text-xs font-semibold uppercase tracking-[0.2em] text-warm-white shadow-xl shadow-italian-red/35 transition-all cursor-pointer flex items-center justify-center gap-2"
                     data-cursor-text="BOOK"
                   >
-                    <span>Book Suite Stay</span>
+                    <span>Reserve Room Now</span>
                     <Sparkles className="h-3.5 w-3.5" />
                   </motion.button>
                 </div>
@@ -644,18 +703,18 @@ export function Footer() {
           )}
         </div>
 
-        {/* 4. Newsletter & Morning Dispatch Subscription Bar */}
+        {/* 4. Newsletter & Heritage Dispatch Subscription Bar */}
         <div className="relative z-10 mt-14 rounded-3xl border border-white/10 bg-white/[0.03] p-8 sm:p-10 backdrop-blur-md">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div>
               <span className="text-xs uppercase tracking-[0.3em] text-gold font-medium">
-                Il Bollettino del Mattino
+                Vasantham Heritage Newsletter
               </span>
               <h3 className="mt-1 font-display text-2xl text-warm-white">
-                Receive the seasonal roast notes.
+                Receive royal festival offers &amp; seasonal privileges.
               </h3>
               <p className="mt-1 text-xs text-white/60 max-w-lg leading-relaxed">
-                A bi-weekly epistolary on rare green bean arrivals, heritage pasticceria bakes, and private tasting dates in Milan & Florence.
+                Stay updated on Chettinad culinary feasts, seasonal Chennai holiday suites, and VIP guest privileges across Tamil Nadu.
               </p>
             </div>
 
@@ -680,7 +739,7 @@ export function Footer() {
               {newsletterSubscribed && (
                 <p className="mt-2 text-xs text-gold flex items-center gap-1.5 animate-in fade-in">
                   <Check className="h-3.5 w-3.5 text-gold" />
-                  <span>Benvenuto! You are now subscribed to Il Bollettino.</span>
+                  <span>Vanakkam! You are now subscribed to BR Vasantham Privileges.</span>
                 </p>
               )}
             </form>
@@ -690,7 +749,7 @@ export function Footer() {
         {/* 5. Giant Kinetic Magnetic Brand Typography Banner with Letter-by-Letter Hovering Animation */}
         <div className="relative z-10 mt-16 pt-8 border-t border-white/10 text-center overflow-hidden">
           <div className="flex items-center justify-center gap-1 sm:gap-3 py-4 select-none">
-            {"BR VELLUTO".split("").map((char, charIdx) => {
+            {"BR VASANTHAM".split("").map((char, charIdx) => {
               if (char === " ") {
                 return <span key={charIdx} className="w-4 sm:w-8" />;
               }
@@ -703,7 +762,7 @@ export function Footer() {
                     color: "#c9a65b",
                     transition: { type: "spring", stiffness: 400, damping: 14 },
                   }}
-                  className="inline-block font-display text-[clamp(2.5rem,8.5vw,8.5rem)] leading-none tracking-tight text-white/15 cursor-default transition-colors duration-300"
+                  className="inline-block font-display text-[clamp(2.5rem,7.5vw,7.5rem)] leading-none tracking-tight text-white/15 cursor-default transition-colors duration-300"
                 >
                   {char}
                 </motion.span>
@@ -715,18 +774,18 @@ export function Footer() {
         {/* 6. Bottom Bar: Copyright, Coordinates & Floating Back to Top */}
         <div className="relative z-10 mt-8 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
           <div>
-            <p>© {new Date().getFullYear()} BR Velluto. Poured with intention.</p>
+            <p>© {new Date().getFullYear()} BR Vasantham Grand — Luxury Heritage Hotel &amp; Suites.</p>
             <p className="text-[11px] text-white/35 mt-0.5">
-              45.4642° N, 9.1900° E · Milano, Italia
+              13.0827° N, 80.2707° E · Anna Salai, Chennai &amp; Madurai, Tamil Nadu, India
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-6 text-xs">
-            <a href="#story" className="hover:text-gold transition-colors">Story</a>
-            <a href="#coffee" className="hover:text-gold transition-colors">Coffee</a>
-            <a href="#pasticceria" className="hover:text-gold transition-colors">Pasticceria</a>
+            <a href="#story" className="hover:text-gold transition-colors">Heritage</a>
+            <a href="#facilities" className="hover:text-gold transition-colors">Facilities</a>
+            <a href="#rooms" className="hover:text-gold transition-colors">Rooms &amp; Suites</a>
+            <a href="#dining" className="hover:text-gold transition-colors">Dining</a>
             <a href="#atmosphere" className="hover:text-gold transition-colors">Atmosphere</a>
-            <a href="#ingredients" className="hover:text-gold transition-colors">Ingredients</a>
           </div>
 
           <motion.button

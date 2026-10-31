@@ -5,12 +5,12 @@ import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Clock, Calendar, Sparkles } from "lucide-react";
 
 const NAV_ITEMS = [
-  { label: "Story", href: "#story" },
-  { label: "Coffee", href: "#coffee" },
-  { label: "Pasticceria", href: "#pasticceria" },
+  { label: "Heritage", href: "#story" },
+  { label: "Rooms & Suites", href: "#rooms" },
+  { label: "Facilities", href: "#facilities" },
+  { label: "Dining", href: "#dining" },
   { label: "Atmosphere", href: "#atmosphere" },
-  { label: "Ingredients", href: "#ingredients" },
-  { label: "Visit", href: "#visit" },
+  { label: "Reserve", href: "#visit" },
 ];
 
 export function Navbar() {
@@ -73,11 +73,11 @@ export function Navbar() {
             data-cursor-text="TOP"
           >
             <span
-              className={`font-display text-lg tracking-[0.3em] font-medium transition-colors ${
+              className={`font-display text-lg tracking-[0.25em] font-medium transition-colors ${
                 scrolled ? "text-warm-brown" : "text-warm-white"
               }`}
             >
-              BR VELLUTO
+              BR VASANTHAM
             </span>
             <span
               className={`hidden sm:inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[10px] uppercase tracking-[0.2em] transition-colors ${
@@ -87,7 +87,7 @@ export function Navbar() {
               }`}
             >
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Open Today
+              Tamil Nadu Heritage
             </span>
           </a>
 
@@ -193,7 +193,7 @@ export function Navbar() {
                   <Clock className="h-3.5 w-3.5" />
                   07:00 – 20:00 Daily
                 </span>
-                <span>Milano & Firenze</span>
+                <span>Chennai & Madurai · Tamil Nadu</span>
               </div>
               <a
                 href="#visit"

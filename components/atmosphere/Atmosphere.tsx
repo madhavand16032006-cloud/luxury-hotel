@@ -7,19 +7,19 @@ import { Volume2, VolumeX, Sparkles, Coffee } from "lucide-react";
 
 const MATERIALS = [
   {
-    name: "Antique Brass & Steam",
-    description: "Lever-pulled espresso extraction maintaining traditional pressure curves.",
-    tag: "Ritual",
+    name: "Athangudi Handmade Tiles",
+    description: "Centuries-old artisanal geometric floor tiles hand-cast using natural earth pigments in Chettinad.",
+    tag: "Heritage Craft",
   },
   {
-    name: "Carrara Marble Counters",
-    description: "Cool, honed natural stone where saucers land with a comforting resonance.",
-    tag: "Tactile",
+    name: "Hand-Carved Burma Teak",
+    description: "Soaring royal palace pillars and intricately carved door lintels preserving Tamil regal majesty.",
+    tag: "Architecture",
   },
   {
-    name: "Aged Italian Walnut",
-    description: "Centuries-old bistro seating crafted by Lombardian cabinetmakers.",
-    tag: "Heritage",
+    name: "Kuthu Vilakku Brasswork",
+    description: "Traditional temple-grade brass oil lamps casting warm, comforting ambient glows across our courtyards.",
+    tag: "Aura & Serenity",
   },
 ];
 
@@ -48,15 +48,15 @@ export function Atmosphere() {
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs uppercase tracking-[0.35em] text-italian-red">
-            L'Atmosfera · Spatial Poetry
+            L&apos;Atmosfera · Chettinad Royal Aesthetics
           </p>
           <h2 className="mt-4 font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-tight text-warm-brown">
-            A sanctuary carved from time, stone and steam.
+            A sanctuary carved from heritage, teak, and stone.
           </h2>
           <p className="mt-6 text-base leading-relaxed text-warm-brown/75">
-            Step through the mahogany doors and leave the frantic rush behind. Here, the hum of
-            the brass lever machine, the soft clatter of porcelain, and the aroma of freshly crushed
-            beans create a cadence that belongs to you.
+            Step through our carved teakwood portals and leave the rush of modern life behind.
+            Here, the fragrance of fresh jasmine, the cool caress of Athangudi tiles, and the gentle whisper
+            of central AC create a peaceful haven in the heart of Tamil Nadu.
           </p>
         </div>
 
@@ -64,26 +64,26 @@ export function Atmosphere() {
         <div className="mt-16 relative aspect-16/9 sm:aspect-21/9 w-full overflow-hidden rounded-[2.5rem] shadow-[0_40px_100px_-30px_rgba(90,70,54,0.4)]">
           <motion.div style={{ scale: imageScale }} className="relative h-full w-full">
             <Image
-              src="/images/cafe-poster.jpg"
-              alt="BR Velluto interior atmosphere"
+              src="/images/hotel-hero.jpg"
+              alt="BR Vasantham Grand architecture and atmosphere"
               fill
               className="object-cover"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-linear-to-t from-warm-brown/80 via-warm-brown/20 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-warm-brown/85 via-warm-brown/25 to-transparent" />
           </motion.div>
 
           {/* Sound / Atmosphere Pill Button */}
           <div className="absolute top-6 right-6 z-10">
             <button
               onClick={toggleSound}
-              className="group flex items-center gap-2.5 rounded-full bg-warm-white/90 px-4 py-2 text-xs uppercase tracking-[0.2em] font-medium text-warm-brown shadow-lg backdrop-blur-md transition-all duration-300 hover:bg-warm-white hover:scale-105"
+              className="group flex items-center gap-2.5 rounded-full bg-warm-white/90 px-4 py-2 text-xs uppercase tracking-[0.2em] font-medium text-warm-brown shadow-lg backdrop-blur-md transition-all duration-300 hover:bg-warm-white hover:scale-105 cursor-pointer"
               data-cursor-text="LISTEN"
             >
               {soundPlaying ? (
                 <>
                   <Volume2 className="h-4 w-4 text-italian-red animate-pulse" />
-                  <span className="text-italian-red">Milano Ambient Audio: On</span>
+                  <span className="text-italian-red">Carnatic Ambient Audio: On</span>
                   <div className="flex items-end gap-0.5 h-3">
                     <span className="w-0.5 h-full bg-italian-red animate-bounce" style={{ animationDelay: "0ms" }} />
                     <span className="w-0.5 h-2/3 bg-italian-red animate-bounce" style={{ animationDelay: "150ms" }} />
@@ -93,7 +93,7 @@ export function Atmosphere() {
               ) : (
                 <>
                   <VolumeX className="h-4 w-4 opacity-60" />
-                  <span>Cafe Soundscape</span>
+                  <span>Sanctuary Audio</span>
                 </>
               )}
             </button>
@@ -103,15 +103,15 @@ export function Atmosphere() {
           <div className="absolute bottom-8 left-8 right-8 z-10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 text-warm-white">
             <div className="max-w-md">
               <p className="font-display text-xl sm:text-2xl text-warm-white">
-                "The finest espresso demands not just heat and grind, but stillness."
+                &ldquo;True royal luxury is not mere ornamentation, but the peace felt within.&rdquo;
               </p>
               <p className="mt-2 text-xs uppercase tracking-[0.25em] text-warm-white/70">
-                BR Velluto · Milano Roastery
+                BR Vasantham Grand · Tamil Nadu Sanctuary
               </p>
             </div>
             <div className="flex items-center gap-2 rounded-full border border-warm-white/30 bg-warm-white/10 px-4 py-2 text-xs uppercase tracking-[0.2em] backdrop-blur-md">
               <Coffee className="h-3.5 w-3.5" />
-              <span>Table Service & Standing Counter</span>
+              <span>Royal Courtyards &amp; Dining Lounges</span>
             </div>
           </div>
         </div>

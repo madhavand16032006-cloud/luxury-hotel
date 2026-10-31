@@ -4,8 +4,9 @@ import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BR Velluto — Italian Café & Artisan Roastery",
-  description: "An Italian café built around ritual, craft and patience. Milano · Firenze.",
+  title: "BR Vasantham Grand — Luxury Heritage Hotel & Suites | Tamil Nadu",
+  description:
+    "Tamil Nadu's premier luxury heritage hotel & suites. 100% AC Deluxe & Normal rooms (320 to 1,200 sq. ft.), free covered car parking & valet, ultra-fast Wi-Fi, and authentic royal hospitality in Chennai & Madurai.",
 };
 
 export const viewport: Viewport = {

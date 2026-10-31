@@ -12,12 +12,12 @@ export function ProductShowcase() {
   const pasticceriaItems = products.filter((p) => p.category === "pasticceria");
 
   return (
-    <div className="relative">
+    <div id="dining" className="relative">
       {/* Coffee Section */}
       <section id="coffee" className="relative pt-24 pb-16">
         <div className="mx-auto max-w-7xl px-6 md:px-12 text-center">
-          <p className="text-xs uppercase tracking-[0.35em] text-italian-red">Chapter I · Il Caffè</p>
-          <h2 className="mt-3 font-display text-4xl sm:text-5xl text-warm-brown">The Coffee Ritual</h2>
+          <p className="text-xs uppercase tracking-[0.35em] text-italian-red">Chapter I · Filter Coffee &amp; Tiffin</p>
+          <h2 className="mt-3 font-display text-4xl sm:text-5xl text-warm-brown">The Kumbakonam Ritual</h2>
         </div>
         {coffeeItems.map((product, index) => (
           <ProductChapter key={product.id} product={product} reverse={index % 2 === 1} />
@@ -27,8 +27,8 @@ export function ProductShowcase() {
       {/* Pasticceria Section */}
       <section id="pasticceria" className="relative pt-24 pb-24 border-t border-cream/80">
         <div className="mx-auto max-w-7xl px-6 md:px-12 text-center">
-          <p className="text-xs uppercase tracking-[0.35em] text-olive">Chapter II · La Pasticceria</p>
-          <h2 className="mt-3 font-display text-4xl sm:text-5xl text-warm-brown">Artisan Pasticceria</h2>
+          <p className="text-xs uppercase tracking-[0.35em] text-olive">Chapter II · Heritage Confections</p>
+          <h2 className="mt-3 font-display text-4xl sm:text-5xl text-warm-brown">Chettinad Royal Treats</h2>
         </div>
         {pasticceriaItems.map((product, index) => (
           <ProductChapter key={product.id} product={product} reverse={index % 2 === 0} />

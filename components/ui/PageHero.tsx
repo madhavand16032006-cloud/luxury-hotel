@@ -129,14 +129,21 @@ export function PageHero({
             {subtitle}
           </p>
 
-          <Link
-            href={ctaHref}
+          <button
+            type="button"
+            onClick={() => {
+              if (ctaHref.startsWith("http")) {
+                window.open(ctaHref, "_blank");
+              } else if (typeof window !== "undefined") {
+                window.dispatchEvent(new CustomEvent("open-direct-booking"));
+              }
+            }}
             className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] hover:brightness-105 px-7 py-3 text-xs font-bold uppercase tracking-[0.16em] text-[#1a120b] shadow-[0_4px_20px_rgba(223,186,115,0.4)] transition-all active:scale-95 cursor-pointer shrink-0"
           >
             <Calendar className="h-4 w-4 text-[#1a120b]" />
             <span>{ctaText}</span>
             <ArrowRight className="h-4 w-4 text-[#1a120b]" />
-          </Link>
+          </button>
         </motion.div>
       </div>
     </section>

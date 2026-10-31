@@ -12,75 +12,30 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 interface NavItem {
   label: string;
   href: string;
-  sectionId: string;
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: "Home", href: "/", sectionId: "hero" },
-  { label: "About", href: "/about", sectionId: "about" },
-  { label: "Rooms & Suites", href: "/rooms", sectionId: "rooms" },
-  { label: "Facilities", href: "/facilities", sectionId: "facilities" },
-  { label: "Reviews", href: "/reviews", sectionId: "reviews" },
-  { label: "Contact", href: "/contact", sectionId: "contact" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Rooms & Suites", href: "/rooms" },
+  { label: "Facilities", href: "/facilities" },
+  { label: "Reviews", href: "/reviews" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
-
-      if (pathname === "/") {
-        const sections = [
-          "contact",
-          "reviews",
-          "gallery",
-          "amenities",
-          "facilities",
-          "rooms",
-          "about",
-          "hero",
-        ];
-        const scrollPosition = window.scrollY + 220;
-
-        for (const section of sections) {
-          const el = document.getElementById(section);
-          if (el && el.offsetTop <= scrollPosition) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [pathname]);
-
-  const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    item: NavItem
-  ) => {
-    if (pathname === "/") {
-      e.preventDefault();
-      if (item.sectionId === "hero") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        setActiveSection("hero");
-      } else {
-        const el = document.getElementById(item.sectionId);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth" });
-          setActiveSection(item.sectionId);
-        }
-      }
-      setMobileMenuOpen(false);
-    }
-  };
+  }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 py-4 sm:py-5 px-4 sm:px-8 transition-all duration-300">
@@ -114,17 +69,13 @@ export function Navbar() {
           <nav className="hidden lg:flex items-center gap-1">
             <ul className="flex items-center gap-0.5">
               {NAV_ITEMS.map((item, idx) => {
-                const isActive =
-                  pathname === "/"
-                    ? activeSection === item.sectionId
-                    : pathname === item.href;
+                const isActive = pathname === item.href;
 
                 return (
                   <React.Fragment key={item.label}>
                     <li>
                       <Link
-                        href={pathname === "/" ? `/#${item.sectionId}` : item.href}
-                        onClick={(e) => handleNavClick(e, item)}
+                        href={item.href}
                         className={`relative px-4 py-2 text-xs uppercase tracking-[0.18em] font-medium transition-all duration-200 cursor-pointer ${
                           isActive
                             ? "text-gold font-semibold"
@@ -210,16 +161,13 @@ export function Navbar() {
 
             <nav className="mt-4 flex flex-col divide-y divide-white/5">
               {NAV_ITEMS.map((item) => {
-                const isActive =
-                  pathname === "/"
-                    ? activeSection === item.sectionId
-                    : pathname === item.href;
+                const isActive = pathname === item.href;
 
                 return (
                   <Link
                     key={item.label}
-                    href={pathname === "/" ? `/#${item.sectionId}` : item.href}
-                    onClick={(e) => handleNavClick(e, item)}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
                     className={`py-3 text-sm font-display tracking-wider transition-colors flex items-center justify-between ${
                       isActive
                         ? "text-gold font-semibold"

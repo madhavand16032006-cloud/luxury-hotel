@@ -411,9 +411,9 @@ export function Hero() {
               <span className="h-1.5 w-1.5 bg-white/45 rounded-full" />
             </div>
 
-            {/* Center: Rotating Realistic 3D Brilliant-Cut Diamond (Quiet-Luxury Scroll Indicator) */}
+            {/* Center: Rotating Realistic 3D Brilliant-Cut Diamond (Quiet-Luxury Scroll Indicator to About Section) */}
             <div className="flex-1 flex items-center justify-center">
-              <RotatingDiamond targetId="facilities" />
+              <RotatingDiamond targetId="about" />
             </div>
 
             {/* Right Spacer to Ensure Perfect Mathematical Center Alignment */}

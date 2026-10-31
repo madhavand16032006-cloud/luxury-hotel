@@ -17,9 +17,9 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/", sectionId: "hero" },
-  { label: "Facilities", href: "/facilities", sectionId: "facilities" },
   { label: "About", href: "/about", sectionId: "about" },
   { label: "Rooms & Suites", href: "/rooms", sectionId: "rooms" },
+  { label: "Facilities", href: "/facilities", sectionId: "facilities" },
   { label: "Reviews", href: "/reviews", sectionId: "reviews" },
   { label: "Contact", href: "/contact", sectionId: "contact" },
 ];
@@ -38,9 +38,11 @@ export function Navbar() {
         const sections = [
           "contact",
           "reviews",
+          "gallery",
+          "amenities",
+          "facilities",
           "rooms",
           "about",
-          "facilities",
           "hero",
         ];
         const scrollPosition = window.scrollY + 220;

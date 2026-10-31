@@ -4,7 +4,6 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  ArrowDown,
   BedDouble,
   Users,
   ChevronDown,
@@ -15,6 +14,7 @@ import {
   Eye,
 } from "lucide-react";
 import { HOTEL_BRANCHES } from "@/lib/branches";
+import { RotatingDiamond } from "@/components/ui/RotatingDiamond";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -398,7 +398,7 @@ export function Hero() {
             </button>
           </div>
 
-          {/* Integrated Bottom Controls Row: Left Dots & Center Diamond/Platinum Reflection Arrow */}
+          {/* Integrated Bottom Controls Row: Left Dots & Center Rotating Realistic Diamond */}
           <div className="mx-auto w-full max-w-6xl mt-4 sm:mt-5 flex items-center justify-between px-3 sm:px-6">
             {/* Left: Slider Dash & Dots Indicator */}
             <div className="w-24 flex items-center gap-2 select-none shrink-0">
@@ -407,67 +407,9 @@ export function Hero() {
               <span className="h-1.5 w-1.5 bg-white/45 rounded-full" />
             </div>
 
-            {/* Center: Diamond / Platinum Faceted Reflection Down Arrow */}
+            {/* Center: Rotating Realistic 3D Brilliant-Cut Diamond (Quiet-Luxury Scroll Indicator) */}
             <div className="flex-1 flex items-center justify-center">
-              <a
-                href="#facilities"
-                className="group relative flex items-center justify-center cursor-pointer"
-                aria-label="Discover Facilities"
-                data-cursor-text="DISCOVER"
-              >
-                {/* Outer Diamond Prismatic Dispersion Halo */}
-                <div className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-white/20 via-sky-200/30 to-amber-100/20 blur-xs opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500 pointer-events-none" />
-
-                {/* Main Platinum / Diamond Glass Disc with Specular Bevels */}
-                <div className="relative h-11 w-11 sm:h-12 sm:w-12 rounded-full border border-white/70 bg-gradient-to-b from-white/30 via-slate-900/60 to-black/80 backdrop-blur-xl flex items-center justify-center shadow-[0_8px_30px_rgba(0,0,0,0.85),inset_0_2px_4px_rgba(255,255,255,0.9),inset_0_-2px_4px_rgba(0,0,0,0.7)] group-hover:border-white group-hover:scale-110 active:scale-95 transition-all duration-300">
-                  {/* Diamond Facet Geometric Refraction Lines (SVG) */}
-                  <svg
-                    viewBox="0 0 48 48"
-                    className="absolute inset-0 h-full w-full pointer-events-none opacity-45 group-hover:opacity-80 transition-opacity duration-300"
-                    fill="none"
-                  >
-                    <circle cx="24" cy="24" r="23" stroke="url(#platRim)" strokeWidth="0.75" />
-                    <polygon
-                      points="24,3 39,12 45,27 39,42 24,45 9,42 3,27 9,12"
-                      stroke="#ffffff"
-                      strokeWidth="0.5"
-                      strokeOpacity="0.7"
-                    />
-                    <polygon
-                      points="24,8 35,15 35,33 24,40 13,33 13,15"
-                      stroke="url(#platGlint)"
-                      strokeWidth="0.5"
-                    />
-                    <defs>
-                      <linearGradient id="platRim" x1="0" y1="0" x2="48" y2="48">
-                        <stop offset="0%" stopColor="#ffffff" />
-                        <stop offset="35%" stopColor="#94a3b8" />
-                        <stop offset="65%" stopColor="#ffffff" />
-                        <stop offset="100%" stopColor="#64748b" />
-                      </linearGradient>
-                      <linearGradient id="platGlint" x1="0" y1="0" x2="48" y2="48">
-                        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.85" />
-                        <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.35" />
-                        <stop offset="100%" stopColor="#ffffff" stopOpacity="0.85" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-
-                  {/* Diamond Light Reflection Sheen Sweeping Across Face on Hover */}
-                  <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
-                    <div className="h-full w-24 bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-[-30deg] -translate-x-full group-hover:translate-x-[200%] transition-transform duration-1000 ease-out" />
-                  </div>
-
-                  {/* Down Arrow with Polished Platinum Chrome Specular Highlight */}
-                  <motion.div
-                    animate={{ y: [0, 2.5, 0] }}
-                    transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                    className="relative z-10 flex items-center justify-center text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.9)] group-hover:text-amber-100 transition-colors"
-                  >
-                    <ArrowDown className="h-4 w-4 sm:h-5 sm:w-5 stroke-[2.2] transition-transform duration-300 group-hover:translate-y-0.5" />
-                  </motion.div>
-                </div>
-              </a>
+              <RotatingDiamond targetId="facilities" />
             </div>
 
             {/* Right Spacer to Ensure Perfect Mathematical Center Alignment */}

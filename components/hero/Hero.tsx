@@ -395,32 +395,33 @@ export function Hero() {
               <ArrowRight className="h-4 w-4" />
             </button>
           </div>
+
+          {/* Integrated Bottom Controls Row: Slider Pagination (Left) & Redesigned Luxury Scroll Down Button (Right) */}
+          <div className="mx-auto w-full max-w-6xl mt-4 sm:mt-5 flex items-center justify-between px-3 sm:px-6">
+            {/* Slider Dots Indicator */}
+            <div className="flex items-center gap-2 select-none">
+              <span className="h-1 w-8 bg-gradient-to-r from-gold to-[#be8e46] rounded-full" />
+              <span className="h-1.5 w-1.5 bg-white/45 rounded-full" />
+              <span className="h-1.5 w-1.5 bg-white/45 rounded-full" />
+            </div>
+
+            {/* Redesigned Luxury Scroll Down Control */}
+            <a
+              href="#facilities"
+              className="group inline-flex items-center gap-2.5 rounded-full border border-white/25 bg-black/60 hover:bg-black/85 hover:border-gold px-4 py-2 text-white/80 hover:text-gold backdrop-blur-md transition-all duration-300 shadow-lg cursor-pointer"
+              aria-label="Scroll to Facilities"
+              data-cursor-text="DOWN"
+            >
+              <span className="text-[10px] uppercase tracking-[0.22em] font-medium text-white/70 group-hover:text-gold transition-colors">
+                Scroll Down
+              </span>
+              <span className="h-6 w-6 rounded-full bg-white/10 group-hover:bg-gradient-to-r group-hover:from-[#dfba73] group-hover:to-[#c79a4d] group-hover:text-[#1a120b] flex items-center justify-center transition-all duration-300">
+                <ArrowDown className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-y-0.5" />
+              </span>
+            </a>
+          </div>
         </motion.div>
       </div>
-
-      {/* Bottom-Left Slider Pagination Indicator matching Reference Image */}
-      <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-12 z-20 hidden sm:flex items-center gap-2 pointer-events-none">
-        <span className="h-1 w-8 bg-gradient-to-r from-gold to-[#be8e46] rounded-full" />
-        <span className="h-1.5 w-1.5 bg-white/45 rounded-full" />
-        <span className="h-1.5 w-1.5 bg-white/45 rounded-full" />
-      </div>
-
-      {/* Bottom-Right Luxury Scroll Down Arrow Indicator matching Reference Image */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1.6, duration: 0.8, ease: EASE }}
-        className="absolute bottom-5 right-6 sm:bottom-7 sm:right-12 z-20"
-      >
-        <a
-          href="#facilities"
-          className="group h-11 w-11 sm:h-12 sm:w-12 rounded-full border border-white/35 bg-black/55 backdrop-blur-md flex items-center justify-center text-white/85 hover:text-gold hover:border-gold hover:bg-black/80 hover:scale-110 active:scale-95 transition-all duration-300 shadow-[0_8px_25px_rgba(0,0,0,0.6)] cursor-pointer"
-          aria-label="Scroll to Facilities"
-          data-cursor-text="DOWN"
-        >
-          <ArrowDown className="h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 group-hover:translate-y-0.5" />
-        </a>
-      </motion.div>
     </section>
   );
 }

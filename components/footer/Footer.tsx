@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import {
   MapPin,
@@ -18,48 +19,53 @@ import {
   Coffee,
   CheckCircle2,
   CalendarDays,
+  BedDouble,
+  Key,
+  Hotel,
 } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-const TIME_SLOTS = [
-  "08:30 AM",
-  "10:00 AM",
-  "11:30 AM",
-  "02:00 PM",
-  "04:30 PM",
-  "06:30 PM",
-  "07:30 PM",
+const STAY_DURATIONS = [
+  "1 Night",
+  "2 Nights (Recommended)",
+  "3 Nights (Weekend Stay)",
+  "5 Nights (Midweek Retreat)",
+  "7 Nights (Weekly Residence)",
 ];
 
-const EXPERIENCES = [
+const ROOM_SUITES = [
   {
-    id: "espresso",
-    title: "Espresso Omakase",
-    duration: "45 min",
-    area: "Standing Marble Bar",
-    desc: "A curated 5-flight sensory progression of rare micro-lots.",
+    id: "courtyard",
+    title: "Deluxe Courtyard Suite",
+    rate: "€380 / night",
+    specs: "45 m² · Private Terrace",
+    desc: "King linen bed, Carrara marble bath, courtyard garden views, and morning in-suite espresso ritual.",
+    image: "/images/suite-courtyard.jpg",
   },
   {
-    id: "pasticceria",
-    title: "Morning Pasticceria Table",
-    duration: "60 min",
-    area: "Garden Salon",
-    desc: "Warm sfogliatella & brioche with artisanal hand-whipped crema.",
+    id: "penthouse",
+    title: "Executive Lombard Penthouse",
+    rate: "€620 / night",
+    specs: "72 m² · Duomo Skyline",
+    desc: "Private rooftop terrace, antique oak beams, open fireplace, and personal butler coffee service.",
+    image: "/images/suite-penthouse.jpg",
   },
   {
-    id: "tasting",
-    title: "Single-Origin Cupping",
-    duration: "40 min",
-    area: "Roastery Cupping Table",
-    desc: "Comparative aroma & acidity cupping with head roaster.",
+    id: "roastery",
+    title: "Master Roastery Suite",
+    rate: "€490 / night",
+    specs: "58 m² · Roastery Heritage",
+    desc: "Bespoke walnut furnishings, custom brass La Marzocco bar, and private cellar access.",
+    image: "/images/suite-roastery.jpg",
   },
   {
-    id: "table",
-    title: "Private Banquette Seating",
-    duration: "90 min",
-    area: "Walnut Dining Salon",
-    desc: "Dedicated seating for relaxed coffee rituals and conversation.",
+    id: "villa",
+    title: "San Frediano Tuscan Villa",
+    rate: "€750 / night",
+    specs: "95 m² · Oltrarno Firenze",
+    desc: "Renaissance vaulted ceilings, private culinary courtyard, wood-fired oven, and sommelier cellar.",
+    image: "/images/suite-villa.jpg",
   },
 ];
 
@@ -69,11 +75,11 @@ export function Footer() {
   const [isMilanOpen, setIsMilanOpen] = useState(true);
   const [isFirenzeOpen, setIsFirenzeOpen] = useState(true);
 
-  // Reservation Form State
-  const [selectedExperience, setSelectedExperience] = useState("espresso");
+  // Room Booking Form State
+  const [selectedSuite, setSelectedSuite] = useState("courtyard");
   const [selectedGuests, setSelectedGuests] = useState(2);
   const [selectedDate, setSelectedDate] = useState("Tomorrow");
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState("10:00 AM");
+  const [selectedDuration, setSelectedDuration] = useState("2 Nights (Recommended)");
   const [guestName, setGuestName] = useState("");
   const [guestPhone, setGuestPhone] = useState("");
   const [specialNote, setSpecialNote] = useState("");
@@ -81,9 +87,10 @@ export function Footer() {
   const [bookingConfirmation, setBookingConfirmation] = useState<{
     id: string;
     name: string;
-    experience: string;
+    suite: string;
+    rate: string;
     date: string;
-    time: string;
+    duration: string;
     guests: number;
   } | null>(null);
 
@@ -138,16 +145,16 @@ export function Footer() {
     e.preventDefault();
     if (!guestName.trim() || !guestPhone.trim()) return;
 
-    const chosenExp =
-      EXPERIENCES.find((exp) => exp.id === selectedExperience)?.title ||
-      "Espresso Ritual";
+    const chosenSuite =
+      ROOM_SUITES.find((room) => room.id === selectedSuite) || ROOM_SUITES[0];
 
     const confirmation = {
-      id: `VR-${Math.floor(1000 + Math.random() * 9000)}`,
+      id: `VR-SUITE-${Math.floor(1000 + Math.random() * 9000)}`,
       name: guestName.trim(),
-      experience: chosenExp,
+      suite: chosenSuite.title,
+      rate: chosenSuite.rate,
       date: selectedDate,
-      time: selectedTimeSlot,
+      duration: selectedDuration,
       guests: selectedGuests,
     };
 
@@ -204,13 +211,13 @@ export function Footer() {
           <div>
             <span className="flex items-center gap-2 text-xs uppercase tracking-[0.35em] text-gold font-medium">
               <Sparkles className="h-3.5 w-3.5 text-gold animate-spin" style={{ animationDuration: "8s" }} />
-              Plan Your Visit & Tables
+              Plan Your Visit & Boutique Suites
             </span>
             <h2 className="mt-2 font-display text-4xl sm:text-5xl md:text-6xl text-warm-white">
-              The counters of Velluto.
+              The sanctuaries of Velluto.
             </h2>
             <p className="mt-2 text-xs sm:text-sm text-white/60 max-w-lg leading-relaxed">
-              Two sanctuaries of Italian craftsmanship. Walk in for counter service, or reserve your dedicated ritual below.
+              Two historic sanctuaries of Italian craftsmanship. Walk in for counter service, or reserve your boutique suite stay below.
             </p>
           </div>
 
@@ -393,19 +400,19 @@ export function Footer() {
           </motion.div>
         </div>
 
-        {/* 3. Interactive Table & Ritual Reservation Module (Fixed Date/Time & Validation Logic) */}
+        {/* 3. Interactive Room & Boutique Suite Booking Module */}
         <div className="relative z-10 mt-14 overflow-hidden rounded-[2.5rem] border border-white/15 bg-white/[0.04] p-6 sm:p-10 backdrop-blur-xl">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/10">
             <div>
               <span className="text-xs uppercase tracking-[0.3em] text-gold font-medium">
-                Tasting & Ritual Reservation
+                Boutique Suites & Room Booking
               </span>
               <h3 className="mt-2 font-display text-3xl sm:text-4xl text-warm-white">
-                Reserve your morning ritual.
+                Reserve your stay at Velluto.
               </h3>
             </div>
             <p className="max-w-md text-xs leading-relaxed text-white/65">
-              Standing counter service is always walk-in. For private banquette seating or the curated 5-course Espresso Omakase, reserve 24 hours in advance.
+              Historic Milanese residences and Tuscan vineyard suites. Experience restful Italian luxury overlooking private courtyards with morning in-suite rituals.
             </p>
           </div>
 
@@ -425,25 +432,37 @@ export function Footer() {
                   Confirmation #{bookingConfirmation.id}
                 </span>
                 <h4 className="mt-3 font-display text-2xl sm:text-3xl text-warm-white">
-                  Ritual Reserved for {bookingConfirmation.name}
+                  Suite Reserved for {bookingConfirmation.name}
                 </h4>
                 <p className="mt-1 text-xs text-white/70">
-                  {bookingConfirmation.experience} · {bookingConfirmation.guests} {bookingConfirmation.guests === 1 ? "Guest" : "Guests"}
+                  {bookingConfirmation.suite} · {bookingConfirmation.guests} {bookingConfirmation.guests === 1 ? "Guest" : "Guests"}
                 </p>
               </div>
 
               <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-xs text-white/80 space-y-1 text-left max-w-sm mx-auto">
                 <div className="flex justify-between py-1 border-b border-white/10">
-                  <span className="text-white/50">Schedule:</span>
-                  <span className="font-semibold text-gold">{bookingConfirmation.date} at {bookingConfirmation.time}</span>
+                  <span className="text-white/50">Suite Type:</span>
+                  <span className="font-semibold text-gold">{bookingConfirmation.suite}</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-white/10">
-                  <span className="text-white/50">Contact:</span>
+                  <span className="text-white/50">Check-in:</span>
+                  <span className="font-semibold text-white">{bookingConfirmation.date}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-white/10">
+                  <span className="text-white/50">Stay Duration:</span>
+                  <span className="font-semibold text-white">{bookingConfirmation.duration}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-white/10">
+                  <span className="text-white/50">Nightly Rate:</span>
+                  <span className="font-semibold text-gold">{bookingConfirmation.rate}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-white/10">
+                  <span className="text-white/50">Guest Mobile:</span>
                   <span className="font-semibold">{guestPhone}</span>
                 </div>
                 <div className="flex justify-between py-1">
-                  <span className="text-white/50">Status:</span>
-                  <span className="font-semibold text-emerald-400">Confirmed with Maître D&apos;</span>
+                  <span className="text-white/50">Concierge Status:</span>
+                  <span className="font-semibold text-emerald-400">Confirmed · Digital Key via WhatsApp</span>
                 </div>
               </div>
 
@@ -452,57 +471,74 @@ export function Footer() {
                 onClick={handleResetBooking}
                 className="mt-4 px-6 py-2.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/15 text-xs uppercase tracking-wider text-white transition-colors cursor-pointer"
               >
-                Make Another Reservation
+                Book Another Suite
               </button>
             </motion.div>
           ) : (
             <form onSubmit={handleBooking} className="mt-8 space-y-6">
-              {/* Row 1: Experience Selection Cards with Detailed Descriptions */}
+              {/* Row 1: Boutique Suite Selection Cards with Realistic Photography & Details */}
               <div>
                 <label className="block text-[11px] uppercase tracking-[0.2em] text-white/60 mb-3 font-medium">
-                  1. Select Experience Ritual
+                  1. Select Boutique Suite
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                  {EXPERIENCES.map((exp) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {ROOM_SUITES.map((suite) => (
                     <button
-                      key={exp.id}
+                      key={suite.id}
                       type="button"
-                      onClick={() => setSelectedExperience(exp.id)}
-                      className={`p-4 rounded-2xl border text-left transition-all duration-300 flex flex-col justify-between cursor-pointer ${
-                        selectedExperience === exp.id
-                          ? "bg-gold/15 border-gold shadow-[0_0_15px_rgba(201,166,91,0.25)] text-warm-white"
+                      onClick={() => setSelectedSuite(suite.id)}
+                      className={`group relative p-4 rounded-2xl border text-left transition-all duration-300 flex flex-col justify-between cursor-pointer overflow-hidden ${
+                        selectedSuite === suite.id
+                          ? "bg-gold/15 border-gold shadow-[0_0_20px_rgba(201,166,91,0.3)] text-warm-white ring-1 ring-gold"
                           : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20 text-white/70"
                       }`}
                     >
-                      <div>
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="font-display text-base font-semibold text-warm-white">
-                            {exp.title}
-                          </span>
-                          <Coffee className={`h-4 w-4 ${selectedExperience === exp.id ? "text-gold" : "opacity-40"}`} />
+                      {/* Realistic Suite Photography Banner */}
+                      <div className="relative h-28 w-full overflow-hidden rounded-xl mb-3">
+                        <Image
+                          src={suite.image}
+                          alt={suite.title}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/25 to-transparent" />
+                        <div className="absolute top-2 right-2 rounded-full bg-black/60 backdrop-blur-xs px-2.5 py-0.5 text-[10px] font-mono text-gold border border-gold/30">
+                          {suite.rate}
                         </div>
-                        <p className="text-[11px] text-white/60 leading-relaxed">
-                          {exp.desc}
+                      </div>
+
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <span className="font-display text-base font-semibold text-warm-white">
+                            {suite.title}
+                          </span>
+                          <BedDouble className={`h-4 w-4 shrink-0 ${selectedSuite === suite.id ? "text-gold" : "opacity-40"}`} />
+                        </div>
+                        <p className="text-[11px] text-white/60 leading-relaxed line-clamp-2">
+                          {suite.desc}
                         </p>
                       </div>
-                      <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[10px] text-white/50">
-                        <span>{exp.area}</span>
-                        <span className="font-mono text-gold">{exp.duration}</span>
+
+                      <div className="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between text-[10px] text-white/50">
+                        <span>{suite.specs}</span>
+                        <span className={`font-semibold ${selectedSuite === suite.id ? "text-gold" : "text-white/60"}`}>
+                          {selectedSuite === suite.id ? "Selected" : "Select Room"}
+                        </span>
                       </div>
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Row 2: Date, Time Slot & Party Size */}
+              {/* Row 2: Check-in Date, Duration of Stay & Guests */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 {/* Date Selection */}
                 <div>
                   <label className="block text-[11px] uppercase tracking-[0.2em] text-white/60 mb-2 font-medium">
-                    2. Date
+                    2. Check-in Date
                   </label>
                   <div className="flex items-center gap-2">
-                    {["Today", "Tomorrow", "This Weekend"].map((d) => (
+                    {["Tomorrow", "This Weekend", "Next Week"].map((d) => (
                       <button
                         key={d}
                         type="button"
@@ -519,31 +555,31 @@ export function Footer() {
                   </div>
                 </div>
 
-                {/* Time Slot Picker */}
+                {/* Duration of Stay Picker */}
                 <div>
                   <label className="block text-[11px] uppercase tracking-[0.2em] text-white/60 mb-2 font-medium">
-                    3. Time Slot
+                    3. Duration of Stay
                   </label>
                   <select
-                    value={selectedTimeSlot}
-                    onChange={(e) => setSelectedTimeSlot(e.target.value)}
+                    value={selectedDuration}
+                    onChange={(e) => setSelectedDuration(e.target.value)}
                     className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-2.5 text-xs text-warm-white outline-none focus:border-gold transition-colors cursor-pointer"
                   >
-                    {TIME_SLOTS.map((slot) => (
-                      <option key={slot} value={slot} className="bg-[#1f1610] text-white">
-                        {slot}
+                    {STAY_DURATIONS.map((dur) => (
+                      <option key={dur} value={dur} className="bg-[#1f1610] text-white">
+                        {dur}
                       </option>
                     ))}
                   </select>
                 </div>
 
-                {/* Party Size */}
+                {/* Number of Guests */}
                 <div>
                   <label className="block text-[11px] uppercase tracking-[0.2em] text-white/60 mb-2 font-medium">
-                    4. Party Size
+                    4. Guests
                   </label>
                   <div className="flex items-center gap-1.5">
-                    {[1, 2, 4, 6, 8].map((num) => (
+                    {[1, 2, 3, 4, 5].map((num) => (
                       <button
                         key={num}
                         type="button"
@@ -554,7 +590,7 @@ export function Footer() {
                             : "border border-white/15 bg-white/5 text-white/70 hover:bg-white/10"
                         }`}
                       >
-                        {num} {num === 8 ? "+" : ""}
+                        {num} {num === 5 ? "+" : ""}
                       </button>
                     ))}
                   </div>
@@ -599,7 +635,7 @@ export function Footer() {
                     className="w-full rounded-xl bg-italian-red hover:bg-[#a3322a] py-3.5 px-6 text-xs font-semibold uppercase tracking-[0.2em] text-warm-white shadow-xl shadow-italian-red/30 transition-all cursor-pointer flex items-center justify-center gap-2"
                     data-cursor-text="BOOK"
                   >
-                    <span>Reserve Ritual</span>
+                    <span>Book Suite Stay</span>
                     <Sparkles className="h-3.5 w-3.5" />
                   </motion.button>
                 </div>

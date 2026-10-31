@@ -19,6 +19,7 @@ const INGREDIENTS = [
     note: "Fresh cow's milk cream whipped by hand every morning until velvety, smooth, and cloud-light.",
     profile: "Silk · Sweet Cream · Delicate",
     tone: "#e8dcc8",
+    image: "/images/mascarpone.jpg",
   },
   {
     name: "Olive oil",
@@ -26,6 +27,7 @@ const INGREDIENTS = [
     note: "First cold-extraction from hand-harvested Frantoio olives, delivering grassy and peppery finish.",
     profile: "Golden · Grassy · Peppery",
     tone: "#b5b56a",
+    image: "/images/olive-oil.jpg",
   },
   {
     name: "Sweet Basil",
@@ -33,6 +35,7 @@ const INGREDIENTS = [
     note: "DOP Genovese basil picked with the morning dew, crushed moments before service for optimal aromatics.",
     profile: "Anise · Herbaceous · Vibrant",
     tone: "#5c7a5a",
+    image: "/images/basil.jpg",
   },
 ];
 

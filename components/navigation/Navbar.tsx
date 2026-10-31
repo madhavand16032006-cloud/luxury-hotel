@@ -139,7 +139,7 @@ export function Navbar() {
               data-cursor-text="BOOK"
             >
               <Calendar className="h-3.5 w-3.5" />
-              <span>Reserve</span>
+              <span>Book Stay</span>
             </a>
           </nav>
 
@@ -200,7 +200,7 @@ export function Navbar() {
                 onClick={(e) => handleNavClick(e, "#visit")}
                 className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-italian-red py-4 text-xs uppercase tracking-[0.25em] text-warm-white shadow-lg"
               >
-                Plan Your Visit
+                Reserve Your Stay
               </a>
             </div>
           </motion.div>

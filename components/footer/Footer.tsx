@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "motion/react";
 import {
   MapPin,
@@ -859,11 +860,11 @@ export function Footer() {
           </div>
 
           <div className="flex flex-wrap items-center gap-6 text-xs">
-            <a href="#facilities" className="hover:text-gold transition-colors">Facilities</a>
-            <a href="#about" className="hover:text-gold transition-colors">About</a>
-            <a href="#rooms" className="hover:text-gold transition-colors">Rooms &amp; Suites</a>
-            <a href="#reviews" className="hover:text-gold transition-colors">Reviews</a>
-            <a href="#contact" className="hover:text-gold transition-colors">Contact</a>
+            <Link href="/facilities" className="hover:text-gold transition-colors">Facilities</Link>
+            <Link href="/about" className="hover:text-gold transition-colors">About</Link>
+            <Link href="/rooms" className="hover:text-gold transition-colors">Rooms &amp; Suites</Link>
+            <Link href="/reviews" className="hover:text-gold transition-colors">Reviews</Link>
+            <Link href="/contact" className="hover:text-gold transition-colors">Contact</Link>
           </div>
 
           <button

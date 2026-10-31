@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { Calendar, ArrowRight, Menu, X, BedDouble } from "lucide-react";
+import { Calendar, ArrowRight, Menu, X } from "lucide-react";
 import { GoldenLotus } from "@/components/ui/GoldenLotus";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -13,50 +15,26 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: "Facilities", href: "#facilities" },
-  { label: "About", href: "#about" },
-  { label: "Rooms & Suites", href: "#rooms" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Contact", href: "#contact" },
+  { label: "Facilities", href: "/facilities" },
+  { label: "About", href: "/about" },
+  { label: "Rooms & Suites", href: "/rooms" },
+  { label: "Reviews", href: "/reviews" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-
-      const sectionIds = ["contact", "reviews", "rooms", "about", "facilities"];
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 240) {
-            setActiveSection(id);
-            return;
-          }
-        }
-      }
-      if (window.scrollY < 200) {
-        setActiveSection("");
-      }
+      setScrolled(window.scrollY > 30);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    setMobileMenuOpen(false);
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 py-4 sm:py-5 px-4 sm:px-8 transition-all duration-300">
@@ -70,9 +48,8 @@ export function Navbar() {
           }`}
         >
           {/* 1. Brand Logo: [BR VASANTHAM] with Golden Lotus */}
-          <a
-            href="#hero"
-            onClick={(e) => handleNavClick(e, "#hero")}
+          <Link
+            href="/"
             className="group flex items-center gap-3 transition-transform cursor-pointer select-none"
             aria-label="BR Vasantham Home"
           >
@@ -85,21 +62,19 @@ export function Navbar() {
                 Luxury Resort &amp; Suites
               </span>
             </div>
-          </a>
+          </Link>
 
-          {/* 2. Desktop Navigation Menu */}
+          {/* 2. Desktop Navigation Menu: Opens New Dedicated Pages */}
           <nav className="hidden lg:flex items-center gap-1">
             <ul className="flex items-center gap-0.5">
               {NAV_ITEMS.map((item, idx) => {
-                const sectionId = item.href.replace("#", "");
-                const isActive = activeSection === sectionId;
+                const isActive = pathname === item.href;
 
                 return (
                   <React.Fragment key={item.label}>
                     <li>
-                      <a
+                      <Link
                         href={item.href}
-                        onClick={(e) => handleNavClick(e, item.href)}
                         className={`relative px-4 py-2 text-xs uppercase tracking-[0.18em] font-medium transition-all duration-200 cursor-pointer ${
                           isActive
                             ? "text-gold font-semibold"
@@ -115,7 +90,7 @@ export function Navbar() {
                             transition={{ duration: 0.3, ease: EASE }}
                           />
                         )}
-                      </a>
+                      </Link>
                     </li>
 
                     {/* Subtle divider between items */}
@@ -128,17 +103,16 @@ export function Navbar() {
             </ul>
           </nav>
 
-          {/* 3. CTA: [Reserve Room] */}
+          {/* 3. CTA: [Reserve Room] with Light Gold Button */}
           <div className="flex items-center gap-3">
-            <a
-              href="#visit"
-              onClick={(e) => handleNavClick(e, "#visit")}
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] text-[#1a120c] px-5 sm:px-6 py-2.5 text-xs uppercase tracking-[0.16em] font-bold shadow-[0_4px_20px_rgba(223,186,115,0.4)] hover:shadow-[0_6px_25px_rgba(223,186,115,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
+            <Link
+              href="/#visit"
+              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] text-[#1a120b] px-5 sm:px-6 py-2.5 text-xs uppercase tracking-[0.16em] font-bold shadow-[0_4px_20px_rgba(223,186,115,0.4)] hover:shadow-[0_6px_25px_rgba(223,186,115,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
             >
               <Calendar className="h-3.5 w-3.5 stroke-[2.5]" />
               <span>Reserve Room</span>
               <ArrowRight className="h-3.5 w-3.5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
+            </Link>
 
             {/* Mobile Hamburger Toggle */}
             <button
@@ -181,28 +155,32 @@ export function Navbar() {
 
             <nav className="mt-4 flex flex-col divide-y divide-white/5">
               {NAV_ITEMS.map((item) => (
-                <a
+                <Link
                   key={item.label}
                   href={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                  className="py-3 text-sm font-display tracking-wider text-warm-white hover:text-gold transition-colors flex items-center justify-between"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`py-3 text-sm font-display tracking-wider transition-colors flex items-center justify-between ${
+                    pathname === item.href
+                      ? "text-gold font-semibold"
+                      : "text-warm-white hover:text-gold"
+                  }`}
                 >
                   <span>{item.label}</span>
                   <span className="text-xs text-gold/50">→</span>
-                </a>
+                </Link>
               ))}
             </nav>
 
             <div className="mt-6 pt-4 border-t border-white/10">
-              <a
-                href="#visit"
-                onClick={(e) => handleNavClick(e, "#visit")}
+              <Link
+                href="/#visit"
+                onClick={() => setMobileMenuOpen(false)}
                 className="w-full flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] py-3 text-xs uppercase tracking-[0.18em] font-bold text-[#1a120b] shadow-lg"
               >
                 <Calendar className="h-4 w-4" />
                 <span>Reserve Room</span>
                 <ArrowRight className="h-4 w-4" />
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}

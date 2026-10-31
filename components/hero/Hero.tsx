@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowDown,
@@ -130,14 +131,14 @@ export function Hero() {
             className="mt-8 flex flex-wrap items-center gap-4 sm:gap-5"
           >
             {/* Primary Button: Explore Our Resort */}
-            <a
-              href="#rooms"
+            <Link
+              href="/rooms"
               className="group rounded-full bg-gradient-to-r from-[#dfba73] via-[#e5c483] to-[#be8e46] text-[#1b120c] font-bold px-8 py-3.5 text-xs uppercase tracking-[0.18em] shadow-[0_15px_30px_-5px_rgba(223,186,115,0.4)] flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
               data-cursor-text="EXPLORE"
             >
               <span>Explore Our Resort</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
+            </Link>
 
             {/* Secondary Button: [Reserve Room] replacing video pause as requested */}
             <a

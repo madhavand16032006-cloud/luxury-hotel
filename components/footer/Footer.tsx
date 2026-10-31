@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import {
   MapPin,
-  Clock,
   Sparkles,
   Phone,
   Mail,
@@ -27,31 +26,8 @@ import { GoldenLotus } from "@/components/ui/GoldenLotus";
 export function Footer() {
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const [chennaiTime, setChennaiTime] = useState("");
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterDone, setNewsletterDone] = useState(false);
-
-  useEffect(() => {
-    const updateTime = () => {
-      try {
-        const now = new Date();
-        const options: Intl.DateTimeFormatOptions = {
-          timeZone: "Asia/Kolkata",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true,
-        };
-        setChennaiTime(new Intl.DateTimeFormat("en-IN", options).format(now));
-      } catch (err) {
-        setChennaiTime("12:00:00 PM");
-      }
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleOpenBooking = (branchId?: string) => {
     if (typeof window !== "undefined") {
@@ -133,29 +109,14 @@ export function Footer() {
         ) : (
           /* Top Feature on Inner Pages (About, Rooms, Contact, etc.): Our 3 Sanctuaries (Chennai, Madurai, Puducherry) */
           <div className="border-b border-white/10 pb-16">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-              <div>
-                <span className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-gold font-medium mb-2">
-                  <Sparkles className="h-3.5 w-3.5 text-gold" />
-                  <span>Our Hotel Sanctuaries</span>
-                </span>
-                <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white">
-                  Experience Luxury Across Tamil Nadu
-                </h2>
-              </div>
-
-              {/* Live IST Clock */}
-              <div className="inline-flex items-center gap-3 bg-black/60 border border-gold/30 px-5 py-2.5 rounded-none shrink-0 backdrop-blur-md">
-                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                <div className="text-xs">
-                  <span className="text-white/50 text-[10px] uppercase tracking-wider block">
-                    Tamil Nadu Time
-                  </span>
-                  <span className="font-mono text-sm font-bold text-white">
-                    {chennaiTime ? `${chennaiTime} IST` : "12:00:00 PM IST"}
-                  </span>
-                </div>
-              </div>
+            <div className="mb-10">
+              <span className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-gold font-medium mb-2">
+                <Sparkles className="h-3.5 w-3.5 text-gold" />
+                <span>Our Hotel Sanctuaries</span>
+              </span>
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white">
+                Experience Luxury Across Tamil Nadu
+              </h2>
             </div>
 
             {/* 3 User-Friendly Branch Cards: Chennai, Madurai, Puducherry */}

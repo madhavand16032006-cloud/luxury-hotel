@@ -103,7 +103,7 @@ export function Navbar() {
               data-cursor-text="BOOK"
             >
               <Calendar className="h-3.5 w-3.5" />
-              <span>Book Stay</span>
+              <span>Reserve Room</span>
             </a>
           </nav>
 

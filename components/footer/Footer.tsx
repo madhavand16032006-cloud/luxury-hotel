@@ -23,6 +23,7 @@ import {
   Calendar,
   MessageSquare,
   ShieldCheck,
+  Printer,
 } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -106,6 +107,7 @@ export function Footer() {
   const [guestName, setGuestName] = useState("");
   const [guestPhone, setGuestPhone] = useState("");
   const [guestNotes, setGuestNotes] = useState("");
+  const [selectionNotice, setSelectionNotice] = useState<string | null>(null);
   const [isBooked, setIsBooked] = useState(false);
   const [bookingConfirmation, setBookingConfirmation] = useState<{
     id: string;
@@ -128,7 +130,7 @@ export function Footer() {
   const [email, setEmail] = useState("");
   const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
 
-  // Live Chennai Time (IST)
+  // Live Chennai Time (IST) & Room Selection Event Listener
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
@@ -144,7 +146,24 @@ export function Footer() {
 
     updateTime();
     const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
+
+    const onSelectRoom = (e: Event) => {
+      const custom = e as CustomEvent<{ id: string; title: string; rate: string }>;
+      if (custom.detail?.id) {
+        setSelectedSuite(custom.detail.id);
+        setSelectionNotice(
+          `✓ Selected from Room Showcase: ${custom.detail.title} (${custom.detail.rate}) — proceed with guest details below`
+        );
+        setTimeout(() => setSelectionNotice(null), 8000);
+      }
+    };
+
+    window.addEventListener("select-hotel-room", onSelectRoom);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("select-hotel-room", onSelectRoom);
+    };
   }, []);
 
   const copyAddress = (address: string, index: number) => {
@@ -466,11 +485,20 @@ export function Footer() {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-none bg-emerald-600 hover:bg-emerald-500 text-xs font-semibold uppercase tracking-wider text-white transition-colors flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-3 rounded-none bg-emerald-600 hover:bg-emerald-500 text-xs font-semibold uppercase tracking-wider text-white transition-colors flex items-center gap-2 cursor-pointer shadow-md"
                 >
                   <MessageSquare className="h-4 w-4" />
                   <span>Send Pass to WhatsApp Concierge</span>
                 </a>
+
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  className="px-6 py-3 rounded-none border border-gold/40 bg-gold/15 hover:bg-gold/25 text-xs uppercase tracking-wider text-gold transition-colors cursor-pointer flex items-center gap-2"
+                >
+                  <Printer className="h-4 w-4" />
+                  <span>Print / Save Digital Pass</span>
+                </button>
 
                 <button
                   type="button"
@@ -483,6 +511,12 @@ export function Footer() {
             </motion.div>
           ) : (
             <form onSubmit={handleBooking} className="mt-8 space-y-6">
+              {selectionNotice && (
+                <div className="p-3.5 rounded-none border border-emerald-400/50 bg-emerald-950/40 text-emerald-300 text-xs flex items-center gap-2 animate-in fade-in">
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
+                  <span>{selectionNotice}</span>
+                </div>
+              )}
               {/* Step 1: Select Room Type (4 Tiers, Straight Corners, Real Photos) */}
               <div>
                 <label className="block text-[11px] uppercase tracking-[0.2em] text-white/60 mb-3 font-medium">
@@ -673,10 +707,15 @@ export function Footer() {
                 <div className="sm:col-span-4">
                   <button
                     type="submit"
-                    className="w-full rounded-none bg-italian-red hover:bg-[#b5372e] py-3.5 px-6 text-xs font-semibold uppercase tracking-[0.2em] text-warm-white shadow-lg transition-all cursor-pointer flex items-center justify-center gap-2 active:scale-95"
+                    className="w-full rounded-none bg-italian-red hover:bg-[#b5372e] py-3 px-4 text-xs font-semibold uppercase tracking-[0.16em] text-warm-white shadow-xl transition-all cursor-pointer flex flex-col items-center justify-center gap-0.5 active:scale-95"
                   >
-                    <span>Reserve Room Now</span>
-                    <Sparkles className="h-3.5 w-3.5" />
+                    <span className="flex items-center gap-2 text-[12px]">
+                      <span>Confirm Stay · Pay at Check-in</span>
+                      <Sparkles className="h-3.5 w-3.5 text-gold" />
+                    </span>
+                    <span className="text-[10px] font-normal opacity-85 lowercase tracking-normal text-rose-100">
+                      Zero advance required · Instant digital pass
+                    </span>
                   </button>
                 </div>
               </div>

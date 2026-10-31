@@ -186,19 +186,19 @@ export function Hero() {
         >
           <a
             href="#rooms"
-            className="flex items-center gap-2 rounded-full bg-italian-red hover:bg-[#b5372e] px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-warm-white shadow-xl shadow-italian-red/35 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            className="flex items-center gap-2 rounded-full bg-italian-red hover:bg-[#b5372e] px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-warm-white shadow-xl shadow-italian-red/35 transition-all hover:scale-105 active:scale-95 cursor-pointer"
             data-cursor-text="ROOMS"
           >
-            <span>Explore Rooms &amp; Suites</span>
+            <span>Explore Rooms &amp; Rates</span>
             <ArrowRight className="h-3.5 w-3.5" />
           </a>
           <a
             href="#visit"
-            className="flex items-center gap-2 rounded-full border border-white/30 bg-white/10 hover:bg-white/20 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-warm-white backdrop-blur-md transition-all hover:border-gold hover:text-gold active:scale-95 cursor-pointer"
+            className="flex items-center gap-2 rounded-full border border-white/30 bg-white/10 hover:bg-white/20 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-warm-white backdrop-blur-md transition-all hover:border-gold hover:text-gold active:scale-95 cursor-pointer"
             data-cursor-text="BOOK"
           >
             <Calendar className="h-3.5 w-3.5 text-gold" />
-            <span>Book Your Stay</span>
+            <span>Instant Room Reservation</span>
           </a>
         </motion.div>
       </div>

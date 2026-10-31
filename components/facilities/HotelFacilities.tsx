@@ -210,10 +210,10 @@ export function HotelFacilities() {
 
           <a
             href="#visit"
-            className="rounded-full bg-warm-brown hover:bg-warm-brown/90 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-warm-white shadow-md transition-all shrink-0 active:scale-95"
+            className="rounded-full bg-warm-brown hover:bg-warm-brown/90 px-6 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-warm-white shadow-md transition-all shrink-0 active:scale-95"
             data-cursor-text="BOOK"
           >
-            Check Room Availability
+            Reserve 100% AC Room (From ₹2,999)
           </a>
         </motion.div>
       </div>

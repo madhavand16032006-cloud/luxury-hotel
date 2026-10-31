@@ -121,6 +121,20 @@ const ROOM_TIERS = [
 export function RoomShowcase() {
   const [activeTab, setActiveTab] = useState("all");
 
+  const handleSelectRoom = (roomId: string, roomTitle: string, roomRate: string) => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("select-hotel-room", {
+          detail: { id: roomId, title: roomTitle, rate: roomRate },
+        })
+      );
+      const visitSection = document.getElementById("visit");
+      if (visitSection) {
+        visitSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   const filteredRooms =
     activeTab === "all"
       ? ROOM_TIERS
@@ -276,14 +290,15 @@ export function RoomShowcase() {
                   </span>
                 </div>
 
-                <a
-                  href="#visit"
-                  className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-italian-red hover:bg-[#b5372e] py-3 px-6 text-xs font-semibold uppercase tracking-[0.2em] text-warm-white shadow-md transition-all active:scale-95"
+                <button
+                  type="button"
+                  onClick={() => handleSelectRoom(room.id, room.title, room.rate)}
+                  className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-none bg-italian-red hover:bg-[#b5372e] py-3 px-6 text-xs font-semibold uppercase tracking-[0.18em] text-warm-white shadow-md transition-all active:scale-95 cursor-pointer"
                   data-cursor-text="BOOK"
                 >
-                  <span>Book This Room</span>
+                  <span>Select &amp; Book {room.title.split(" ")[0]} ({room.rate})</span>
                   <ArrowRight className="h-3.5 w-3.5" />
-                </a>
+                </button>
               </div>
             </motion.div>
           ))}

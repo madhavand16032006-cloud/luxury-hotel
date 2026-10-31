@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import {
   Car,
@@ -15,6 +15,9 @@ import {
   ShieldCheck,
   Tv,
   Coffee,
+  Eye,
+  Calendar,
+  X,
 } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -120,8 +123,10 @@ const ROOM_TIERS = [
 
 export function RoomShowcase() {
   const [activeTab, setActiveTab] = useState("all");
+  const [viewingRoom, setViewingRoom] = useState<(typeof ROOM_TIERS)[0] | null>(null);
 
   const handleSelectRoom = (roomId: string, roomTitle: string, roomRate: string) => {
+    setViewingRoom(null);
     if (typeof window !== "undefined") {
       window.dispatchEvent(
         new CustomEvent("select-hotel-room", {
@@ -276,8 +281,8 @@ export function RoomShowcase() {
                 </div>
               </div>
 
-              {/* Bottom Reservation Action Bar */}
-              <div className="border-t border-cream bg-[#faf7f2] p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+              {/* Bottom Reservation Action Bar with [View Room] and [Reserve Room] */}
+              <div className="border-t border-cream bg-[#faf7f2] p-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-3 text-xs text-warm-brown/70">
                   <span className="flex items-center gap-1">
                     <Car className="h-3.5 w-3.5 text-gold" />
@@ -290,19 +295,146 @@ export function RoomShowcase() {
                   </span>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => handleSelectRoom(room.id, room.title, room.rate)}
-                  className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-none bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] hover:brightness-105 py-3 px-6 text-xs font-bold uppercase tracking-[0.18em] text-[#1a120b] shadow-[0_4px_20px_rgba(223,186,115,0.4)] transition-all active:scale-95 cursor-pointer"
-                  data-cursor-text="BOOK"
-                >
-                  <span>Select &amp; Book {room.title.split(" ")[0]} ({room.rate})</span>
-                  <ArrowRight className="h-3.5 w-3.5 text-[#1a120b]" />
-                </button>
+                <div className="flex flex-wrap items-center gap-2.5">
+                  {/* View Room Button */}
+                  <button
+                    type="button"
+                    onClick={() => setViewingRoom(room)}
+                    className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-3 border border-gold/50 bg-white hover:bg-gold/15 text-xs uppercase tracking-[0.16em] font-semibold text-warm-brown hover:text-[#8c6b2d] transition-all cursor-pointer shadow-xs active:scale-95"
+                  >
+                    <Eye className="h-3.5 w-3.5 text-gold" />
+                    <span>View Room</span>
+                  </button>
+
+                  {/* Reserve Room Button */}
+                  <button
+                    type="button"
+                    onClick={() => handleSelectRoom(room.id, room.title, room.rate)}
+                    className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 rounded-none bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] hover:brightness-105 py-3 px-6 text-xs font-bold uppercase tracking-[0.16em] text-[#1a120b] shadow-[0_4px_20px_rgba(223,186,115,0.4)] transition-all active:scale-95 cursor-pointer"
+                    data-cursor-text="BOOK"
+                  >
+                    <Calendar className="h-3.5 w-3.5 text-[#1a120b]" />
+                    <span>Reserve Room ({room.rate})</span>
+                    <ArrowRight className="h-3.5 w-3.5 text-[#1a120b]" />
+                  </button>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Room Quick View Modal */}
+        <AnimatePresence>
+          {viewingRoom && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 sm:p-6 backdrop-blur-md overflow-y-auto"
+            >
+              <motion.div
+                initial={{ scale: 0.95, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.95, y: 20 }}
+                transition={{ duration: 0.3, ease: EASE }}
+                className="relative w-full max-w-3xl rounded-none border border-gold/50 bg-[#160f0b] text-warm-white p-6 sm:p-8 shadow-2xl my-auto"
+              >
+                {/* Close Button */}
+                <button
+                  type="button"
+                  onClick={() => setViewingRoom(null)}
+                  className="absolute top-4 right-4 h-9 w-9 rounded-full bg-white/10 hover:bg-gold hover:text-black flex items-center justify-center text-white/80 transition-colors cursor-pointer z-10"
+                  aria-label="Close Room View"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+
+                {/* Modal Photo */}
+                <div className="relative h-64 sm:h-80 w-full overflow-hidden rounded-none mb-6 border border-white/10">
+                  <Image
+                    src={viewingRoom.image}
+                    alt={viewingRoom.title}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent" />
+                  <div className="absolute top-4 left-4 rounded-none bg-gold/90 px-3 py-1 text-xs font-semibold text-warm-brown uppercase tracking-wider">
+                    {viewingRoom.badge}
+                  </div>
+                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                    <div>
+                      <h3 className="font-display text-2xl sm:text-3xl text-warm-white">
+                        {viewingRoom.title}
+                      </h3>
+                      <p className="text-xs text-white/70 mt-0.5">{viewingRoom.sqft} · {viewingRoom.bedType}</p>
+                    </div>
+                    <span className="font-mono text-xl sm:text-2xl font-bold text-gold">
+                      {viewingRoom.rate} <span className="text-xs font-normal text-white/70">{viewingRoom.period}</span>
+                    </span>
+                  </div>
+                </div>
+
+                {/* Modal Description & Specifications */}
+                <div className="space-y-4 text-xs sm:text-sm text-white/80">
+                  <p className="leading-relaxed">
+                    {viewingRoom.description}
+                  </p>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-3 border-y border-white/10 text-xs">
+                    <div>
+                      <span className="text-white/50 block text-[10px] uppercase tracking-wider">Dimensions</span>
+                      <span className="font-semibold text-warm-white mt-0.5 block">{viewingRoom.sqft}</span>
+                    </div>
+                    <div>
+                      <span className="text-white/50 block text-[10px] uppercase tracking-wider">Climate Control</span>
+                      <span className="font-semibold text-sky-400 mt-0.5 block">{viewingRoom.acType.split(" ")[0]} Inverter AC</span>
+                    </div>
+                    <div>
+                      <span className="text-white/50 block text-[10px] uppercase tracking-wider">Car Parking</span>
+                      <span className="font-semibold text-emerald-400 mt-0.5 block">Free Valet Included</span>
+                    </div>
+                    <div>
+                      <span className="text-white/50 block text-[10px] uppercase tracking-wider">Guest Capacity</span>
+                      <span className="font-semibold text-warm-white mt-0.5 block">{viewingRoom.maxGuests}</span>
+                    </div>
+                  </div>
+
+                  {/* Amenities Checklist */}
+                  <div>
+                    <h4 className="text-[11px] uppercase tracking-[0.2em] text-gold font-semibold mb-2">
+                      Included Suite Amenities
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                      {viewingRoom.amenities.map((am) => (
+                        <div key={am} className="flex items-center gap-2 text-white/80">
+                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+                          <span>{am}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Modal Action CTA */}
+                <div className="mt-8 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <span className="text-xs text-white/50">
+                    Pay at check-in · Zero advance fee required
+                  </span>
+
+                  <button
+                    type="button"
+                    onClick={() => handleSelectRoom(viewingRoom.id, viewingRoom.title, viewingRoom.rate)}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-none bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] hover:brightness-105 py-3.5 px-8 text-xs font-bold uppercase tracking-[0.18em] text-[#1a120b] shadow-xl transition-all active:scale-95 cursor-pointer"
+                  >
+                    <Calendar className="h-4 w-4 text-[#1a120b]" />
+                    <span>Reserve {viewingRoom.title.split(" ")[0]} Now ({viewingRoom.rate})</span>
+                    <ArrowRight className="h-4 w-4 text-[#1a120b]" />
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

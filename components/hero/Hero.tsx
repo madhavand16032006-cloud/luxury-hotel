@@ -12,6 +12,7 @@ import {
   Calendar,
   MapPin,
   Sparkles,
+  Eye,
 } from "lucide-react";
 import { HOTEL_BRANCHES } from "@/lib/branches";
 
@@ -130,26 +131,27 @@ export function Hero() {
             transition={{ delay: 1.1, duration: 0.8, ease: EASE }}
             className="mt-8 flex flex-wrap items-center gap-4 sm:gap-5"
           >
-            {/* Primary Button: Explore Our Resort */}
-            <Link
-              href="/rooms"
-              className="group rounded-full bg-gradient-to-r from-[#dfba73] via-[#e5c483] to-[#be8e46] text-[#1b120c] font-bold px-8 py-3.5 text-xs uppercase tracking-[0.18em] shadow-[0_15px_30px_-5px_rgba(223,186,115,0.4)] flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
-              data-cursor-text="EXPLORE"
-            >
-              <span>Explore Our Resort</span>
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-
-            {/* Secondary Button: [Reserve Room] replacing video pause as requested */}
+            {/* Primary Button: Reserve Room */}
             <a
               href="#visit"
-              className="group rounded-full border border-gold/75 bg-black/50 backdrop-blur-md text-warm-white hover:bg-gradient-to-r hover:from-[#dfba73] hover:via-[#fae4b2] hover:to-[#c79a4d] hover:text-[#1a120b] hover:border-transparent px-7 py-3.5 text-xs uppercase tracking-[0.18em] font-semibold flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
+              className="group rounded-full bg-gradient-to-r from-[#dfba73] via-[#e5c483] to-[#be8e46] text-[#1b120c] font-bold px-8 py-3.5 text-xs uppercase tracking-[0.18em] shadow-[0_15px_30px_-5px_rgba(223,186,115,0.4)] flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
               data-cursor-text="BOOK"
             >
-              <Calendar className="h-4 w-4 text-gold shrink-0 transition-transform group-hover:scale-110" />
+              <Calendar className="h-4 w-4 text-[#1b120c]" />
               <span>Reserve Room</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
+
+            {/* View Rooms Button */}
+            <Link
+              href="/rooms"
+              className="group rounded-full border border-gold/75 bg-black/50 backdrop-blur-md text-warm-white hover:bg-gradient-to-r hover:from-[#dfba73] hover:via-[#fae4b2] hover:to-[#c79a4d] hover:text-[#1a120b] hover:border-transparent px-7 py-3.5 text-xs uppercase tracking-[0.18em] font-semibold flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
+              data-cursor-text="VIEW"
+            >
+              <Eye className="h-4 w-4 text-gold group-hover:text-[#1a120b] transition-colors" />
+              <span>View Rooms</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
           </motion.div>
         </div>
 

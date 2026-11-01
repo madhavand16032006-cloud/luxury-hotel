@@ -28,6 +28,17 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [roomsDropdownOpen, setRoomsDropdownOpen] = useState(false);
 
+  const handleBranchClick = (branchId: string, e: React.MouseEvent) => {
+    setRoomsDropdownOpen(false);
+    setMobileMenuOpen(false);
+    if (pathname === "/") {
+      e.preventDefault();
+      window.dispatchEvent(
+        new CustomEvent("switch-hero-branch", { detail: { branchId } })
+      );
+    }
+  };
+
   useEffect(() => {
     setRoomsDropdownOpen(false);
     setMobileMenuOpen(false);
@@ -121,15 +132,15 @@ export function Navbar() {
                                 ROOMS &amp; SUITES
                               </div>
 
-                              <div className="border-y border-white/10 py-5 grid grid-cols-2 divide-x divide-white/10">
+                              <div className="border-y border-white/10 py-5 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/10 gap-2 sm:gap-0">
                                 <Link
                                   href="/rooms?branch=puducherry"
-                                  onClick={() => setRoomsDropdownOpen(false)}
-                                  className="group px-4 py-2 flex flex-col items-center justify-center hover:bg-white/5 transition-all rounded-xl cursor-pointer"
+                                  onClick={(e) => handleBranchClick("puducherry", e)}
+                                  className="group px-3 py-2 flex flex-col items-center justify-center hover:bg-white/5 transition-all rounded-xl cursor-pointer"
                                 >
-                                  <div className="flex items-center gap-2 text-warm-white group-hover:text-gold transition-colors font-serif text-sm tracking-[0.2em] uppercase font-medium">
+                                  <div className="flex items-center gap-2 text-warm-white group-hover:text-gold transition-colors font-serif text-sm tracking-[0.16em] uppercase font-medium">
                                     <MapPin className="h-4 w-4 text-gold shrink-0 transition-transform group-hover:scale-110" />
-                                    <span>PONDICHERRY</span>
+                                    <span>PUDUCHERRY</span>
                                   </div>
                                   <span className="text-[10px] text-white/50 tracking-wider mt-1 group-hover:text-white/75">
                                     Main Residency Branch
@@ -138,15 +149,29 @@ export function Navbar() {
 
                                 <Link
                                   href="/rooms?branch=tindivanam"
-                                  onClick={() => setRoomsDropdownOpen(false)}
-                                  className="group px-4 py-2 flex flex-col items-center justify-center hover:bg-white/5 transition-all rounded-xl cursor-pointer"
+                                  onClick={(e) => handleBranchClick("tindivanam", e)}
+                                  className="group px-3 py-2 flex flex-col items-center justify-center hover:bg-white/5 transition-all rounded-xl cursor-pointer"
                                 >
-                                  <div className="flex items-center gap-2 text-warm-white group-hover:text-gold transition-colors font-serif text-sm tracking-[0.2em] uppercase font-medium">
+                                  <div className="flex items-center gap-2 text-warm-white group-hover:text-gold transition-colors font-serif text-sm tracking-[0.16em] uppercase font-medium">
                                     <MapPin className="h-4 w-4 text-gold shrink-0 transition-transform group-hover:scale-110" />
                                     <span>TINDIVANAM</span>
                                   </div>
                                   <span className="text-[10px] text-white/50 tracking-wider mt-1 group-hover:text-white/75">
-                                    Second Branch
+                                    Restaurant &amp; Suites
+                                  </span>
+                                </Link>
+
+                                <Link
+                                  href="/rooms?branch=chennai"
+                                  onClick={(e) => handleBranchClick("chennai", e)}
+                                  className="group px-3 py-2 flex flex-col items-center justify-center hover:bg-white/5 transition-all rounded-xl cursor-pointer"
+                                >
+                                  <div className="flex items-center gap-2 text-warm-white group-hover:text-gold transition-colors font-serif text-sm tracking-[0.16em] uppercase font-medium">
+                                    <MapPin className="h-4 w-4 text-gold shrink-0 transition-transform group-hover:scale-110" />
+                                    <span>CHENNAI</span>
+                                  </div>
+                                  <span className="text-[10px] text-white/50 tracking-wider mt-1 group-hover:text-white/75">
+                                    Flagship Metro Sanctuary
                                   </span>
                                 </Link>
                               </div>
@@ -269,25 +294,36 @@ export function Navbar() {
                       <div className="pl-3 space-y-2 border-l border-gold/40 my-1">
                         <Link
                           href="/rooms?branch=puducherry"
-                          onClick={() => setMobileMenuOpen(false)}
+                          onClick={(e) => handleBranchClick("puducherry", e)}
                           className="flex items-center justify-between text-xs text-white/80 hover:text-gold transition-colors font-serif tracking-wider"
                         >
                           <span className="flex items-center gap-2">
                             <MapPin className="h-3.5 w-3.5 text-gold" />
-                            <span>PONDICHERRY</span>
+                            <span>PUDUCHERRY</span>
                           </span>
                           <span className="text-[10px] text-white/40">Main Branch →</span>
                         </Link>
                         <Link
                           href="/rooms?branch=tindivanam"
-                          onClick={() => setMobileMenuOpen(false)}
+                          onClick={(e) => handleBranchClick("tindivanam", e)}
                           className="flex items-center justify-between text-xs text-white/80 hover:text-gold transition-colors font-serif tracking-wider"
                         >
                           <span className="flex items-center gap-2">
                             <MapPin className="h-3.5 w-3.5 text-gold" />
                             <span>TINDIVANAM</span>
                           </span>
-                          <span className="text-[10px] text-white/40">Second Branch →</span>
+                          <span className="text-[10px] text-white/40">Restaurant &amp; Suites →</span>
+                        </Link>
+                        <Link
+                          href="/rooms?branch=chennai"
+                          onClick={(e) => handleBranchClick("chennai", e)}
+                          className="flex items-center justify-between text-xs text-white/80 hover:text-gold transition-colors font-serif tracking-wider"
+                        >
+                          <span className="flex items-center gap-2">
+                            <MapPin className="h-3.5 w-3.5 text-gold" />
+                            <span>CHENNAI</span>
+                          </span>
+                          <span className="text-[10px] text-white/40">Flagship Metro →</span>
                         </Link>
                       </div>
                     </div>

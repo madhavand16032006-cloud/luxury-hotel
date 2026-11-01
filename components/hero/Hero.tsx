@@ -83,6 +83,21 @@ export function Hero() {
     return () => clearInterval(timer);
   }, []);
 
+  // Listen for branch selection from Navbar menu
+  useEffect(() => {
+    const handleSwitch = (e: Event) => {
+      const customEvent = e as CustomEvent<{ branchId: string }>;
+      const branchId = customEvent.detail?.branchId;
+      const idx = HERO_SLIDES.findIndex((s) => s.branchId === branchId);
+      if (idx !== -1) {
+        setCurrentSlide(idx);
+      }
+    };
+
+    window.addEventListener("switch-hero-branch", handleSwitch);
+    return () => window.removeEventListener("switch-hero-branch", handleSwitch);
+  }, []);
+
   const activeSlide = HERO_SLIDES[currentSlide];
 
   const handleOpenBooking = () => {
@@ -140,32 +155,6 @@ export function Hero() {
       <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-between px-6 pt-28 sm:pt-32 pb-8 sm:pb-16 md:px-12">
         {/* Editorial Header: Centered on Mobile, Left-Aligned on Desktop */}
         <div className="max-w-3xl my-auto w-full flex flex-col items-center md:items-start text-center md:text-left">
-          {/* Top Branch Selector: [Puducherry] [Tindivanam Restaurant] [Chennai] */}
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-4 sm:mb-5">
-            {HERO_SLIDES.map((slide, idx) => {
-              const isActive = currentSlide === idx;
-              return (
-                <button
-                  key={slide.id}
-                  type="button"
-                  onClick={() => setCurrentSlide(idx)}
-                  className={`px-3.5 py-1.5 rounded-full text-[10px] sm:text-xs uppercase tracking-[0.18em] font-medium transition-all duration-300 cursor-pointer flex items-center gap-1.5 ${
-                    isActive
-                      ? "bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] text-[#1a120b] font-bold shadow-[0_4px_15px_rgba(223,186,115,0.45)] scale-105"
-                      : "bg-black/45 text-white/75 hover:text-white border border-white/20 hover:border-gold/50 backdrop-blur-md"
-                  }`}
-                >
-                  <span
-                    className={`h-1.5 w-1.5 rounded-full ${
-                      isActive ? "bg-[#1a120b]" : "bg-gold/70"
-                    }`}
-                  />
-                  <span>{slide.navLabel}</span>
-                </button>
-              );
-            })}
-          </div>
-
           {/* Dynamic Content Transitions with AnimatePresence */}
           <AnimatePresence mode="wait">
             <motion.div

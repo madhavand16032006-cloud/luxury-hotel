@@ -275,22 +275,6 @@ export function AdminPanelModal() {
 
   return (
     <>
-      {/* Floating Shortcut Pill in bottom corner for quick access */}
-      <div className="fixed bottom-4 left-4 z-40 hidden sm:block">
-        <button
-          type="button"
-          onClick={() => setIsOpen(true)}
-          className="group flex items-center gap-2 rounded-full border border-gold/45 bg-[#0a0705]/90 px-3.5 py-1.5 text-[11px] font-medium tracking-wider text-warm-white shadow-[0_4px_20px_rgba(0,0,0,0.6)] backdrop-blur-md hover:border-gold hover:text-gold transition-all duration-300 cursor-pointer"
-          title="Open Master Admin Panel (Ctrl+M)"
-        >
-          <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="font-semibold text-gold">Admin</span>
-          <kbd className="rounded border border-white/20 bg-white/10 px-1.5 py-0.5 text-[9px] font-mono text-white/70 group-hover:text-gold">
-            Ctrl + M
-          </kbd>
-        </button>
-      </div>
-
       {/* Main Admin Panel Modal */}
       <AnimatePresence>
         {isOpen && (

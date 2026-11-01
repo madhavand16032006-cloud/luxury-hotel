@@ -320,11 +320,10 @@ export function AdminPanelModal() {
                   <button
                     type="button"
                     onClick={() => setActiveTab("orders")}
-                    className={`flex items-center gap-1.5 sm:gap-2 rounded-xl px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer shrink-0 ${
-                      activeTab === "orders"
+                    className={`flex items-center gap-1.5 sm:gap-2 rounded-xl px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer shrink-0 ${activeTab === "orders"
                         ? "bg-gradient-to-r from-gold to-[#c79a4d] text-[#1a120b] shadow-md"
                         : "text-white/70 hover:text-white"
-                    }`}
+                      }`}
                   >
                     <FileText className="h-3.5 w-3.5" />
                     <span>Reservations ({reservations.length})</span>
@@ -333,11 +332,10 @@ export function AdminPanelModal() {
                   <button
                     type="button"
                     onClick={() => setActiveTab("media")}
-                    className={`flex items-center gap-1.5 sm:gap-2 rounded-xl px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer shrink-0 ${
-                      activeTab === "media"
+                    className={`flex items-center gap-1.5 sm:gap-2 rounded-xl px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer shrink-0 ${activeTab === "media"
                         ? "bg-gradient-to-r from-gold to-[#c79a4d] text-[#1a120b] shadow-md"
                         : "text-white/70 hover:text-white"
-                    }`}
+                      }`}
                   >
                     <ImageIcon className="h-3.5 w-3.5" />
                     <span>Photos &amp; Videos</span>
@@ -346,11 +344,10 @@ export function AdminPanelModal() {
                   <button
                     type="button"
                     onClick={() => setActiveTab("analytics")}
-                    className={`flex items-center gap-1.5 sm:gap-2 rounded-xl px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer shrink-0 ${
-                      activeTab === "analytics"
+                    className={`flex items-center gap-1.5 sm:gap-2 rounded-xl px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer shrink-0 ${activeTab === "analytics"
                         ? "bg-gradient-to-r from-gold to-[#c79a4d] text-[#1a120b] shadow-md"
                         : "text-white/70 hover:text-white"
-                    }`}
+                      }`}
                   >
                     <BarChart3 className="h-3.5 w-3.5" />
                     <span>Analytics</span>
@@ -359,11 +356,10 @@ export function AdminPanelModal() {
                   <button
                     type="button"
                     onClick={() => setActiveTab("inventory")}
-                    className={`flex items-center gap-1.5 sm:gap-2 rounded-xl px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer shrink-0 ${
-                      activeTab === "inventory"
+                    className={`flex items-center gap-1.5 sm:gap-2 rounded-xl px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer shrink-0 ${activeTab === "inventory"
                         ? "bg-gradient-to-r from-gold to-[#c79a4d] text-[#1a120b] shadow-md"
                         : "text-white/70 hover:text-white"
-                    }`}
+                      }`}
                   >
                     <Layers className="h-3.5 w-3.5" />
                     <span>Rooms &amp; Rates</span>
@@ -468,11 +464,10 @@ export function AdminPanelModal() {
                             key={b}
                             type="button"
                             onClick={() => setBranchFilter(b)}
-                            className={`rounded-lg px-2.5 py-1.5 uppercase font-medium tracking-wider transition-all cursor-pointer ${
-                              branchFilter === b
+                            className={`rounded-lg px-2.5 py-1.5 uppercase font-medium tracking-wider transition-all cursor-pointer ${branchFilter === b
                                 ? "bg-gold text-[#1a120b] font-bold"
                                 : "text-white/60 hover:text-white"
-                            }`}
+                              }`}
                           >
                             {b === "all" ? "All" : b.slice(0, 4)}
                           </button>
@@ -486,11 +481,10 @@ export function AdminPanelModal() {
                             key={s}
                             type="button"
                             onClick={() => setStatusFilter(s)}
-                            className={`rounded-lg px-2 py-1.5 uppercase font-medium tracking-wider transition-all cursor-pointer ${
-                              statusFilter === s
+                            className={`rounded-lg px-2 py-1.5 uppercase font-medium tracking-wider transition-all cursor-pointer ${statusFilter === s
                                 ? "bg-white/20 text-white font-bold"
                                 : "text-white/50 hover:text-white"
-                            }`}
+                              }`}
                           >
                             {s}
                           </button>
@@ -626,9 +620,8 @@ export function AdminPanelModal() {
                                           e.target.value as Reservation["status"]
                                         )
                                       }
-                                      className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider cursor-pointer bg-black/60 ${
-                                        statusColors[res.status] || "border-white/20 text-white"
-                                      }`}
+                                      className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider cursor-pointer bg-black/60 ${statusColors[res.status] || "border-white/20 text-white"
+                                        }`}
                                     >
                                       <option value="Confirmed">Confirmed</option>
                                       <option value="Checked In">Checked In</option>
@@ -1455,11 +1448,10 @@ export function AdminPanelModal() {
                       key={st}
                       type="button"
                       onClick={() => handleStatusChange(selectedOrder.id, st)}
-                      className={`rounded-xl py-2 px-3 text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer ${
-                        selectedOrder.status === st
+                      className={`rounded-xl py-2 px-3 text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer ${selectedOrder.status === st
                           ? "bg-gold text-[#1a120b] shadow-md font-bold"
                           : "border border-white/20 bg-white/5 text-white/70 hover:text-white"
-                      }`}
+                        }`}
                     >
                       {st}
                     </button>

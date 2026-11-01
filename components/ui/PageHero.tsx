@@ -34,7 +34,7 @@ export function PageHero({
   const videoRef = useRef<HTMLVideoElement>(null);
 
   return (
-    <section className="relative h-[55vh] min-h-[440px] max-h-[620px] w-full overflow-hidden bg-[#0d0806] flex items-end">
+    <section className="relative min-h-[480px] sm:min-h-[540px] md:h-[62vh] max-h-[700px] w-full overflow-hidden bg-[#0d0806] flex flex-col justify-end">
       {/* Cinematic Motion Video or Photography Background */}
       <motion.div
         initial={{ scale: 1.08 }}
@@ -76,7 +76,7 @@ export function PageHero({
       </motion.div>
 
       {/* Hero Content Container */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-12 sm:pb-16 md:px-12">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-6 sm:pb-8 md:px-12 flex flex-col justify-end">
         {/* Breadcrumb Path in Light Gold */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -144,6 +144,48 @@ export function PageHero({
             <span>{ctaText}</span>
             <ArrowRight className="h-4 w-4 text-[#1a120b]" />
           </button>
+        </motion.div>
+
+        {/* Elegant Animated SCROLL Vertical Line Indicator matching Hero */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.85, duration: 0.8, ease: EASE }}
+          className="mt-8 sm:mt-10 flex justify-center w-full"
+        >
+          <a
+            href="#page-content"
+            onClick={(e) => {
+              e.preventDefault();
+              const heroSection = (e.currentTarget as HTMLElement).closest("section");
+              const nextSection = heroSection?.nextElementSibling;
+              if (nextSection) {
+                nextSection.scrollIntoView({ behavior: "smooth" });
+              } else {
+                window.scrollBy({ top: window.innerHeight * 0.75, behavior: "smooth" });
+              }
+            }}
+            className="flex flex-col items-center gap-1.5 sm:gap-2 text-white/80 hover:text-gold transition-colors cursor-pointer group select-none"
+            aria-label="Scroll to explore"
+          >
+            <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] font-medium text-white/90 group-hover:text-gold transition-colors">
+              SCROLL
+            </span>
+            <div className="relative w-[1.5px] h-10 sm:h-12 bg-white/25 overflow-hidden rounded-full">
+              <motion.div
+                animate={{
+                  y: [-16, 48],
+                  opacity: [0, 1, 1, 0],
+                }}
+                transition={{
+                  duration: 1.8,
+                  repeat: Infinity,
+                  ease: [0.45, 0, 0.55, 1],
+                }}
+                className="w-full h-4 bg-gradient-to-b from-white via-white to-transparent shadow-[0_0_8px_rgba(255,255,255,0.9)]"
+              />
+            </div>
+          </a>
         </motion.div>
       </div>
     </section>

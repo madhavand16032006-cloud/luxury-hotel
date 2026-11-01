@@ -2,12 +2,15 @@ import { Navbar } from "@/components/navigation/Navbar";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { PageHero } from "@/components/ui/PageHero";
 import { HotelAboutSection } from "@/components/about/HotelAboutSection";
+import { HotelStorySection } from "@/components/about/HotelStorySection";
+import { HotelHospitalityPromise } from "@/components/about/HotelHospitalityPromise";
+import { HotelContactSection } from "@/components/contact/HotelContactSection";
 import { Footer } from "@/components/footer/Footer";
 
 export const metadata = {
-  title: "About Us & Heritage — BR Vasantham Grand | Luxury Resort & Suites",
+  title: "About Us & Our Story — Le Prestige Residency | BR Vasantham",
   description:
-    "Learn about BR Vasantham Grand: the sacred Tamil hospitality tradition of Virunthombal, Chettinad palace craftsmanship, Athangudi handmade tiles, and luxury suites.",
+    "Learn about Le Prestige Residency: our story, our founding vision, genuine South Indian Virunthombal hospitality, whisper-quiet inverter AC suites, and 24/7 concierge across Puducherry, Tindivanam, and Chennai.",
 };
 
 export default function AboutPage() {
@@ -23,19 +26,31 @@ export default function AboutPage() {
           eyebrow="OUR ROYAL HERITAGE STORY"
           title="Centuries of Comfort, Carved in"
           highlightTitle="Teak & Stone."
-          subtitle="Discover the architectural majesty of Chettinad palace courtyards, authentic Athangudi craftsmanship, and the sacred Tamil tradition of Virunthombal across Chennai, Madurai, and Puducherry."
+          subtitle="Discover the architectural majesty of Chettinad palace courtyards, authentic Athangudi craftsmanship, and the sacred Tamil tradition of Virunthombal across Puducherry, Tindivanam, and Chennai."
           breadcrumb="About"
           ctaText="Explore Sanctuaries"
           ctaHref="/#visit"
         />
 
-        {/* Heritage Story & Commitments */}
+        {/* 1. Heritage Architecture & Craftsmanship Standards */}
         <HotelAboutSection />
 
-        {/* Hotel Footer with Multi-Branch Booking Engine */}
+        {/* 2. Our Story: Founding Vision, Ethics & The Journey */}
+        <HotelStorySection />
+
+        {/* 3. Bottom Top Feature: Every Stay. Every Guest. Every Time. (Matching Reference Image) */}
+        <HotelHospitalityPromise />
+
+        {/* 4. Contact & 24/7 Concierge Desk */}
+        <HotelContactSection
+          eyebrow="GET IN TOUCH"
+          title="24/7 Concierge & Reception"
+          subtitle="Planning your stay or have special requests? Reach out to our front desk team anytime via WhatsApp or telephone call."
+        />
+
+        {/* 5. Hotel Footer with Multi-Branch Booking Engine */}
         <Footer />
       </main>
     </>
   );
 }
-

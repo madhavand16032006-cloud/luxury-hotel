@@ -38,15 +38,15 @@ export default function AboutPage() {
         {/* 2. Our Story: Founding Vision, Ethics & The Journey */}
         <HotelStorySection />
 
-        {/* 3. Bottom Top Feature: Every Stay. Every Guest. Every Time. (Matching Reference Image) */}
-        <HotelHospitalityPromise />
-
-        {/* 4. Contact & 24/7 Concierge Desk */}
+        {/* 3. Contact & 24/7 Concierge Desk (Next After Our Story) */}
         <HotelContactSection
           eyebrow="GET IN TOUCH"
           title="24/7 Concierge & Reception"
           subtitle="Planning your stay or have special requests? Reach out to our front desk team anytime via WhatsApp or telephone call."
         />
+
+        {/* 4. Bottom Top Feature: Every Stay. Every Guest. Every Time. (Matching Reference Image) */}
+        <HotelHospitalityPromise />
 
         {/* 5. Hotel Footer with Multi-Branch Booking Engine */}
         <Footer />

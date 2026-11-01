@@ -24,7 +24,7 @@ export function RotatingDiamond({
     <a
       href={`#${targetId}`}
       onClick={handleClick}
-      aria-label="Explore BR Vasantham"
+      aria-label="Explore Luxury Hotel"
       data-cursor-text="EXPLORE"
       className={`group relative inline-flex flex-col items-center justify-center cursor-pointer select-none ${className}`}
     >

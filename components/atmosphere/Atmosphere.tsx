@@ -232,7 +232,7 @@ export function Atmosphere() {
           <motion.div style={{ scale: imageScale }} className="relative h-full w-full">
             <Image
               src="/images/hotel-hero.jpg"
-              alt="BR Vasantham Grand architecture and atmosphere"
+              alt="Luxury Hotel architecture and atmosphere"
               fill
               className="object-cover"
               sizes="100vw"
@@ -289,7 +289,7 @@ export function Atmosphere() {
                 &ldquo;True royal luxury is not mere ornamentation, but the peace felt within.&rdquo;
               </p>
               <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-white/70">
-                BR Vasantham Grand · Tamil Nadu Sanctuary
+                Luxury Hotel · Sanctuary &amp; Suites
               </p>
             </div>
             <a

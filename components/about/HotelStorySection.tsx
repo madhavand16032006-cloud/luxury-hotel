@@ -17,7 +17,7 @@ export function HotelStorySection() {
             OUR STORY &amp; PHILOSOPHY
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a120b] tracking-tight">
-            The Story Behind Le Prestige
+            The Story Behind Luxury Hotel
           </h2>
           <p className="mt-3 text-xs sm:text-sm text-stone-600 leading-relaxed font-light">
             Founded on the simple belief that true hospitality is quiet, personal, and profoundly caring.
@@ -37,7 +37,7 @@ export function HotelStorySection() {
             <div className="relative aspect-16/10 w-full overflow-hidden rounded-3xl border border-stone-200 shadow-[0_25px_60px_rgba(0,0,0,0.08)]">
               <Image
                 src="/images/room-chettinad-suite.jpg"
-                alt="Le Prestige Residency Heritage Suite"
+                alt="Luxury Hotel Heritage Suite"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -96,14 +96,14 @@ export function HotelStorySection() {
               </h3>
 
               <p className="text-stone-600 leading-relaxed">
-                Le Prestige Residency was born from a singular conviction: luxury is not about loud grandeur,
+                Luxury Hotel was born from a singular conviction: luxury is not about loud grandeur,
                 but about the quiet feeling of being truly taken care of. While modern corporate hospitality
                 became increasingly transactional, we chose to return to the sacred South Indian ethos
                 of <em>Virunthombal</em>—treating every arriving guest as divine family.
               </p>
 
               <p className="text-stone-600 leading-relaxed">
-                Starting with our flagship property on Villianur Main Road in Puducherry, we designed our rooms
+                Starting with our premier property in Pondicherry, we designed our rooms
                 with generous proportions, whisper-quiet split inverter air conditioning, and guaranteed free
                 covered parking so that families, business executives, and spiritual travelers can arrive with complete peace of mind.
               </p>

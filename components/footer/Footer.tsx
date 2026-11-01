@@ -69,7 +69,7 @@ export function Footer() {
             <div className="mx-auto max-w-2xl">
               {/* Eyebrow Label matching Reference Image */}
               <span className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-white/55 font-medium block">
-                BR VASANTHAM BOUTIQUE HOTEL
+                LUXURY HOTEL &amp; SUITES
               </span>
 
               {/* Serif Headline with Italic Royal Gold Accent */}
@@ -82,7 +82,7 @@ export function Footer() {
 
               {/* Subtitle matching Reference Image */}
               <p className="mt-5 text-xs sm:text-sm text-white/70 max-w-xl mx-auto leading-relaxed font-light">
-                Reserve today and experience the BR Vasantham difference — where luxury is quiet and service is personal.
+                Reserve today and experience the Luxury Hotel difference — where luxury is quiet and service is personal.
               </p>
 
               {/* Centered Dual Action Buttons matching Reference Image */}
@@ -184,10 +184,10 @@ export function Footer() {
               <GoldenLotus className="h-8 w-8 drop-shadow-[0_0_10px_rgba(223,186,115,0.4)]" />
               <div>
                 <span className="font-display font-medium text-sm tracking-[0.24em] text-white block">
-                  BR VASANTHAM
+                  LUXURY HOTEL
                 </span>
                 <span className="text-[9px] uppercase tracking-[0.3em] text-gold/80 font-light block">
-                  Luxury Resort &amp; Suites
+                  Sanctuary &amp; Suites
                 </span>
               </div>
             </Link>
@@ -268,19 +268,19 @@ export function Footer() {
             </h4>
             <ul className="space-y-3.5 text-xs text-white/70">
               <li>
-                <p className="font-semibold text-white">BR Vasantham Grand (Chennai)</p>
-                <p className="text-[11px] text-white/50">OMR Expressway, Sholinganallur</p>
-                <p className="text-[11px] text-gold">Tel: +91 94440 12345</p>
+                <p className="font-semibold text-white">Luxury Hotel (Pondicherry)</p>
+                <p className="text-[11px] text-white/50">ABC Address, Pondicherry</p>
+                <p className="text-[11px] text-gold">Tel: +91 1234567890</p>
               </li>
               <li>
-                <p className="font-semibold text-white">BR Vasantham Heritage (Madurai)</p>
-                <p className="text-[11px] text-white/50">West Perumal Maistry St (Near Meenakshi Temple)</p>
-                <p className="text-[11px] text-gold">Tel: +91 94440 23456</p>
+                <p className="font-semibold text-white">Luxury Hotel (Tindivanam)</p>
+                <p className="text-[11px] text-white/50">ABC Address, Tindivanam</p>
+                <p className="text-[11px] text-gold">Tel: +91 1234567890</p>
               </li>
               <li>
-                <p className="font-semibold text-white">BR Vasantham Villa (Puducherry)</p>
-                <p className="text-[11px] text-white/50">Rue Dumas, French White Town Promenade</p>
-                <p className="text-[11px] text-gold">Tel: +91 94440 34567</p>
+                <p className="font-semibold text-white">Luxury Hotel (Chennai)</p>
+                <p className="text-[11px] text-white/50">XYZ Address, Chennai</p>
+                <p className="text-[11px] text-gold">Tel: +91 1234567890</p>
               </li>
             </ul>
           </div>
@@ -295,11 +295,11 @@ export function Footer() {
                 Our front desk team is on standby 24 hours a day for reservations and assistance:
               </p>
               <a
-                href="tel:+919444012345"
+                href="tel:+911234567890"
                 className="mt-2 inline-flex items-center gap-2 text-gold font-semibold text-sm hover:underline"
               >
                 <Phone className="h-4 w-4" />
-                <span>+91 94440 12345</span>
+                <span>+91 1234567890</span>
               </a>
             </div>
 
@@ -338,9 +338,9 @@ export function Footer() {
         {/* Bottom Bar: Copyright & Back to Top */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
           <div>
-            <p>© {new Date().getFullYear()} BR Vasantham Grand — Luxury Heritage Hotel &amp; Suites.</p>
+            <p>© {new Date().getFullYear()} Luxury Hotel — Luxury Hotel &amp; Suites.</p>
             <p className="text-[11px] text-white/35 mt-0.5">
-              Tamil Nadu, India · Chennai · Madurai · Puducherry
+              Pondicherry · Tindivanam · Chennai
             </p>
           </div>
 

@@ -41,7 +41,7 @@ export function HotelHospitalityPromise() {
             </h2>
 
             <p className="mt-8 text-xs sm:text-sm text-stone-300 leading-relaxed font-light max-w-xl">
-              At Le Prestige Residency, hospitality is more than a service—it&apos;s our promise.
+              At Luxury Hotel, hospitality is more than a service—it&apos;s our promise.
               From your arrival to your departure, we are committed to delivering exceptional comfort,
               thoughtful attention, genuine care, and memorable experiences that make every guest feel at home.
             </p>

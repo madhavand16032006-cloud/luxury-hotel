@@ -202,9 +202,9 @@ export function AdminPanelModal() {
     const rateNum = parseInt(newRate, 10) || 4499;
     const nightsNum = parseInt(newNights, 10) || 1;
     const branchNames: Record<string, string> = {
-      puducherry: "Puducherry Residency",
-      tindivanam: "Tindivanam Restaurant & Suites",
-      chennai: "Chennai Flagship Metro",
+      puducherry: "Luxury Hotel (Pondicherry)",
+      tindivanam: "Luxury Hotel (Tindivanam)",
+      chennai: "Luxury Hotel (Chennai)",
     };
 
     const newRes: Reservation = {
@@ -318,7 +318,7 @@ export function AdminPanelModal() {
                   <div>
                     <div className="flex items-center gap-2">
                       <h2 className="font-display text-base sm:text-lg font-bold tracking-wider text-warm-white">
-                        BR VASANTHAM GRAND
+                        LUXURY HOTEL
                       </h2>
                       <span className="rounded-full bg-emerald-500/15 border border-emerald-500/40 px-2 py-0.5 text-[10px] font-semibold text-emerald-400 uppercase tracking-widest flex items-center gap-1">
                         <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -1342,7 +1342,7 @@ export function AdminPanelModal() {
               {/* Bottom Footer Information Bar */}
               <div className="border-t border-white/10 bg-[#120c09] px-6 py-3 flex flex-wrap items-center justify-between text-xs text-white/50">
                 <div className="flex items-center gap-3">
-                  <span>BR Vasantham Master OS v2.4</span>
+                  <span>Luxury Hotel Master OS v2.4</span>
                   <span>•</span>
                   <span>Direct Guest WhatsApp Concierge Sync Enabled</span>
                 </div>
@@ -1497,7 +1497,7 @@ export function AdminPanelModal() {
                 <button
                   type="button"
                   onClick={() => {
-                    const msg = `Hello ${selectedOrder.guestName}, this is BR Vasantham Grand confirming your stay for ${selectedOrder.roomType} [Ref: ${selectedOrder.id}]. We look forward to hosting you.`;
+                    const msg = `Hello ${selectedOrder.guestName}, this is Luxury Hotel confirming your stay for ${selectedOrder.roomType} [Ref: ${selectedOrder.id}]. We look forward to hosting you.`;
                     window.open(`https://wa.me/${selectedOrder.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(msg)}`, "_blank");
                   }}
                   className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white hover:brightness-105 transition-all shadow-md cursor-pointer"
@@ -1701,3 +1701,4 @@ export function AdminPanelModal() {
     </>
   );
 }
+

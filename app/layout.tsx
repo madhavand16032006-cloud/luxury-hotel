@@ -7,9 +7,9 @@ import { AdminPanelModal } from "@/components/admin/AdminPanelModal";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BR Vasantham Grand — Luxury Heritage Hotel & Suites | Tamil Nadu",
+  title: "Luxury Hotel — Premier Luxury Hotel & Suites",
   description:
-    "Tamil Nadu's premier luxury heritage hotel & suites. 100% AC Deluxe & Normal rooms (320 to 1,200 sq. ft.), free covered car parking & valet, ultra-fast Wi-Fi, and authentic royal hospitality in Chennai & Madurai.",
+    "Premier luxury hotel & suites across Pondicherry, Tindivanam, and Chennai. 100% AC Deluxe & Normal rooms, free covered car parking & valet, ultra-fast Wi-Fi, and authentic hospitality.",
 };
 
 export const viewport: Viewport = {

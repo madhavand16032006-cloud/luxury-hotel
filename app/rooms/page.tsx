@@ -6,7 +6,7 @@ import { RoomShowcase } from "@/components/rooms/RoomShowcase";
 import { Footer } from "@/components/footer/Footer";
 
 export const metadata = {
-  title: "Rooms & Suites — BR Vasantham Grand | Luxury Resort & Suites",
+  title: "Rooms & Suites — Luxury Hotel",
   description:
     "Explore 4 tiers of luxury accommodation: Standard Normal AC (320 sq. ft.), Deluxe Luxury AC (450 sq. ft.), Royal Chettinad Suite (750 sq. ft.), and Presidential Penthouse (1,200 sq. ft.).",
 };

@@ -60,7 +60,7 @@ const HOTEL_FAQS: FaqItem[] = [
     id: 6,
     question: "How close are your properties to the beach and major transit hubs?",
     answer:
-      "Our Puducherry property on Villianur Main Road provides seamless 10-15 minute access to the Promenade Beach, French White Town, Auroville, and Puducherry Railway Station. Our Tindivanam property on Marakanam Road sits right off the highway junction with direct expressway connectivity.",
+      "Our Pondicherry property (ABC Address, Pondicherry), Tindivanam property (ABC Address, Tindivanam), and Chennai flagship (XYZ Address, Chennai) provide seamless access to beaches, transit hubs, and commercial centers.",
     category: "location",
   },
   {
@@ -201,7 +201,7 @@ export function HotelFaqSection() {
 
           <div className="flex flex-wrap items-center gap-3 shrink-0">
             <a
-              href="tel:+919677751329"
+              href="tel:+911234567890"
               className="inline-flex items-center gap-2 rounded-xl bg-white text-[#1a120b] hover:bg-stone-100 px-5 py-3 text-xs font-bold uppercase tracking-wider shadow-sm transition-all active:scale-95 cursor-pointer"
             >
               <Phone className="h-3.5 w-3.5 text-[#c2593f]" />
@@ -209,7 +209,7 @@ export function HotelFaqSection() {
             </a>
 
             <a
-              href="https://wa.me/919677751329?text=Vanakkam!%20I%20have%20a%20question%20regarding%20Le%20Prestige%20Residency%20booking."
+              href="https://wa.me/911234567890?text=Vanakkam!%20I%20have%20a%20question%20regarding%20Luxury%20Hotel%20booking."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white px-5 py-3 text-xs font-bold uppercase tracking-wider shadow-sm transition-all active:scale-95 cursor-pointer"

@@ -32,10 +32,10 @@ export function ContactLocationsMap() {
             OUR LOCATIONS
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a120b] tracking-tight">
-            Visit Le Prestige
+            Visit Luxury Hotel
           </h2>
           <p className="mt-3 text-xs sm:text-sm text-stone-600 leading-relaxed font-light">
-            Experience Le Prestige Residency across our locations.
+            Experience Luxury Hotel across our locations.
           </p>
         </div>
 

@@ -5,9 +5,9 @@ import { HotelReviewsSection } from "@/components/reviews/HotelReviewsSection";
 import { Footer } from "@/components/footer/Footer";
 
 export const metadata = {
-  title: "Guest Reviews & Ratings — BR Vasantham Grand | Luxury Resort & Suites",
+  title: "Guest Reviews & Ratings — Luxury Hotel",
   description:
-    "Read 500+ verified guest reviews and 4.8★ Google ratings for BR Vasantham Grand in Chennai, Madurai, and Puducherry. Transparent live feedback from real travelers.",
+    "Read 500+ verified guest reviews and 4.8★ ratings for Luxury Hotel in Pondicherry, Tindivanam, and Chennai. Transparent live feedback from real travelers.",
 };
 
 export default function ReviewsPage() {
@@ -22,7 +22,7 @@ export default function ReviewsPage() {
           imageSrc="/images/hotel-hero.jpg"
           eyebrow="GUEST EXPERIENCES & REPUTATION"
           title="What Our Guests Say About"
-          highlightTitle="BR Vasantham."
+          highlightTitle="Luxury Hotel."
           subtitle="Verified experiences from travelers across Tamil Nadu. Celebrating our 4.8★ Google rating, whisper-quiet 100% inverter AC, complimentary covered car parking, and genuine royal hospitality."
           breadcrumb="Reviews"
           ctaText="Share Your Review"

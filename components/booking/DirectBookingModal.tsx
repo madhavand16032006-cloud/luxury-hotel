@@ -132,7 +132,7 @@ export function DirectBookingModal() {
       `*Payment:* Pay at Hotel Check-in`;
 
     // Open WhatsApp in background/new tab
-    window.open(`https://wa.me/919444012345?text=${whatsappMsg}`, "_blank");
+    window.open(`https://wa.me/911234567890?text=${whatsappMsg}`, "_blank");
   };
 
   const handleClose = () => {

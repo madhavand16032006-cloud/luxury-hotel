@@ -80,7 +80,7 @@ export function HotelAboutSection() {
             {/* Eyebrow in Light Gold */}
             <div className="inline-flex items-center gap-2 rounded-none bg-gold/15 border border-gold/35 px-4 py-1.5 text-[11px] uppercase tracking-[0.25em] text-[#8c6b2d] font-semibold">
               <Sparkles className="h-3.5 w-3.5 text-[#c9a65b]" />
-              <span>About BR Vasantham Grand</span>
+              <span>About Luxury Hotel</span>
             </div>
 
             {/* Main Headline with Light Gold Accent */}
@@ -91,8 +91,8 @@ export function HotelAboutSection() {
 
             {/* Lead Narrative with Light Gold Emphasis */}
             <p className="text-sm sm:text-base leading-relaxed text-[#594d45]">
-              At BR Vasantham Grand, hospitality is the sacred Tamil tradition of{" "}
-              <strong className="text-[#8c6b2d] font-semibold">Virunthombal</strong>. Born from the architectural grandeur of historic Chettinad palaces, our sanctuaries across <span className="text-[#8c6b2d] font-medium">Chennai, Madurai, and Puducherry</span> blend royal heritage craftsmanship with modern five-star comfort.
+              At Luxury Hotel, hospitality is the sacred Tamil tradition of{" "}
+              <strong className="text-[#8c6b2d] font-semibold">Virunthombal</strong>. Born from the architectural grandeur of historic Chettinad palaces, our sanctuaries across <span className="text-[#8c6b2d] font-medium">Pondicherry, Tindivanam, and Chennai</span> blend royal heritage craftsmanship with modern five-star comfort.
             </p>
 
             <p className="text-xs sm:text-sm leading-relaxed text-[#594d45]">

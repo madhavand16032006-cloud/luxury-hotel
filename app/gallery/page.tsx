@@ -5,9 +5,9 @@ import { HotelGallery } from "@/components/gallery/HotelGallery";
 import { Footer } from "@/components/footer/Footer";
 
 export const metadata = {
-  title: "The Gallery — BR Vasantham Grand | Luxury Resort & Suites",
+  title: "The Gallery — Luxury Hotel",
   description:
-    "Explore the visual gallery of BR Vasantham Grand: palatial Chettinad architecture, Burmese teakwood courtyards, emerald swimming pool, and luxury suites.",
+    "Explore the visual gallery of Luxury Hotel: palatial Chettinad architecture, Burmese teakwood courtyards, emerald swimming pool, and luxury suites.",
 };
 
 export default function GalleryPage() {

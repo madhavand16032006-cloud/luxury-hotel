@@ -186,7 +186,7 @@ export function HotelAmenities() {
           </h2>
 
           <p className="mt-4 text-xs sm:text-sm text-stone-600 max-w-2xl mx-auto leading-relaxed">
-            Every room and common space at BR Vasantham Grand is thoughtfully curated with modern comforts, 100% inverter air-conditioning, free covered parking, and attentive round-the-clock service.
+            Every room and common space at Luxury Hotel is thoughtfully curated with modern comforts, 100% inverter air-conditioning, free covered parking, and attentive round-the-clock service.
           </p>
 
           {/* Filter Categories */}

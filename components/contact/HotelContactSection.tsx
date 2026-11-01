@@ -40,7 +40,7 @@ export function HotelContactSection({
     // Direct WhatsApp Concierge format
     const whatsappMsg = `Vanakkam Front Desk Concierge! My name is ${guestName}. Phone: ${guestPhone}. Interested in: ${suiteInterest}. Travel Dates: ${travelDates || "Flexible"}. Note: ${message || "Please share availability & room details."}`;
     window.open(
-      `https://wa.me/919444012345?text=${encodeURIComponent(whatsappMsg)}`,
+      `https://wa.me/911234567890?text=${encodeURIComponent(whatsappMsg)}`,
       "_blank"
     );
 
@@ -94,12 +94,12 @@ export function HotelContactSection({
                   </p>
                 </div>
                 <a
-                  href="https://wa.me/919444012345?text=Vanakkam!%20I%20have%20an%20inquiry%20regarding%20BR%20Vasantham%20Grand%20stay."
+                  href="https://wa.me/911234567890?text=Vanakkam!%20I%20have%20an%20inquiry%20regarding%20Luxury%20Hotel%20stay."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-emerald-800 hover:text-emerald-950 transition-colors"
                 >
-                  <span>+91 94440 12345 →</span>
+                  <span>+91 1234567890 →</span>
                 </a>
               </div>
 
@@ -122,25 +122,37 @@ export function HotelContactSection({
                   </p>
                 </div>
                 <a
-                  href="tel:+914428451984"
+                  href="tel:+911234567890"
                   className="mt-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-warm-brown hover:text-italian-red transition-colors"
                 >
-                  <span>+91 44 2845 1984 →</span>
+                  <span>+91 1234567890 →</span>
                 </a>
               </div>
             </div>
 
             {/* Hotel Sanctuaries Address Block */}
-            <div className="p-6 sm:p-8 bg-[#f8f5ef] border border-[#e5ded6] rounded-none space-y-5 text-xs text-stone-700">
-              <div className="border-b border-[#e8dfd6] pb-4">
+            <div className="p-6 sm:p-8 bg-[#f8f5ef] border border-[#e5ded6] rounded-none space-y-4 text-xs text-stone-700">
+              <div className="border-b border-[#e8dfd6] pb-3">
                 <div className="flex items-center gap-2 text-warm-brown font-semibold mb-1">
                   <MapPin className="h-4 w-4 text-[#c2593f]" />
                   <span className="font-display text-base text-[#221610]">
-                    Chennai Flagship Hotel
+                    Luxury Hotel (Pondicherry)
                   </span>
                 </div>
                 <p className="text-stone-600 pl-6">
-                  Anna Salai (Mount Road) &amp; ECR Beachfront, Chennai 600002, Tamil Nadu (Near Central Metro)
+                  ABC Address, Pondicherry • Tel: +91 1234567890
+                </p>
+              </div>
+
+              <div className="border-b border-[#e8dfd6] pb-3">
+                <div className="flex items-center gap-2 text-warm-brown font-semibold mb-1">
+                  <MapPin className="h-4 w-4 text-[#c2593f]" />
+                  <span className="font-display text-base text-[#221610]">
+                    Luxury Hotel (Tindivanam)
+                  </span>
+                </div>
+                <p className="text-stone-600 pl-6">
+                  ABC Address, Tindivanam • Tel: +91 1234567890
                 </p>
               </div>
 
@@ -148,11 +160,11 @@ export function HotelContactSection({
                 <div className="flex items-center gap-2 text-warm-brown font-semibold mb-1">
                   <MapPin className="h-4 w-4 text-[#c2593f]" />
                   <span className="font-display text-base text-[#221610]">
-                    Madurai &amp; Chettinad Palace
+                    Luxury Hotel (Chennai)
                   </span>
                 </div>
                 <p className="text-stone-600 pl-6">
-                  West Perumal Maistry Street, Madurai &amp; Kanadukathan, Chettinad 625001, Tamil Nadu
+                  XYZ Address, Chennai • Tel: +91 1234567890
                 </p>
               </div>
 
@@ -163,7 +175,7 @@ export function HotelContactSection({
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Mail className="h-3.5 w-3.5 text-stone-400" />
-                  <span>stay@brvasantham.com</span>
+                  <span>stay@luxuryhotel.com</span>
                 </span>
               </div>
             </div>
@@ -217,7 +229,7 @@ export function HotelContactSection({
                     required
                     value={guestPhone}
                     onChange={(e) => setGuestPhone(e.target.value)}
-                    placeholder="e.g. +91 94440 12345"
+                    placeholder="e.g. +91 1234567890"
                     className="w-full border border-[#d8cfc5] bg-[#faf8f5] px-3.5 py-2.5 text-xs text-[#221610] outline-none focus:border-gold rounded-none"
                   />
                 </div>

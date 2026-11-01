@@ -62,7 +62,7 @@ export function HotelFacilities() {
         <div className="mx-auto max-w-2xl text-center mb-16">
           <div className="inline-flex items-center gap-2 rounded-none bg-gold/15 border border-gold/30 px-3.5 py-1 text-[11px] uppercase tracking-[0.25em] text-warm-brown font-semibold mb-3">
             <Sparkles className="h-3 w-3 text-gold" />
-            <span>The BR Vasantham Standard</span>
+            <span>The Luxury Hotel Standard</span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-warm-brown tracking-tight">
             Crafted for Unmatched Serenity &amp; Comfort

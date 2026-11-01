@@ -203,7 +203,7 @@ export function ProductShowcase() {
               {/* Action Buttons */}
               <div className="mt-6 pt-4 border-t border-white/10 flex flex-col gap-2.5">
                 <a
-                  href={`https://wa.me/919444012345?text=${encodeURIComponent(
+                  href={`https://wa.me/911234567890?text=${encodeURIComponent(
                     `Vanakkam! I would like to order: ${selectedProduct.name} (${portions} portion${portions > 1 ? "s" : ""}) · Service: ${serviceType === "in-room" ? "In-Room Suite Delivery" : "Reserve Table at Dakshin Restaurant"} · Preference: ${specialNote}.`
                   )}`}
                   target="_blank"

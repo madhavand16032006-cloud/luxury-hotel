@@ -64,19 +64,19 @@ export function Navbar() {
               : "bg-[#090d15]/80 border border-white/20 shadow-[0_15px_40px_rgba(0,0,0,0.65)] backdrop-blur-xl hover:border-gold/50"
           }`}
         >
-          {/* 1. Brand Logo: [BR VASANTHAM] with Golden Lotus */}
+          {/* 1. Brand Logo: [LUXURY HOTEL] with Golden Lotus */}
           <Link
             href="/"
             className="group flex items-center gap-2 sm:gap-3 transition-transform cursor-pointer select-none"
-            aria-label="BR Vasantham Home"
+            aria-label="Luxury Hotel Home"
           >
             <GoldenLotus className="h-6 w-6 sm:h-8 sm:w-8 transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_8px_rgba(223,186,115,0.5)] shrink-0" />
             <div className="flex flex-col">
               <span className="font-display font-medium text-[11px] sm:text-sm tracking-[0.22em] sm:tracking-[0.26em] text-white group-hover:text-gold transition-colors leading-tight">
-                BR<span className="hidden sm:inline"> </span><span className="sm:inline block">VASANTHAM</span>
+                LUXURY HOTEL
               </span>
               <span className="text-[9px] uppercase tracking-[0.3em] text-gold/75 font-sans font-light hidden sm:block">
-                Luxury Resort &amp; Suites
+                Sanctuary &amp; Suites
               </span>
             </div>
           </Link>
@@ -268,7 +268,7 @@ export function Navbar() {
               <div className="flex items-center gap-2.5">
                 <GoldenLotus className="h-6 w-6" />
                 <span className="font-display font-medium text-xs tracking-[0.24em] text-gold">
-                  BR VASANTHAM
+                  LUXURY HOTEL
                 </span>
               </div>
               <button

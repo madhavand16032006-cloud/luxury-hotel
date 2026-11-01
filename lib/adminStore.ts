@@ -76,7 +76,7 @@ export const INITIAL_SAMPLE_RESERVATIONS: Reservation[] = [
     phone: "+91 98410 44219",
     email: "anand.r@gmail.com",
     branchId: "chennai",
-    branchName: "Chennai Flagship Metro",
+    branchName: "Luxury Hotel (Chennai)",
     roomType: "Royal Penthouse & Family Suite",
     rate: "₹8,999",
     rateNumeric: 8999,
@@ -96,7 +96,7 @@ export const INITIAL_SAMPLE_RESERVATIONS: Reservation[] = [
     phone: "+91 94432 11880",
     email: "priyakarthik@outlook.com",
     branchId: "puducherry",
-    branchName: "Puducherry Residency",
+    branchName: "Luxury Hotel (Pondicherry)",
     roomType: "Heritage Chettinad Teak Suite",
     rate: "₹6,499",
     rateNumeric: 6499,
@@ -116,7 +116,7 @@ export const INITIAL_SAMPLE_RESERVATIONS: Reservation[] = [
     phone: "+91 97890 55432",
     email: "dr.raghavan@apollo.org",
     branchId: "tindivanam",
-    branchName: "Tindivanam Restaurant & Suites",
+    branchName: "Luxury Hotel (Tindivanam)",
     roomType: "Deluxe Luxury AC Room",
     rate: "₹4,499",
     rateNumeric: 4499,
@@ -136,7 +136,7 @@ export const INITIAL_SAMPLE_RESERVATIONS: Reservation[] = [
     phone: "+91 98840 90123",
     email: "deepa.swami@yahoo.com",
     branchId: "chennai",
-    branchName: "Chennai Flagship Metro",
+    branchName: "Luxury Hotel (Chennai)",
     roomType: "Deluxe Luxury AC Room",
     rate: "₹4,499",
     rateNumeric: 4499,
@@ -156,7 +156,7 @@ export const INITIAL_SAMPLE_RESERVATIONS: Reservation[] = [
     phone: "+91 98201 34910",
     email: "rohan.mehta@fintech.in",
     branchId: "puducherry",
-    branchName: "Puducherry Residency",
+    branchName: "Luxury Hotel (Pondicherry)",
     roomType: "Standard Normal AC Room",
     rate: "₹2,999",
     rateNumeric: 2999,
@@ -176,7 +176,7 @@ export const INITIAL_SAMPLE_RESERVATIONS: Reservation[] = [
     phone: "+91 94441 87654",
     email: "meena.sun@gmail.com",
     branchId: "tindivanam",
-    branchName: "Tindivanam Restaurant & Suites",
+    branchName: "Luxury Hotel (Tindivanam)",
     roomType: "Heritage Chettinad Teak Suite",
     rate: "₹6,499",
     rateNumeric: 6499,
@@ -196,7 +196,7 @@ export const INITIAL_SAMPLE_RESERVATIONS: Reservation[] = [
     phone: "+91 99620 44321",
     email: "arjun.v@tcs.com",
     branchId: "chennai",
-    branchName: "Chennai Flagship Metro",
+    branchName: "Luxury Hotel (Chennai)",
     roomType: "Standard Normal AC Room",
     rate: "₹2,999",
     rateNumeric: 2999,
@@ -216,7 +216,7 @@ export const INITIAL_SAMPLE_RESERVATIONS: Reservation[] = [
     phone: "+91 98402 77109",
     email: "suresh.n@rediffmail.com",
     branchId: "puducherry",
-    branchName: "Puducherry Residency",
+    branchName: "Luxury Hotel (Pondicherry)",
     roomType: "Deluxe Luxury AC Room",
     rate: "₹4,499",
     rateNumeric: 4499,
@@ -363,9 +363,10 @@ export function exportReservationsCSV(list: Reservation[]): void {
   link.setAttribute("href", encodedUri);
   link.setAttribute(
     "download",
-    `BR_Vasantham_Reservations_${new Date().toISOString().slice(0, 10)}.csv`
+    `Luxury_Hotel_Reservations_${new Date().toISOString().slice(0, 10)}.csv`
   );
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
 }
+

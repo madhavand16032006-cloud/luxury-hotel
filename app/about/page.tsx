@@ -8,9 +8,9 @@ import { HotelContactSection } from "@/components/contact/HotelContactSection";
 import { Footer } from "@/components/footer/Footer";
 
 export const metadata = {
-  title: "About Us & Our Story — Le Prestige Residency | BR Vasantham",
+  title: "About Us & Our Story — Luxury Hotel",
   description:
-    "Learn about Le Prestige Residency: our story, our founding vision, genuine South Indian Virunthombal hospitality, whisper-quiet inverter AC suites, and 24/7 concierge across Puducherry, Tindivanam, and Chennai.",
+    "Learn about Luxury Hotel: our story, our founding vision, genuine South Indian Virunthombal hospitality, whisper-quiet inverter AC suites, and 24/7 concierge across Pondicherry, Tindivanam, and Chennai.",
 };
 
 export default function AboutPage() {

@@ -5,9 +5,9 @@ import { HotelFacilities } from "@/components/facilities/HotelFacilities";
 import { Footer } from "@/components/footer/Footer";
 
 export const metadata = {
-  title: "Facilities & Amenities — BR Vasantham Grand | Luxury Resort & Suites",
+  title: "Facilities & Amenities — Luxury Hotel",
   description:
-    "Explore BR Vasantham Grand facilities: 100% inverter AC in every room, free covered car parking with valet, 24x7 front desk concierge, and boutique Tamil hospitality.",
+    "Explore Luxury Hotel facilities: 100% inverter AC in every room, free covered car parking with valet, 24x7 front desk concierge, and boutique hospitality.",
 };
 
 export default function FacilitiesPage() {

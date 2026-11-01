@@ -8,7 +8,6 @@ import {
   Calendar,
   Eye,
 } from "lucide-react";
-import { RotatingDiamond } from "@/components/ui/RotatingDiamond";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -300,9 +299,35 @@ export function Hero() {
               })}
             </div>
 
-            {/* Center: Rotating Realistic 3D Brilliant-Cut Diamond (Quiet-Luxury Scroll Indicator to About Section) */}
+            {/* Center: Elegant SCROLL Vertical Line Indicator matching Reference Image */}
             <div className="flex-1 flex items-center justify-center">
-              <RotatingDiamond targetId="about" />
+              <a
+                href="#about"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="flex flex-col items-center gap-2 text-white/80 hover:text-gold transition-colors cursor-pointer group"
+                aria-label="Scroll to explore"
+              >
+                <span className="text-[11px] uppercase tracking-[0.3em] font-medium text-white/90 group-hover:text-gold transition-colors">
+                  SCROLL
+                </span>
+                <div className="relative w-[1.5px] h-12 bg-white/25 overflow-hidden rounded-full">
+                  <motion.div
+                    animate={{
+                      y: [-16, 48],
+                      opacity: [0, 1, 1, 0],
+                    }}
+                    transition={{
+                      duration: 1.8,
+                      repeat: Infinity,
+                      ease: [0.45, 0, 0.55, 1],
+                    }}
+                    className="w-full h-4 bg-gradient-to-b from-white via-white to-transparent shadow-[0_0_8px_rgba(255,255,255,0.9)]"
+                  />
+                </div>
+              </a>
             </div>
 
             {/* Right Spacer to Ensure Perfect Mathematical Center Alignment */}

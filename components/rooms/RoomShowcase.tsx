@@ -21,6 +21,7 @@ import {
   X,
   MapPin,
 } from "lucide-react";
+import { useSiteMedia } from "@/lib/useSiteMedia";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -125,7 +126,15 @@ const ROOM_TIERS = [
 
 export function RoomShowcase() {
   const searchParams = useSearchParams();
+  const media = useSiteMedia();
   const branchParam = searchParams?.get("branch");
+
+  const roomImages: Record<string, string> = {
+    normal: media.roomNormal || "/images/room-normal-ac.jpg",
+    deluxe: media.roomDeluxe || "/images/room-deluxe-ac.jpg",
+    chettinad: media.roomChettinad || "/images/room-chettinad-suite.jpg",
+    penthouse: media.roomPenthouse || "/images/room-presidential.jpg",
+  };
   const [selectedBranch, setSelectedBranch] = useState(
     branchParam === "tindivanam"
       ? "tindivanam"
@@ -366,7 +375,7 @@ export function RoomShowcase() {
                 {/* Real High-Resolution Room Image Banner */}
                 <div className="relative aspect-16/10 w-full overflow-hidden">
                   <Image
-                    src={room.image}
+                    src={roomImages[room.id] || room.image}
                     alt={room.title}
                     fill
                     className="object-cover transition-transform duration-1000 ease-[var(--ease-cinematic)] group-hover:scale-108"

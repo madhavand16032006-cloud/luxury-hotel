@@ -19,6 +19,7 @@ import {
   Wind,
 } from "lucide-react";
 import { HOTEL_BRANCHES } from "@/lib/branches";
+import { addReservation } from "@/lib/adminStore";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -93,6 +94,30 @@ export function DirectBookingModal() {
     const randomRef = `BRV-${Math.floor(100000 + Math.random() * 900000)}`;
     setBookingRef(randomRef);
     setIsConfirmed(true);
+
+    // Save to Admin Master Reservations Store
+    const rateNum = parseInt(room.rate.replace(/[^0-9]/g, ""), 10) || 4499;
+    const parsedNights = parseInt(nights, 10) || 1;
+    addReservation({
+      id: randomRef,
+      guestName: guestName.trim(),
+      phone: guestPhone.trim(),
+      email: `${guestName.toLowerCase().replace(/[^a-z0-9]/g, "") || "guest"}@hotelguest.com`,
+      branchId: branchId,
+      branchName: selectedBranch.name,
+      roomType: room.title,
+      rate: room.rate,
+      rateNumeric: rateNum,
+      checkIn: checkIn,
+      checkOut: `${parsedNights} Night(s) Stay`,
+      nights: parsedNights,
+      guests: guests,
+      totalAmount: rateNum * parsedNights,
+      status: "Confirmed",
+      paymentStatus: "Pay at Hotel",
+      specialRequest: specialRequest.trim() || undefined,
+      createdAt: new Date().toISOString(),
+    });
 
     // Also send instant WhatsApp message to Front Desk Concierge
     const whatsappMsg = `*Direct Booking Request [Ref: ${randomRef}]*%0A` +

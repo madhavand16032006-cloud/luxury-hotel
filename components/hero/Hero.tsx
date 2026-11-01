@@ -8,6 +8,7 @@ import {
   Calendar,
   Eye,
 } from "lucide-react";
+import { useSiteMedia } from "@/lib/useSiteMedia";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -73,21 +74,40 @@ const HERO_SLIDES: HeroSlide[] = [
 
 export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const media = useSiteMedia();
+
+  const slides: HeroSlide[] = [
+    {
+      ...HERO_SLIDES[0],
+      videoSrc: media.heroPuducherryVideo || HERO_SLIDES[0].videoSrc,
+      posterSrc: media.heroPuducherryPoster || HERO_SLIDES[0].posterSrc,
+    },
+    {
+      ...HERO_SLIDES[1],
+      videoSrc: media.heroTindivanamVideo || HERO_SLIDES[1].videoSrc,
+      posterSrc: media.heroTindivanamPoster || HERO_SLIDES[1].posterSrc,
+    },
+    {
+      ...HERO_SLIDES[2],
+      videoSrc: media.heroChennaiVideo || HERO_SLIDES[2].videoSrc,
+      posterSrc: media.heroChennaiPoster || HERO_SLIDES[2].posterSrc,
+    },
+  ];
 
   // Auto-advance slides every 8 seconds
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 8000);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   // Listen for branch selection from Navbar menu
   useEffect(() => {
     const handleSwitch = (e: Event) => {
       const customEvent = e as CustomEvent<{ branchId: string }>;
       const branchId = customEvent.detail?.branchId;
-      const idx = HERO_SLIDES.findIndex((s) => s.branchId === branchId);
+      const idx = slides.findIndex((s) => s.branchId === branchId);
       if (idx !== -1) {
         setCurrentSlide(idx);
       }
@@ -95,9 +115,9 @@ export function Hero() {
 
     window.addEventListener("switch-hero-branch", handleSwitch);
     return () => window.removeEventListener("switch-hero-branch", handleSwitch);
-  }, []);
+  }, [slides]);
 
-  const activeSlide = HERO_SLIDES[currentSlide];
+  const activeSlide = slides[currentSlide];
 
   const handleOpenBooking = () => {
     if (typeof window !== "undefined") {
@@ -252,7 +272,7 @@ export function Hero() {
 
           {/* Centered Slider Dots: Clickable to switch branch slides */}
           <div className="flex items-center justify-center gap-2.5 pt-1">
-            {HERO_SLIDES.map((slide, idx) => {
+            {slides.map((slide, idx) => {
               const isActive = currentSlide === idx;
               return (
                 <button
@@ -281,7 +301,7 @@ export function Hero() {
           <div className="mx-auto w-full max-w-6xl flex items-center justify-between px-3 sm:px-6">
             {/* Left: Slider Dash & Dots Indicator (Clickable to switch slides) */}
             <div className="flex items-center gap-2 select-none shrink-0">
-              {HERO_SLIDES.map((slide, idx) => {
+              {slides.map((slide, idx) => {
                 const isActive = currentSlide === idx;
                 return (
                   <button

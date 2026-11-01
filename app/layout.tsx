@@ -3,6 +3,7 @@ import { inter, playfair } from "@/lib/fonts";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 import { DirectBookingModal } from "@/components/booking/DirectBookingModal";
+import { AdminPanelModal } from "@/components/admin/AdminPanelModal";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ScrollProgressBar />
           {children}
           <DirectBookingModal />
+          <AdminPanelModal />
         </SmoothScroll>
       </body>
     </html>

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { Sparkles, Calendar, ArrowRight, ChevronRight } from "lucide-react";
+import { useSiteMedia } from "@/lib/useSiteMedia";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -32,6 +33,9 @@ export function PageHero({
   ctaHref = "/#visit",
 }: PageHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const media = useSiteMedia();
+  const effectiveVideo = videoSrc || media.pageHeroVideo;
+  const effectiveImage = media.pageHeroImage || imageSrc;
 
   return (
     <section className="relative min-h-[480px] sm:min-h-[540px] md:h-[62vh] max-h-[700px] w-full overflow-hidden bg-[#0d0806] flex flex-col justify-end">
@@ -42,7 +46,7 @@ export function PageHero({
         transition={{ duration: 1.6, ease: EASE }}
         className="absolute inset-0"
       >
-        {videoSrc ? (
+        {effectiveVideo ? (
           <video
             ref={videoRef}
             autoPlay
@@ -50,18 +54,18 @@ export function PageHero({
             loop
             playsInline
             preload="auto"
-            poster={imageSrc}
+            poster={effectiveImage}
             className="h-full w-full object-cover"
             style={{
               filter: "contrast(1.08) brightness(0.95) saturate(1.1)",
             }}
             aria-hidden="true"
           >
-            <source src={videoSrc} type="video/mp4" />
+            <source src={effectiveVideo} type="video/mp4" />
           </video>
         ) : (
           <Image
-            src={imageSrc}
+            src={effectiveImage}
             alt={title}
             fill
             priority

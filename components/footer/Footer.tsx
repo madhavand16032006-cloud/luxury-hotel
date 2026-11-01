@@ -72,10 +72,10 @@ export function Footer() {
                 BR VASANTHAM BOUTIQUE HOTEL
               </span>
 
-              {/* Serif Headline with Italic Warm Terracotta Accent matching Reference */}
+              {/* Serif Headline with Italic Royal Gold Accent */}
               <h2 className="mt-5 text-4xl sm:text-5xl md:text-6xl text-white tracking-tight leading-[1.12]">
                 <span className="block font-serif font-normal text-white">Book Your</span>
-                <span className="block font-serif italic text-[#c2593f] mt-1 sm:mt-1.5 font-normal">
+                <span className="block font-serif italic text-transparent bg-clip-text bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] mt-1 sm:mt-1.5 font-normal">
                   Luxury Stay
                 </span>
               </h2>
@@ -90,7 +90,7 @@ export function Footer() {
                 <button
                   type="button"
                   onClick={() => handleOpenBooking()}
-                  className="rounded-none bg-[#c2593f] hover:bg-[#a84c35] text-white font-bold px-8 py-3.5 text-xs uppercase tracking-[0.2em] shadow-lg transition-all active:scale-95 cursor-pointer"
+                  className="rounded-none bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] hover:brightness-105 text-[#1a120b] font-bold px-8 py-3.5 text-xs uppercase tracking-[0.2em] shadow-[0_4px_25px_rgba(223,186,115,0.4)] transition-all active:scale-95 cursor-pointer"
                   data-cursor-text="BOOK"
                 >
                   RESERVE NOW

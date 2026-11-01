@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { inter, playfair } from "@/lib/fonts";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 import { DirectBookingModal } from "@/components/booking/DirectBookingModal";
 import "./globals.css";
 
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body className="bg-warm-white text-warm-brown antialiased selection:bg-cream selection:text-italian-red">
         <SmoothScroll>
+          <ScrollProgressBar />
           {children}
           <DirectBookingModal />
         </SmoothScroll>

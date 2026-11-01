@@ -8,6 +8,7 @@ import { HotelAboutSection } from "@/components/about/HotelAboutSection";
 import { RoomShowcase } from "@/components/rooms/RoomShowcase";
 import { HotelReviewsSection } from "@/components/reviews/HotelReviewsSection";
 import { HotelContactSection } from "@/components/contact/HotelContactSection";
+import { JourneyMapSection } from "@/components/contact/JourneyMapSection";
 import { Footer } from "@/components/footer/Footer";
 
 export default function Home() {
@@ -40,7 +41,10 @@ export default function Home() {
         {/* 8. Contact & 24/7 Concierge Desk: WhatsApp, Phone Desk & Direct Assistance */}
         <HotelContactSection />
 
-        {/* 9. Hotel Footer: Destination Branch Reservation Engine with Guest Memory */}
+        {/* 9. Interactive Google Map: Your Journey Starts Here */}
+        <JourneyMapSection />
+
+        {/* 10. Hotel Footer: Destination Branch Reservation Engine with Guest Memory */}
         <Footer />
       </main>
     </>

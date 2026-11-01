@@ -7,7 +7,6 @@ import {
   ArrowRight,
   Calendar,
   Eye,
-  ChevronDown,
 } from "lucide-react";
 import { RotatingDiamond } from "@/components/ui/RotatingDiamond";
 
@@ -137,29 +136,40 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Mobile View: Scroll Down & Centered Dots (Matching Reference Image) */}
+        {/* Mobile View: Scroll Indicator (Matching Reference Image) & Dots */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.3, duration: 0.8, ease: EASE }}
-          className="md:hidden flex flex-col items-center gap-2 pb-2"
+          className="md:hidden flex flex-col items-center gap-2.5 pb-2"
         >
-          {/* Scroll Down Mouse & Chevron Indicator */}
+          {/* Scroll Line Indicator matching Reference Image */}
           <a
             href="#about"
-            className="flex flex-col items-center gap-1 text-white/75 hover:text-gold transition-colors cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="flex flex-col items-center gap-2 text-white/80 hover:text-gold transition-colors cursor-pointer group"
+            aria-label="Scroll to explore"
           >
-            <div className="w-4 h-7 rounded-full border-2 border-white/60 flex items-start justify-center pt-1">
-              <motion.span
-                animate={{ y: [0, 6, 0], opacity: [1, 0.3, 1] }}
-                transition={{ repeat: Infinity, duration: 1.4, ease: "easeInOut" }}
-                className="h-1.5 w-0.5 rounded-full bg-gold"
+            <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] font-medium text-white/90 group-hover:text-gold transition-colors">
+              SCROLL
+            </span>
+            <div className="relative w-[1.5px] h-10 bg-white/25 overflow-hidden rounded-full">
+              <motion.div
+                animate={{
+                  y: [-16, 42],
+                  opacity: [0, 1, 1, 0],
+                }}
+                transition={{
+                  duration: 1.8,
+                  repeat: Infinity,
+                  ease: [0.45, 0, 0.55, 1],
+                }}
+                className="w-full h-4 bg-gradient-to-b from-white via-white to-transparent shadow-[0_0_8px_rgba(255,255,255,0.9)]"
               />
             </div>
-            <ChevronDown className="h-3 w-3 -mt-0.5 text-white/60 animate-bounce" />
-            <span className="text-[9px] uppercase tracking-[0.25em] text-white/70 font-medium">
-              SCROLL DOWN
-            </span>
           </a>
 
           {/* Centered Slider Dots matching Reference Image */}

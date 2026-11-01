@@ -193,7 +193,7 @@ export function RoomShowcase() {
 
           {/* Branch Selector Card matching Reference Image */}
           <div className="mx-auto max-w-2xl mt-10 mb-8 overflow-hidden rounded-3xl border border-stone-200/90 bg-[#faf8f5] shadow-xs text-center p-6 sm:p-8">
-            <div className="text-[11px] uppercase tracking-[0.35em] text-[#c2593f] font-semibold mb-3">
+            <div className="text-[11px] uppercase tracking-[0.35em] text-[#c79a4d] font-bold mb-3">
               ROOMS
             </div>
 
@@ -211,14 +211,14 @@ export function RoomShowcase() {
                   <MapPin
                     className={`h-4 w-4 shrink-0 transition-colors ${
                       selectedBranch === "puducherry"
-                        ? "text-[#c2593f]"
+                        ? "text-[#c79a4d]"
                         : "text-stone-400 group-hover:text-stone-600"
                     }`}
                   />
                   <span
                     className={
                       selectedBranch === "puducherry"
-                        ? "underline underline-offset-8 decoration-2 decoration-[#c2593f] font-bold text-[#1a120b]"
+                        ? "underline underline-offset-8 decoration-2 decoration-[#c79a4d] font-bold text-[#1a120b]"
                         : ""
                     }
                   >
@@ -243,14 +243,14 @@ export function RoomShowcase() {
                   <MapPin
                     className={`h-4 w-4 shrink-0 transition-colors ${
                       selectedBranch === "tindivanam"
-                        ? "text-[#c2593f]"
+                        ? "text-[#c79a4d]"
                         : "text-stone-400 group-hover:text-stone-600"
                     }`}
                   />
                   <span
                     className={
                       selectedBranch === "tindivanam"
-                        ? "underline underline-offset-8 decoration-2 decoration-[#c2593f] font-bold text-[#1a120b]"
+                        ? "underline underline-offset-8 decoration-2 decoration-[#c79a4d] font-bold text-[#1a120b]"
                         : ""
                     }
                   >
@@ -274,7 +274,7 @@ export function RoomShowcase() {
               onClick={() => setActiveTab("all")}
               className={`rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
                 activeTab === "all"
-                  ? "bg-warm-brown text-warm-white shadow-sm"
+                  ? "bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] text-[#1a120b] font-bold shadow-sm"
                   : "text-warm-brown/70 hover:text-warm-brown"
               }`}
             >
@@ -284,7 +284,7 @@ export function RoomShowcase() {
               onClick={() => setActiveTab("ac")}
               className={`rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
                 activeTab === "ac"
-                  ? "bg-warm-brown text-warm-white shadow-sm"
+                  ? "bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] text-[#1a120b] font-bold shadow-sm"
                   : "text-warm-brown/70 hover:text-warm-brown"
               }`}
             >
@@ -294,7 +294,7 @@ export function RoomShowcase() {
               onClick={() => setActiveTab("suites")}
               className={`rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
                 activeTab === "suites"
-                  ? "bg-warm-brown text-warm-white shadow-sm"
+                  ? "bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] text-[#1a120b] font-bold shadow-sm"
                   : "text-warm-brown/70 hover:text-warm-brown"
               }`}
             >
@@ -386,7 +386,7 @@ export function RoomShowcase() {
                 <div className="flex items-center justify-between text-xs text-warm-brown/75">
                   <div className="flex items-center gap-2.5">
                     <span className="flex items-center gap-1 font-medium">
-                      <Car className="h-3.5 w-3.5 text-[#c2593f]" />
+                      <Car className="h-3.5 w-3.5 text-[#c79a4d]" />
                       <span>Free Parking</span>
                     </span>
                     <span className="text-stone-300">·</span>

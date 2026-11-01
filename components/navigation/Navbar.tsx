@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
@@ -28,6 +28,10 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [roomsDropdownOpen, setRoomsDropdownOpen] = useState(false);
 
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const toggleButtonRef = useRef<HTMLButtonElement>(null);
+  const roomsDropdownRef = useRef<HTMLLIElement>(null);
+
   const handleBranchClick = (branchId: string, e: React.MouseEvent) => {
     setRoomsDropdownOpen(false);
     setMobileMenuOpen(false);
@@ -43,6 +47,52 @@ export function Navbar() {
     setRoomsDropdownOpen(false);
     setMobileMenuOpen(false);
   }, [pathname]);
+
+  // Close menus when clicking outside anywhere on the website or pressing Escape
+  useEffect(() => {
+    if (!mobileMenuOpen && !roomsDropdownOpen) return;
+
+    const handleOutsideClick = (event: MouseEvent | TouchEvent) => {
+      const target = event.target as Node;
+
+      // Close mobile drawer if clicked outside drawer and outside toggle button
+      if (
+        mobileMenuOpen &&
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(target) &&
+        toggleButtonRef.current &&
+        !toggleButtonRef.current.contains(target)
+      ) {
+        setMobileMenuOpen(false);
+      }
+
+      // Close rooms dropdown if clicked outside rooms dropdown container
+      if (
+        roomsDropdownOpen &&
+        roomsDropdownRef.current &&
+        !roomsDropdownRef.current.contains(target)
+      ) {
+        setRoomsDropdownOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+        setRoomsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("touchstart", handleOutsideClick, { passive: true });
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("touchstart", handleOutsideClick);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [mobileMenuOpen, roomsDropdownOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -91,6 +141,7 @@ export function Navbar() {
                   return (
                     <React.Fragment key={item.label}>
                       <li
+                        ref={roomsDropdownRef}
                         className="relative"
                         onMouseEnter={() => setRoomsDropdownOpen(true)}
                         onMouseLeave={() => setRoomsDropdownOpen(false)}
@@ -243,10 +294,12 @@ export function Navbar() {
 
             {/* Mobile Hamburger Toggle */}
             <button
+              ref={toggleButtonRef}
               type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
               className="lg:hidden h-9 w-9 rounded-full border border-white/20 bg-white/5 text-warm-white flex items-center justify-center hover:bg-white/10 hover:border-gold transition-colors cursor-pointer shrink-0"
-              aria-label="Toggle Navigation"
+              aria-label={mobileMenuOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
@@ -254,31 +307,52 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Menu & Website Backdrop Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
+            key="mobile-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setMobileMenuOpen(false)}
+            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden cursor-pointer"
+            aria-label="Close navigation menu"
+          />
+        )}
+
+        {mobileMenuOpen && (
+          <motion.div
+            key="mobile-drawer"
+            ref={mobileMenuRef}
+            initial={{ opacity: 0, y: -15, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -15, scale: 0.98 }}
             transition={{ duration: 0.25, ease: EASE }}
-            className="fixed inset-x-4 top-20 z-40 rounded-2xl bg-[#0a0e17]/98 border border-gold/40 p-6 shadow-2xl backdrop-blur-2xl lg:hidden text-warm-white"
+            className="fixed inset-x-4 top-20 z-50 rounded-2xl bg-[#0a0e17]/98 border border-gold/40 p-6 shadow-[0_20px_50px_rgba(0,0,0,0.9)] backdrop-blur-2xl lg:hidden text-warm-white max-h-[calc(100vh-6rem)] overflow-y-auto"
           >
-            <div className="flex items-center justify-between pb-4 border-b border-white/10">
-              <div className="flex items-center gap-2.5">
-                <GoldenLotus className="h-6 w-6" />
-                <span className="font-display font-medium text-xs tracking-[0.24em] text-gold">
-                  LUXURY HOTEL
-                </span>
+              <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                <Link
+                  href="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2.5 group cursor-pointer"
+                  aria-label="Luxury Hotel Home"
+                >
+                  <GoldenLotus className="h-6 w-6 transition-transform group-hover:scale-105" />
+                  <span className="font-display font-medium text-xs tracking-[0.24em] text-gold group-hover:text-[#fae4b2] transition-colors">
+                    LUXURY HOTEL
+                  </span>
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="h-7 w-7 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-colors cursor-pointer"
+                  aria-label="Close menu"
+                >
+                  <X className="h-3.5 w-3.5" />
+                </button>
               </div>
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(false)}
-                className="h-7 w-7 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:text-white"
-              >
-                <X className="h-3.5 w-3.5" />
-              </button>
-            </div>
 
             <nav className="mt-4 flex flex-col divide-y divide-white/5">
               {NAV_ITEMS.map((item) => {

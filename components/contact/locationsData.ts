@@ -87,3 +87,4 @@ export const BRANCH_LOCATIONS: LocationBranch[] = [
       "https://www.google.com/maps/dir/?api=1&destination=Anna+Salai+Chennai+Tamil+Nadu",
   },
 ];
+

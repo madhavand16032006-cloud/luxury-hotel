@@ -127,11 +127,19 @@ export function RoomShowcase() {
   const searchParams = useSearchParams();
   const branchParam = searchParams?.get("branch");
   const [selectedBranch, setSelectedBranch] = useState(
-    branchParam === "tindivanam" ? "tindivanam" : "puducherry"
+    branchParam === "tindivanam"
+      ? "tindivanam"
+      : branchParam === "chennai"
+      ? "chennai"
+      : "puducherry"
   );
 
   useEffect(() => {
-    if (branchParam === "tindivanam" || branchParam === "puducherry") {
+    if (
+      branchParam === "tindivanam" ||
+      branchParam === "chennai" ||
+      branchParam === "puducherry"
+    ) {
       setSelectedBranch(branchParam);
     }
   }, [branchParam]);
@@ -147,11 +155,17 @@ export function RoomShowcase() {
   ) => {
     setViewingRoom(null);
     if (typeof window !== "undefined") {
+      const branchLabel =
+        selectedBranch === "tindivanam"
+          ? "Tindivanam"
+          : selectedBranch === "chennai"
+          ? "Chennai"
+          : "Puducherry";
       window.dispatchEvent(
         new CustomEvent("open-direct-booking", {
           detail: {
             id: roomId,
-            title: `${roomTitle} (${selectedBranch === "tindivanam" ? "Tindivanam" : "Puducherry"})`,
+            title: `${roomTitle} (${branchLabel})`,
             rate: roomRate,
             branchId: selectedBranch,
             image: roomObj?.image,
@@ -192,22 +206,22 @@ export function RoomShowcase() {
           </p>
 
           {/* Branch Selector Card matching Reference Image */}
-          <div className="mx-auto max-w-2xl mt-10 mb-8 overflow-hidden rounded-3xl border border-stone-200/90 bg-[#faf8f5] shadow-xs text-center p-6 sm:p-8">
+          <div className="mx-auto max-w-3xl mt-10 mb-8 overflow-hidden rounded-3xl border border-stone-200/90 bg-[#faf8f5] shadow-xs text-center p-6 sm:p-8">
             <div className="text-[11px] uppercase tracking-[0.35em] text-[#c79a4d] font-bold mb-3">
               ROOMS
             </div>
 
-            <div className="border-y border-stone-200/90 py-5 grid grid-cols-2 divide-x divide-stone-200/90">
+            <div className="border-y border-stone-200/90 py-5 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-stone-200/90 gap-2 sm:gap-0">
               <button
                 type="button"
                 onClick={() => setSelectedBranch("puducherry")}
-                className={`group px-4 py-2 flex flex-col items-center justify-center transition-all cursor-pointer ${
+                className={`group px-3 py-2 flex flex-col items-center justify-center transition-all cursor-pointer ${
                   selectedBranch === "puducherry"
                     ? "text-[#1a120b] font-semibold"
                     : "text-stone-500 hover:text-stone-900"
                 }`}
               >
-                <div className="flex items-center gap-2 font-serif text-sm sm:text-base tracking-[0.2em] uppercase">
+                <div className="flex items-center gap-2 font-serif text-sm sm:text-base tracking-[0.16em] uppercase">
                   <MapPin
                     className={`h-4 w-4 shrink-0 transition-colors ${
                       selectedBranch === "puducherry"
@@ -233,13 +247,13 @@ export function RoomShowcase() {
               <button
                 type="button"
                 onClick={() => setSelectedBranch("tindivanam")}
-                className={`group px-4 py-2 flex flex-col items-center justify-center transition-all cursor-pointer ${
+                className={`group px-3 py-2 flex flex-col items-center justify-center transition-all cursor-pointer ${
                   selectedBranch === "tindivanam"
                     ? "text-[#1a120b] font-semibold"
                     : "text-stone-500 hover:text-stone-900"
                 }`}
               >
-                <div className="flex items-center gap-2 font-serif text-sm sm:text-base tracking-[0.2em] uppercase">
+                <div className="flex items-center gap-2 font-serif text-sm sm:text-base tracking-[0.16em] uppercase">
                   <MapPin
                     className={`h-4 w-4 shrink-0 transition-colors ${
                       selectedBranch === "tindivanam"
@@ -258,7 +272,39 @@ export function RoomShowcase() {
                   </span>
                 </div>
                 <span className="text-[10px] text-stone-400 tracking-wider mt-1.5 font-normal">
-                  Second Branch
+                  Second Branch &amp; Suites
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setSelectedBranch("chennai")}
+                className={`group px-3 py-2 flex flex-col items-center justify-center transition-all cursor-pointer ${
+                  selectedBranch === "chennai"
+                    ? "text-[#1a120b] font-semibold"
+                    : "text-stone-500 hover:text-stone-900"
+                }`}
+              >
+                <div className="flex items-center gap-2 font-serif text-sm sm:text-base tracking-[0.16em] uppercase">
+                  <MapPin
+                    className={`h-4 w-4 shrink-0 transition-colors ${
+                      selectedBranch === "chennai"
+                        ? "text-[#c79a4d]"
+                        : "text-stone-400 group-hover:text-stone-600"
+                    }`}
+                  />
+                  <span
+                    className={
+                      selectedBranch === "chennai"
+                        ? "underline underline-offset-8 decoration-2 decoration-[#c79a4d] font-bold text-[#1a120b]"
+                        : ""
+                    }
+                  >
+                    CHENNAI
+                  </span>
+                </div>
+                <span className="text-[10px] text-stone-400 tracking-wider mt-1.5 font-normal">
+                  Flagship Metro Sanctuary
                 </span>
               </button>
             </div>

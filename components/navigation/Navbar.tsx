@@ -225,7 +225,7 @@ export function Navbar() {
             </ul>
           </nav>
 
-          {/* 3. CTA: [Reserve Room] with Light Gold Button - Opens Direct Booking */}
+          {/* 3. CTA: [Reserve Room] with Light Gold Button - Hidden on Mobile, Shown on Laptop */}
           <div className="flex items-center gap-2 sm:gap-3">
             <button
               type="button"
@@ -234,11 +234,11 @@ export function Navbar() {
                   window.dispatchEvent(new CustomEvent("open-direct-booking"));
                 }
               }}
-              className="group inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] text-[#1a120b] px-3.5 sm:px-6 py-2 sm:py-2.5 text-[10px] sm:text-xs uppercase tracking-[0.14em] sm:tracking-[0.16em] font-bold shadow-[0_4px_20px_rgba(223,186,115,0.4)] hover:shadow-[0_6px_25px_rgba(223,186,115,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
+              className="hidden lg:inline-flex group items-center gap-2 rounded-full bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] text-[#1a120b] px-6 py-2.5 text-xs uppercase tracking-[0.16em] font-bold shadow-[0_4px_20px_rgba(223,186,115,0.4)] hover:shadow-[0_6px_25px_rgba(223,186,115,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
             >
               <Calendar className="h-3.5 w-3.5 stroke-[2.5]" />
               <span>Reserve Room</span>
-              <ArrowRight className="hidden sm:inline-block h-3.5 w-3.5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight className="h-3.5 w-3.5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-1" />
             </button>
 
             {/* Mobile Hamburger Toggle */}

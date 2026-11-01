@@ -56,11 +56,10 @@ export function Footer() {
   return (
     <footer
       id="visit"
-      className={`relative w-full border-t border-gold/30 ${
-        isHome
+      className={`relative w-full border-t border-gold/30 ${isHome
           ? "bg-gradient-to-b from-[#222426] via-[#161210] to-[#0a0503]"
           : "bg-gradient-to-b from-[#18100a] via-[#120a06] to-[#0a0503]"
-      } text-warm-white pt-20 pb-12 px-6 sm:px-10 lg:px-16`}
+        } text-warm-white pt-20 pb-12 px-6 sm:px-10 lg:px-16`}
     >
       <div className="relative mx-auto max-w-7xl">
         {/* Top Feature: Home Page shows "Book Your Luxury Stay" CTA Banner matching Reference Image */}

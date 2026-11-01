@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
@@ -124,7 +124,7 @@ const ROOM_TIERS = [
   },
 ];
 
-export function RoomShowcase() {
+function RoomShowcaseContent() {
   const searchParams = useSearchParams();
   const media = useSiteMedia();
   const branchParam = searchParams?.get("branch");
@@ -323,11 +323,11 @@ export function RoomShowcase() {
             </p>
           </div>
 
-          {/* Filter Tabs */}
-          <div className="mt-8 inline-flex rounded-full border border-warm-brown/20 bg-cream/60 p-1.5 shadow-inner">
+          {/* Filter Tabs - Fully Responsive */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-1.5 rounded-3xl sm:rounded-full border border-warm-brown/20 bg-cream/60 p-1.5 shadow-inner max-w-full">
             <button
               onClick={() => setActiveTab("all")}
-              className={`rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+              className={`rounded-full px-3.5 sm:px-5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
                 activeTab === "all"
                   ? "bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] text-[#1a120b] font-bold shadow-sm"
                   : "text-warm-brown/70 hover:text-warm-brown"
@@ -337,7 +337,7 @@ export function RoomShowcase() {
             </button>
             <button
               onClick={() => setActiveTab("ac")}
-              className={`rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+              className={`rounded-full px-3.5 sm:px-5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
                 activeTab === "ac"
                   ? "bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] text-[#1a120b] font-bold shadow-sm"
                   : "text-warm-brown/70 hover:text-warm-brown"
@@ -347,7 +347,7 @@ export function RoomShowcase() {
             </button>
             <button
               onClick={() => setActiveTab("suites")}
-              className={`rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+              className={`rounded-full px-3.5 sm:px-5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
                 activeTab === "suites"
                   ? "bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] text-[#1a120b] font-bold shadow-sm"
                   : "text-warm-brown/70 hover:text-warm-brown"
@@ -605,6 +605,20 @@ export function RoomShowcase() {
         </AnimatePresence>
       </div>
     </section>
+  );
+}
+
+export function RoomShowcase() {
+  return (
+    <Suspense
+      fallback={
+        <div className="py-24 bg-warm-white text-center text-xs text-stone-400">
+          Loading sanctuaries...
+        </div>
+      }
+    >
+      <RoomShowcaseContent />
+    </Suspense>
   );
 }
 

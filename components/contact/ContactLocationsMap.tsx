@@ -48,8 +48,8 @@ export function ContactLocationsMap() {
                 key={branch.id}
                 onClick={() => setActiveBranchId(branch.id)}
                 className={`relative bg-white rounded-3xl p-7 sm:p-8 flex flex-col justify-between cursor-pointer transition-all duration-300 border ${isSelected
-                    ? "border-[#c2593f] shadow-[0_20px_45px_rgba(194,89,63,0.14)] ring-2 ring-[#c2593f]/20"
-                    : "border-stone-200/80 hover:border-stone-300 shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.08)]"
+                  ? "border-[#c2593f] shadow-[0_20px_45px_rgba(194,89,63,0.14)] ring-2 ring-[#c2593f]/20"
+                  : "border-stone-200/80 hover:border-stone-300 shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.08)]"
                   }`}
               >
                 <div>
@@ -66,8 +66,8 @@ export function ContactLocationsMap() {
 
                     <div
                       className={`h-11 w-11 rounded-full flex items-center justify-center shrink-0 transition-colors ${isSelected
-                          ? "bg-[#c2593f] text-white"
-                          : "bg-[#faf7f2] text-[#c2593f]"
+                        ? "bg-[#c2593f] text-white"
+                        : "bg-[#faf7f2] text-[#c2593f]"
                         }`}
                     >
                       <MapPin className="h-5 w-5" />
@@ -116,8 +116,8 @@ export function ContactLocationsMap() {
                   </span>
                   <ArrowRight
                     className={`h-4 w-4 transition-transform ${isSelected
-                        ? "text-[#c2593f] translate-x-1"
-                        : "text-stone-400"
+                      ? "text-[#c2593f] translate-x-1"
+                      : "text-stone-400"
                       }`}
                   />
                 </div>

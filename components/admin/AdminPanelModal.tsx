@@ -315,12 +315,12 @@ export function AdminPanelModal() {
                   </div>
                 </div>
 
-                {/* Tabs */}
-                <div className="flex items-center gap-1 rounded-2xl bg-black/40 border border-white/10 p-1 my-2 sm:my-0">
+                {/* Tabs - Responsive with Smooth Horizontal Scroll on Small Screens */}
+                <div className="flex items-center gap-1 rounded-2xl bg-black/40 border border-white/10 p-1 my-2 sm:my-0 overflow-x-auto max-w-full">
                   <button
                     type="button"
                     onClick={() => setActiveTab("orders")}
-                    className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer ${
+                    className={`flex items-center gap-1.5 sm:gap-2 rounded-xl px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer shrink-0 ${
                       activeTab === "orders"
                         ? "bg-gradient-to-r from-gold to-[#c79a4d] text-[#1a120b] shadow-md"
                         : "text-white/70 hover:text-white"
@@ -333,7 +333,7 @@ export function AdminPanelModal() {
                   <button
                     type="button"
                     onClick={() => setActiveTab("media")}
-                    className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer ${
+                    className={`flex items-center gap-1.5 sm:gap-2 rounded-xl px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer shrink-0 ${
                       activeTab === "media"
                         ? "bg-gradient-to-r from-gold to-[#c79a4d] text-[#1a120b] shadow-md"
                         : "text-white/70 hover:text-white"
@@ -346,7 +346,7 @@ export function AdminPanelModal() {
                   <button
                     type="button"
                     onClick={() => setActiveTab("analytics")}
-                    className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer ${
+                    className={`flex items-center gap-1.5 sm:gap-2 rounded-xl px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer shrink-0 ${
                       activeTab === "analytics"
                         ? "bg-gradient-to-r from-gold to-[#c79a4d] text-[#1a120b] shadow-md"
                         : "text-white/70 hover:text-white"
@@ -359,7 +359,7 @@ export function AdminPanelModal() {
                   <button
                     type="button"
                     onClick={() => setActiveTab("inventory")}
-                    className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer ${
+                    className={`flex items-center gap-1.5 sm:gap-2 rounded-xl px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer shrink-0 ${
                       activeTab === "inventory"
                         ? "bg-gradient-to-r from-gold to-[#c79a4d] text-[#1a120b] shadow-md"
                         : "text-white/70 hover:text-white"

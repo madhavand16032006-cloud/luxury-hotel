@@ -47,7 +47,7 @@ export function Navbar() {
       <div className="mx-auto max-w-6xl">
         {/* Luxury Glass Capsule */}
         <div
-          className={`relative mx-auto flex items-center justify-between rounded-full px-5 sm:px-7 py-3 transition-all duration-300 ${
+          className={`relative mx-auto flex items-center justify-between rounded-full px-4 sm:px-7 py-2 sm:py-3 transition-all duration-300 ${
             scrolled
               ? "bg-[#0a0e17]/95 border border-gold/45 shadow-[0_20px_50px_rgba(0,0,0,0.85)] backdrop-blur-2xl"
               : "bg-[#090d15]/80 border border-white/20 shadow-[0_15px_40px_rgba(0,0,0,0.65)] backdrop-blur-xl hover:border-gold/50"
@@ -56,13 +56,13 @@ export function Navbar() {
           {/* 1. Brand Logo: [BR VASANTHAM] with Golden Lotus */}
           <Link
             href="/"
-            className="group flex items-center gap-3 transition-transform cursor-pointer select-none"
+            className="group flex items-center gap-2 sm:gap-3 transition-transform cursor-pointer select-none"
             aria-label="BR Vasantham Home"
           >
-            <GoldenLotus className="h-7 w-7 sm:h-8 sm:w-8 transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_8px_rgba(223,186,115,0.5)]" />
+            <GoldenLotus className="h-6 w-6 sm:h-8 sm:w-8 transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_8px_rgba(223,186,115,0.5)] shrink-0" />
             <div className="flex flex-col">
-              <span className="font-display font-medium text-xs sm:text-sm tracking-[0.26em] text-white group-hover:text-gold transition-colors">
-                BR VASANTHAM
+              <span className="font-display font-medium text-[11px] sm:text-sm tracking-[0.22em] sm:tracking-[0.26em] text-white group-hover:text-gold transition-colors leading-tight">
+                BR<span className="hidden sm:inline"> </span><span className="sm:inline block">VASANTHAM</span>
               </span>
               <span className="text-[9px] uppercase tracking-[0.3em] text-gold/75 font-sans font-light hidden sm:block">
                 Luxury Resort &amp; Suites
@@ -201,7 +201,7 @@ export function Navbar() {
           </nav>
 
           {/* 3. CTA: [Reserve Room] with Light Gold Button - Opens Direct Booking */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <button
               type="button"
               onClick={() => {
@@ -209,18 +209,18 @@ export function Navbar() {
                   window.dispatchEvent(new CustomEvent("open-direct-booking"));
                 }
               }}
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] text-[#1a120b] px-5 sm:px-6 py-2.5 text-xs uppercase tracking-[0.16em] font-bold shadow-[0_4px_20px_rgba(223,186,115,0.4)] hover:shadow-[0_6px_25px_rgba(223,186,115,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
+              className="group inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] text-[#1a120b] px-3.5 sm:px-6 py-2 sm:py-2.5 text-[10px] sm:text-xs uppercase tracking-[0.14em] sm:tracking-[0.16em] font-bold shadow-[0_4px_20px_rgba(223,186,115,0.4)] hover:shadow-[0_6px_25px_rgba(223,186,115,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
             >
               <Calendar className="h-3.5 w-3.5 stroke-[2.5]" />
               <span>Reserve Room</span>
-              <ArrowRight className="h-3.5 w-3.5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight className="hidden sm:inline-block h-3.5 w-3.5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-1" />
             </button>
 
             {/* Mobile Hamburger Toggle */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden h-9 w-9 rounded-full border border-white/20 bg-white/5 text-warm-white flex items-center justify-center hover:bg-white/10 hover:border-gold transition-colors cursor-pointer"
+              className="lg:hidden h-9 w-9 rounded-full border border-white/20 bg-white/5 text-warm-white flex items-center justify-center hover:bg-white/10 hover:border-gold transition-colors cursor-pointer shrink-0"
               aria-label="Toggle Navigation"
             >
               {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}

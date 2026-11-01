@@ -7,6 +7,7 @@ import {
   ArrowRight,
   Calendar,
   Eye,
+  ChevronDown,
 } from "lucide-react";
 import { RotatingDiamond } from "@/components/ui/RotatingDiamond";
 
@@ -60,18 +61,20 @@ export function Hero() {
       </motion.div>
 
       {/* Main Hero Container */}
-      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-between px-6 pt-32 pb-14 sm:pb-16 md:px-12">
-        {/* Left-Aligned Luxury Editorial Header matching Reference Image */}
-        <div className="max-w-3xl my-auto">
-          {/* Eyebrow Label with Golden Accent Rule Line */}
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-between px-6 pt-28 sm:pt-32 pb-8 sm:pb-16 md:px-12">
+        {/* Editorial Header: Centered on Mobile, Left-Aligned on Desktop */}
+        <div className="max-w-3xl my-auto w-full flex flex-col items-center md:items-start text-center md:text-left">
+          {/* Eyebrow Label with Golden Accent Rule Line(s) */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8, ease: EASE }}
-            className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] font-semibold text-warm-white/90 mb-4"
+            className="flex items-center justify-center md:justify-start gap-2.5 sm:gap-3 text-[11px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] font-semibold text-warm-white/90 mb-3 sm:mb-4"
           >
+            {/* Flanking left rule line on mobile matching reference */}
+            <span className="h-px w-6 sm:w-8 md:hidden bg-gradient-to-l from-gold to-transparent" />
             <span>LUXURY RESORT &amp; SPA</span>
-            <span className="h-px w-20 bg-gradient-to-r from-gold via-gold/80 to-transparent" />
+            <span className="h-px w-6 sm:w-8 md:w-20 bg-gradient-to-r from-gold via-gold/80 to-transparent" />
           </motion.div>
 
           {/* Main Title: "Experience True Luxury" */}
@@ -79,7 +82,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.9, ease: EASE }}
-            className="font-display text-[clamp(3rem,7.5vw,6.5rem)] leading-[1.0] tracking-tight text-white drop-shadow-[0_15px_35px_rgba(0,0,0,0.8)]"
+            className="font-display text-[clamp(2.6rem,7.5vw,6.5rem)] leading-[1.08] sm:leading-[1.0] tracking-tight text-white drop-shadow-[0_15px_35px_rgba(0,0,0,0.8)]"
           >
             Experience
             <br />
@@ -93,23 +96,27 @@ export function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8, ease: EASE }}
-            className="mt-4 text-sm sm:text-base tracking-[0.2em] uppercase font-light text-warm-white/90 drop-shadow-md"
+            className="mt-3.5 sm:mt-4 text-xs sm:text-sm md:text-base tracking-[0.22em] uppercase font-light text-warm-white/90 drop-shadow-md flex items-center justify-center md:justify-start gap-2 sm:gap-2.5"
           >
-            Relax · Unwind · Rejuvenate
+            <span>RELAX</span>
+            <span className="text-gold/80 text-[10px]">·</span>
+            <span>UNWIND</span>
+            <span className="text-gold/80 text-[10px]">·</span>
+            <span>REJUVENATE</span>
           </motion.p>
 
-          {/* Action Buttons: [Explore Our Resort] & [Reserve Room] in replace of video pause */}
+          {/* Action Buttons: Stacked on Mobile matching reference, side-by-side on laptop */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1, duration: 0.8, ease: EASE }}
-            className="mt-8 flex flex-wrap items-center gap-4 sm:gap-5"
+            className="mt-7 sm:mt-8 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 sm:gap-5 w-full sm:w-auto max-w-[280px] sm:max-w-none"
           >
             {/* Primary Button: Reserve Room */}
             <button
               type="button"
               onClick={handleOpenBooking}
-              className="group rounded-full bg-gradient-to-r from-[#dfba73] via-[#e5c483] to-[#be8e46] text-[#1b120c] font-bold px-8 py-3.5 text-xs uppercase tracking-[0.18em] shadow-[0_15px_30px_-5px_rgba(223,186,115,0.4)] flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+              className="w-full sm:w-auto group rounded-full bg-gradient-to-r from-[#dfba73] via-[#fae4b2] to-[#c79a4d] text-[#1b120c] font-bold px-7 sm:px-8 py-3.5 text-xs uppercase tracking-[0.18em] shadow-[0_15px_30px_-5px_rgba(223,186,115,0.4)] flex items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
               data-cursor-text="BOOK"
             >
               <Calendar className="h-4 w-4 text-[#1b120c]" />
@@ -120,7 +127,7 @@ export function Hero() {
             {/* View Rooms Button */}
             <Link
               href="/rooms"
-              className="group rounded-full border border-gold/75 bg-black/50 backdrop-blur-md text-warm-white hover:bg-gradient-to-r hover:from-[#dfba73] hover:via-[#fae4b2] hover:to-[#c79a4d] hover:text-[#1a120b] hover:border-transparent px-7 py-3.5 text-xs uppercase tracking-[0.18em] font-semibold flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
+              className="w-full sm:w-auto group rounded-full border border-gold/85 bg-black/60 backdrop-blur-md text-warm-white hover:bg-gradient-to-r hover:from-[#dfba73] hover:via-[#fae4b2] hover:to-[#c79a4d] hover:text-[#1a120b] hover:border-transparent px-7 sm:px-8 py-3.5 text-xs uppercase tracking-[0.18em] font-semibold flex items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
               data-cursor-text="VIEW"
             >
               <Eye className="h-4 w-4 text-gold group-hover:text-[#1a120b] transition-colors" />
@@ -130,12 +137,45 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Integrated Bottom Controls Row: Left Dots & Center Rotating Realistic Diamond */}
+        {/* Mobile View: Scroll Down & Centered Dots (Matching Reference Image) */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.3, duration: 0.8, ease: EASE }}
+          className="md:hidden flex flex-col items-center gap-2 pb-2"
+        >
+          {/* Scroll Down Mouse & Chevron Indicator */}
+          <a
+            href="#about"
+            className="flex flex-col items-center gap-1 text-white/75 hover:text-gold transition-colors cursor-pointer"
+          >
+            <div className="w-4 h-7 rounded-full border-2 border-white/60 flex items-start justify-center pt-1">
+              <motion.span
+                animate={{ y: [0, 6, 0], opacity: [1, 0.3, 1] }}
+                transition={{ repeat: Infinity, duration: 1.4, ease: "easeInOut" }}
+                className="h-1.5 w-0.5 rounded-full bg-gold"
+              />
+            </div>
+            <ChevronDown className="h-3 w-3 -mt-0.5 text-white/60 animate-bounce" />
+            <span className="text-[9px] uppercase tracking-[0.25em] text-white/70 font-medium">
+              SCROLL DOWN
+            </span>
+          </a>
+
+          {/* Centered Slider Dots matching Reference Image */}
+          <div className="flex items-center justify-center gap-2 pt-1">
+            <span className="h-2 w-2 rounded-full bg-gradient-to-r from-gold to-[#be8e46]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-white/40" />
+            <span className="h-1.5 w-1.5 rounded-full bg-white/40" />
+          </div>
+        </motion.div>
+
+        {/* Laptop View: Left Dots & Center Rotating 3D Diamond (Unchanged, already ok) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, duration: 0.9, ease: EASE }}
-          className="w-full pt-4 pb-2"
+          className="hidden md:block w-full pt-4 pb-2"
         >
           <div className="mx-auto w-full max-w-6xl flex items-center justify-between px-3 sm:px-6">
             {/* Left: Slider Dash & Dots Indicator */}

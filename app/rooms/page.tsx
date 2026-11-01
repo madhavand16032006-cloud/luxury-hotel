@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Navbar } from "@/components/navigation/Navbar";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { PageHero } from "@/components/ui/PageHero";
@@ -30,7 +31,9 @@ export default function RoomsPage() {
         />
 
         {/* 4 Tiers of Luxury Suites */}
-        <RoomShowcase />
+        <Suspense fallback={null}>
+          <RoomShowcase />
+        </Suspense>
 
         {/* Hotel Footer with Multi-Branch Booking Engine */}
         <Footer />

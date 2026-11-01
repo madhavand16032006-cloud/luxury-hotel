@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import {
@@ -18,6 +19,7 @@ import {
   Eye,
   Calendar,
   X,
+  MapPin,
 } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -122,6 +124,18 @@ const ROOM_TIERS = [
 ];
 
 export function RoomShowcase() {
+  const searchParams = useSearchParams();
+  const branchParam = searchParams?.get("branch");
+  const [selectedBranch, setSelectedBranch] = useState(
+    branchParam === "tindivanam" ? "tindivanam" : "puducherry"
+  );
+
+  useEffect(() => {
+    if (branchParam === "tindivanam" || branchParam === "puducherry") {
+      setSelectedBranch(branchParam);
+    }
+  }, [branchParam]);
+
   const [activeTab, setActiveTab] = useState("all");
   const [viewingRoom, setViewingRoom] = useState<(typeof ROOM_TIERS)[0] | null>(null);
 
@@ -137,8 +151,9 @@ export function RoomShowcase() {
         new CustomEvent("open-direct-booking", {
           detail: {
             id: roomId,
-            title: roomTitle,
+            title: `${roomTitle} (${selectedBranch === "tindivanam" ? "Tindivanam" : "Puducherry"})`,
             rate: roomRate,
+            branchId: selectedBranch,
             image: roomObj?.image,
             acType: roomObj?.acType,
           },
@@ -175,6 +190,83 @@ export function RoomShowcase() {
             <strong> Royal Chettinad &amp; Presidential Suites</strong>. All rooms guarantee free covered car parking,
             high-speed Wi-Fi, and generous square footage.
           </p>
+
+          {/* Branch Selector Card matching Reference Image */}
+          <div className="mx-auto max-w-2xl mt-10 mb-8 overflow-hidden rounded-3xl border border-stone-200/90 bg-[#faf8f5] shadow-xs text-center p-6 sm:p-8">
+            <div className="text-[11px] uppercase tracking-[0.35em] text-[#c2593f] font-semibold mb-3">
+              ROOMS
+            </div>
+
+            <div className="border-y border-stone-200/90 py-5 grid grid-cols-2 divide-x divide-stone-200/90">
+              <button
+                type="button"
+                onClick={() => setSelectedBranch("puducherry")}
+                className={`group px-4 py-2 flex flex-col items-center justify-center transition-all cursor-pointer ${
+                  selectedBranch === "puducherry"
+                    ? "text-[#1a120b] font-semibold"
+                    : "text-stone-500 hover:text-stone-900"
+                }`}
+              >
+                <div className="flex items-center gap-2 font-serif text-sm sm:text-base tracking-[0.2em] uppercase">
+                  <MapPin
+                    className={`h-4 w-4 shrink-0 transition-colors ${
+                      selectedBranch === "puducherry"
+                        ? "text-[#c2593f]"
+                        : "text-stone-400 group-hover:text-stone-600"
+                    }`}
+                  />
+                  <span
+                    className={
+                      selectedBranch === "puducherry"
+                        ? "underline underline-offset-8 decoration-2 decoration-[#c2593f] font-bold text-[#1a120b]"
+                        : ""
+                    }
+                  >
+                    PONDICHERRY
+                  </span>
+                </div>
+                <span className="text-[10px] text-stone-400 tracking-wider mt-1.5 font-normal">
+                  Main Residency Branch
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setSelectedBranch("tindivanam")}
+                className={`group px-4 py-2 flex flex-col items-center justify-center transition-all cursor-pointer ${
+                  selectedBranch === "tindivanam"
+                    ? "text-[#1a120b] font-semibold"
+                    : "text-stone-500 hover:text-stone-900"
+                }`}
+              >
+                <div className="flex items-center gap-2 font-serif text-sm sm:text-base tracking-[0.2em] uppercase">
+                  <MapPin
+                    className={`h-4 w-4 shrink-0 transition-colors ${
+                      selectedBranch === "tindivanam"
+                        ? "text-[#c2593f]"
+                        : "text-stone-400 group-hover:text-stone-600"
+                    }`}
+                  />
+                  <span
+                    className={
+                      selectedBranch === "tindivanam"
+                        ? "underline underline-offset-8 decoration-2 decoration-[#c2593f] font-bold text-[#1a120b]"
+                        : ""
+                    }
+                  >
+                    TINDIVANAM
+                  </span>
+                </div>
+                <span className="text-[10px] text-stone-400 tracking-wider mt-1.5 font-normal">
+                  Second Branch
+                </span>
+              </button>
+            </div>
+
+            <p className="mt-4 text-xs text-stone-600 font-light tracking-wide">
+              Select a location to explore curated luxury rooms &amp; suites
+            </p>
+          </div>
 
           {/* Filter Tabs */}
           <div className="mt-8 inline-flex rounded-full border border-warm-brown/20 bg-cream/60 p-1.5 shadow-inner">

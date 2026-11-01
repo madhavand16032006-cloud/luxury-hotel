@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { Calendar, ArrowRight, Menu, X } from "lucide-react";
+import { Calendar, ArrowRight, Menu, X, MapPin } from "lucide-react";
 import { GoldenLotus } from "@/components/ui/GoldenLotus";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -26,6 +26,12 @@ export function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [roomsDropdownOpen, setRoomsDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    setRoomsDropdownOpen(false);
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,6 +75,97 @@ export function Navbar() {
             <ul className="flex items-center gap-0.5">
               {NAV_ITEMS.map((item, idx) => {
                 const isActive = pathname === item.href;
+
+                if (item.href === "/rooms") {
+                  return (
+                    <React.Fragment key={item.label}>
+                      <li
+                        className="relative"
+                        onMouseEnter={() => setRoomsDropdownOpen(true)}
+                        onMouseLeave={() => setRoomsDropdownOpen(false)}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => setRoomsDropdownOpen((prev) => !prev)}
+                          className={`relative flex items-center gap-1.5 px-4 py-2 text-xs uppercase tracking-[0.18em] font-medium transition-all duration-200 cursor-pointer ${
+                            isActive || roomsDropdownOpen
+                              ? "text-gold font-semibold"
+                              : "text-white/80 hover:text-white hover:text-gold"
+                          }`}
+                        >
+                          <span>{item.label}</span>
+                          <span className="text-[9px] text-gold/80 transition-transform duration-200">
+                            {roomsDropdownOpen ? "▲" : "▼"}
+                          </span>
+                          {/* Subtle Underline for Active Section */}
+                          {isActive && (
+                            <motion.span
+                              layoutId="activeNavIndicator"
+                              className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent"
+                              transition={{ duration: 0.3, ease: EASE }}
+                            />
+                          )}
+                        </button>
+
+                        {/* Floating Dropdown: Branch Selection matching Reference */}
+                        <AnimatePresence>
+                          {roomsDropdownOpen && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 10, scale: 0.96 }}
+                              animate={{ opacity: 1, y: 0, scale: 1 }}
+                              exit={{ opacity: 0, y: 10, scale: 0.96 }}
+                              transition={{ duration: 0.2, ease: EASE }}
+                              className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-[480px] sm:w-[520px] rounded-3xl bg-[#0a0e17]/98 border border-gold/45 p-6 shadow-[0_25px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl text-center z-50 pointer-events-auto"
+                            >
+                              <div className="text-[11px] uppercase tracking-[0.35em] text-gold font-semibold mb-3">
+                                ROOMS &amp; SUITES
+                              </div>
+
+                              <div className="border-y border-white/10 py-5 grid grid-cols-2 divide-x divide-white/10">
+                                <Link
+                                  href="/rooms?branch=puducherry"
+                                  onClick={() => setRoomsDropdownOpen(false)}
+                                  className="group px-4 py-2 flex flex-col items-center justify-center hover:bg-white/5 transition-all rounded-xl cursor-pointer"
+                                >
+                                  <div className="flex items-center gap-2 text-warm-white group-hover:text-gold transition-colors font-serif text-sm tracking-[0.2em] uppercase font-medium">
+                                    <MapPin className="h-4 w-4 text-gold shrink-0 transition-transform group-hover:scale-110" />
+                                    <span>PONDICHERRY</span>
+                                  </div>
+                                  <span className="text-[10px] text-white/50 tracking-wider mt-1 group-hover:text-white/75">
+                                    Main Residency Branch
+                                  </span>
+                                </Link>
+
+                                <Link
+                                  href="/rooms?branch=tindivanam"
+                                  onClick={() => setRoomsDropdownOpen(false)}
+                                  className="group px-4 py-2 flex flex-col items-center justify-center hover:bg-white/5 transition-all rounded-xl cursor-pointer"
+                                >
+                                  <div className="flex items-center gap-2 text-warm-white group-hover:text-gold transition-colors font-serif text-sm tracking-[0.2em] uppercase font-medium">
+                                    <MapPin className="h-4 w-4 text-gold shrink-0 transition-transform group-hover:scale-110" />
+                                    <span>TINDIVANAM</span>
+                                  </div>
+                                  <span className="text-[10px] text-white/50 tracking-wider mt-1 group-hover:text-white/75">
+                                    Second Branch
+                                  </span>
+                                </Link>
+                              </div>
+
+                              <p className="mt-4 text-[11px] text-white/65 font-light tracking-wide">
+                                Select a location to explore curated luxury rooms &amp; suites
+                              </p>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </li>
+
+                      {/* Subtle divider between items */}
+                      {idx < NAV_ITEMS.length - 1 && (
+                        <span className="h-3 w-px bg-white/15" aria-hidden="true" />
+                      )}
+                    </React.Fragment>
+                  );
+                }
 
                 return (
                   <React.Fragment key={item.label}>
@@ -161,6 +258,41 @@ export function Navbar() {
             <nav className="mt-4 flex flex-col divide-y divide-white/5">
               {NAV_ITEMS.map((item) => {
                 const isActive = pathname === item.href;
+
+                if (item.href === "/rooms") {
+                  return (
+                    <div key={item.label} className="py-2.5">
+                      <div className="flex items-center justify-between text-sm font-display tracking-wider text-gold font-semibold mb-2">
+                        <span>{item.label}</span>
+                        <span className="text-[10px] uppercase tracking-wider text-gold/75">Select Branch</span>
+                      </div>
+                      <div className="pl-3 space-y-2 border-l border-gold/40 my-1">
+                        <Link
+                          href="/rooms?branch=puducherry"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center justify-between text-xs text-white/80 hover:text-gold transition-colors font-serif tracking-wider"
+                        >
+                          <span className="flex items-center gap-2">
+                            <MapPin className="h-3.5 w-3.5 text-gold" />
+                            <span>PONDICHERRY</span>
+                          </span>
+                          <span className="text-[10px] text-white/40">Main Branch →</span>
+                        </Link>
+                        <Link
+                          href="/rooms?branch=tindivanam"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center justify-between text-xs text-white/80 hover:text-gold transition-colors font-serif tracking-wider"
+                        >
+                          <span className="flex items-center gap-2">
+                            <MapPin className="h-3.5 w-3.5 text-gold" />
+                            <span>TINDIVANAM</span>
+                          </span>
+                          <span className="text-[10px] text-white/40">Second Branch →</span>
+                        </Link>
+                      </div>
+                    </div>
+                  );
+                }
 
                 return (
                   <Link
